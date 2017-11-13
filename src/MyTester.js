@@ -38,10 +38,10 @@ function test(input) {
     return result;
 }
 
-var r;
+// var r;
 
-r = test('"1" + 2 * 3 - 4')
-assert.equal(r, 3)
+// r = test('"1" + 2 * 3 - 4')
+// assert.equal(r, 3)
 // r = test('#queId_100 * 2')
 // assert(r, '246');
 // r = test('(20 + 30) / 5')
@@ -115,4 +115,4 @@ assert.equal(r, 3)
 // r = test('CURDATE()')
 // r = test('NOW()')
 // r = test('RDID()')
-exports.calculate = calculate;
+module.exports = calculate;
