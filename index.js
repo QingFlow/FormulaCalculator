@@ -2,6 +2,5 @@
 
 module.exports =  Object.assign(
   {},
-  require('./src/Calculator'),
-  require('./src/Validator')
+  require('./src/Calculator')
 );
