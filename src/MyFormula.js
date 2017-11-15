@@ -15,8 +15,12 @@ class MyFormulaVisitor extends FormulaVisitor{
     visitUnaryOperator(ctx) {
         var value = this.visit(ctx.expr());
         switch(ctx.op.type) {
-            case FormulaParser.NOT: return ! value;
-            case FormulaParser.MINUS: return - Number.parseFloat(value);
+            case FormulaParser.NOT: 
+                checkValueType(value, 'boolean');
+                return ! value;
+            case FormulaParser.MINUS: 
+                checkValueType(value, 'number');
+                return - Number.parseFloat(value);
         }
     }
     
@@ -25,8 +29,8 @@ class MyFormulaVisitor extends FormulaVisitor{
         var value1 = this.visit(ctx.expr(0));
         var value2 = this.visit(ctx.expr(1));
         // 类型检查
-        this.checkValueType(value1, 'number');
-        this.checkValueType(value2, 'number');
+        checkValueType(value1, 'number');
+        checkValueType(value2, 'number');
         switch (ctx.op.type){
             case FormulaParser.PLUS:return value1 + value2;
             case FormulaParser.MINUS:return value1 - value2;
@@ -62,12 +66,12 @@ class MyFormulaVisitor extends FormulaVisitor{
             case FormulaParser.LE:
             case FormulaParser.GT:
             case FormulaParser.GE:
-                this.checkValueType(value1, 'number');
-                this.checkValueType(value2, 'number');
+                checkValueType(value1, 'number');
+                checkValueType(value2, 'number');
         }
         switch (ctx.op.type) {
-            case FormulaParser.EQ: return value1 == value2;
-            case FormulaParser.NEQ: return value1 != value2;
+            case FormulaParser.EQ: return value1 === value2;
+            case FormulaParser.NEQ: return value1 !== value2;
             case FormulaParser.LT: return value1 < value2;
             case FormulaParser.LE: return value1 <= value2;
             case FormulaParser.GT: return value1 > value2;
@@ -79,14 +83,17 @@ class MyFormulaVisitor extends FormulaVisitor{
         var value1 = this.visit(ctx.expr(0));
         var value2 = this.visit(ctx.expr(1));
         // 类型检查
-        this.checkValueType(value1, 'boolean');
-        this.checkValueType(value2, 'boolean');
+        checkValueType(value1, 'boolean');
+        checkValueType(value2, 'boolean');
         return value1 || value2;
     }
     // 解析and操作
     visitAnd(ctx) {
         var value1 = this.visit(ctx.expr(0));
         var value2 = this.visit(ctx.expr(1));
+        // 类型检查
+        checkValueType(value1, 'boolean');
+        checkValueType(value2, 'boolean');
         return value1 && value2;
     }
     // 解析抑或
@@ -107,6 +114,9 @@ class MyFormulaVisitor extends FormulaVisitor{
     visitMulDiv(ctx) {
         var value1 = Number.parseFloat(this.visit(ctx.expr(0)));
         var value2 = Number.parseFloat(this.visit(ctx.expr(1)));
+        // 类型解析
+        checkValueType(value1, 'number');
+        checkValueType(value2, 'number');
         switch(ctx.op.type) {
             case FormulaParser.MULTIPLY: return value1 * value2;
             case FormulaParser.DIVIDE: return value1 / value2;
@@ -132,20 +142,6 @@ class MyFormulaVisitor extends FormulaVisitor{
         }
         else {
             // todo: 抛出异常
-        }
-    }
-
-    /**
-     * 检查值的类型，并抛出错误
-     * @param {*} value 要检查类型的值
-     * @param {*} type 值应该的类型，如“number”，“boolean”， “string”，必须字符床
-     */
-    checkValueType(value, type) {
-        if(typeof value !== type) {
-            let err = new QfErr({
-                errCode: 2
-            });
-            throw err;
         }
     }
 }
@@ -187,6 +183,7 @@ class Function {
     }
     // if表达式
     funcIf(test, value1, value2) {
+        checkValueType(test, 'boolean');
         return test ? value1 : value2;
     }
     // 把字符串串起来
@@ -218,6 +215,11 @@ class Function {
     // 求和
     funcSum(...values) {
         values = [].concat(...values); // flat
+        // 类型检查
+        values.every(val => {
+            checkValueType(val, 'number');
+            return true;
+        })
         return values.reduce((pre, next) => {
             return Number.parseFloat(pre) + Number.parseFloat(next);
         })
@@ -225,6 +227,11 @@ class Function {
     // 平均数
     funcAverage(...values) {
         values = [].concat(...values); // flat
+        // 类型检查
+        values.every(val => {
+            checkValueType(val, 'number');
+            return true;
+        })
         var sum = values.reduce((pre, next) => {
             return Number.parseFloat(pre) + Number.parseFloat(next);
         })
@@ -238,6 +245,11 @@ class Function {
     // 最小值
     funcMin(...values) {
         values = [].concat(...values); // flat
+        // 类型检查
+        values.every(val => {
+            checkValueType(val, 'number');
+            return true;
+        })
         var min = Number.MIN_VALUE;
         for (var v of values) {
             if (min > v) {
@@ -249,6 +261,11 @@ class Function {
     // 最大值
     funcMax(...values) {
         values = [].concat(...values); // flat
+        // 类型检查
+        values.every(val => {
+            checkValueType(val, 'number');
+            return true;
+        })
         var max = Number.MAX_VALUE;
         for (var v of values) {
             if (max < v) {
@@ -259,19 +276,29 @@ class Function {
     }
     // 四舍五入
     funcRound(value, n) {
+        checkValueType(value, 'number');
+        checkValueType(n, 'number');
         return Math.round(value * (10**n)) / (10**n);
     }
     // 取整数
     funcInt(value) {
+        checkValueType(value, 'number');
         return Number.parseInt(value);
     }
     // 取余（mod操作）
     funcMod(value, divisor) {
+        checkValueType(value, 'number');
+        checkValueType(divisor, 'number');
         return Number.parseInt(value) % Number.parseInt(divisor);
     }
     // 连乘（product是office里面的称呼）
     funcProduct(...values) {
         values = [].concat(...values); // flat
+        // 类型检查
+        values.every(val => {
+            checkValueType(val, 'number');
+            return true;
+        })
         var result = 1;
         for (var v of values) {
             result *= Number.parseFloat(v);
@@ -366,6 +393,20 @@ function uuid() {
         d = Math.floor(d / 16);
         return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
+}
+
+/**
+ * 检查值的类型，并抛出错误
+ * @param {*} value 要检查类型的值
+ * @param {*} type 值应该的类型，如“number”，“boolean”， “string”，必须字符床
+ */
+function checkValueType(value, type) {
+    if(typeof value !== type) {
+        let err = new QfErr({
+            errCode: 2
+        });
+        throw err;
+    }
 }
 
 exports.MyFormulaVisitor = MyFormulaVisitor;
