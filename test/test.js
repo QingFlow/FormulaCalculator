@@ -2,10 +2,11 @@
 
 var calc = require('../index');
 
-// console.log(calc.calculate("SUM(1,'a')"));
 try {
-  // console.log(calc.calculate("1+'s'"));
-  calc.calculate("1+'s'")
+  // calc.calculate("1+'s'");
+  // let a = calc.calculate('"ss" and false');
+  let a = calc.calculate('DAY("1-2-3-4-5-6")')
+  console.log(a);
 }
 catch(err) {
   console.log('inside err');
