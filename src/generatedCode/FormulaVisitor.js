@@ -48,6 +48,12 @@ FormulaVisitor.prototype.visitOr = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FormulaParser#bool.
+FormulaVisitor.prototype.visitBool = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FormulaParser#double.
 FormulaVisitor.prototype.visitDouble = function(ctx) {
   return this.visitChildren(ctx);

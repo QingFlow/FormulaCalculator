@@ -11,6 +11,7 @@ class MyFormulaVisitor extends FormulaVisitor{
         this.functionMap = new Function().getFuncMap();
     }
 
+    // 一元操作符
     visitUnaryOperator(ctx) {
         var value = this.visit(ctx.expr());
         switch(ctx.op.type) {
@@ -23,18 +24,13 @@ class MyFormulaVisitor extends FormulaVisitor{
     visitPlusMinus(ctx) {
         var value1 = this.visit(ctx.expr(0));
         var value2 = this.visit(ctx.expr(1));
-        if (typeof value1 != 'number' || typeof value2 != 'number') {
-            let err = {
-                errCode: 1
-            }
-            throw new QfErr(err);
-            return;
-        }
+        // 类型检查
+        this.checkValueType(value1, 'number');
+        this.checkValueType(value2, 'number');
         switch (ctx.op.type){
             case FormulaParser.PLUS:return value1 + value2;
             case FormulaParser.MINUS:return value1 - value2;
         }
-        return this.visitChildren(ctx);
     };
     
     //解析整数
@@ -45,6 +41,13 @@ class MyFormulaVisitor extends FormulaVisitor{
     visitDouble(ctx) {
         return Number.parseFloat(ctx.DOUBLE().getText());
     }
+    // 解析布尔值
+    visitBool(ctx) {
+        switch (ctx.op.type){
+            case FormulaParser.TRUE: return true;
+            case FormulaParser.FALSE: return false;
+        }
+    }
     // 解析括号
     visitParens(ctx) {
         return this.visit(ctx.expr());
@@ -53,6 +56,15 @@ class MyFormulaVisitor extends FormulaVisitor{
     visitCompare(ctx) {
         var value1 = this.visit(ctx.expr(0));
         var value2 = this.visit(ctx.expr(1));
+        // 类型检查
+        switch (ctx.op.type) {
+            case FormulaParser.LT:
+            case FormulaParser.LE:
+            case FormulaParser.GT:
+            case FormulaParser.GE:
+                this.checkValueType(value1, 'number');
+                this.checkValueType(value2, 'number');
+        }
         switch (ctx.op.type) {
             case FormulaParser.EQ: return value1 == value2;
             case FormulaParser.NEQ: return value1 != value2;
@@ -66,6 +78,9 @@ class MyFormulaVisitor extends FormulaVisitor{
     visitOr(ctx) {
         var value1 = this.visit(ctx.expr(0));
         var value2 = this.visit(ctx.expr(1));
+        // 类型检查
+        this.checkValueType(value1, 'boolean');
+        this.checkValueType(value2, 'boolean');
         return value1 || value2;
     }
     // 解析and操作
@@ -117,6 +132,20 @@ class MyFormulaVisitor extends FormulaVisitor{
         }
         else {
             // todo: 抛出异常
+        }
+    }
+
+    /**
+     * 检查值的类型，并抛出错误
+     * @param {*} value 要检查类型的值
+     * @param {*} type 值应该的类型，如“number”，“boolean”， “string”，必须字符床
+     */
+    checkValueType(value, type) {
+        if(typeof value !== type) {
+            let err = new QfErr({
+                errCode: 2
+            });
+            throw err;
         }
     }
 }

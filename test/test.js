@@ -2,10 +2,10 @@
 
 var calc = require('../index');
 
-// console.log(calc.calculate("SUM(1,'a')"));
 try {
-  // console.log(calc.calculate("1+'s'"));
-  calc.calculate("1+'s'")
+  // calc.calculate("1+'s'");
+  let a = calc.calculate("true and false");
+  console.log(a);
 }
 catch(err) {
   console.log('inside err');
