@@ -1,8 +1,9 @@
 'use strict'
+
 var FormulaVisitor = require('./generatedCode/FormulaVisitor').FormulaVisitor;
 var FormulaParser = require('./generatedCode/FormulaParser').FormulaParser;
 var moment = require('moment');
-// var numFormatter = require('qf-formula-test');
+var QfErr = require('./FormulaError');
 
 class MyFormulaVisitor extends FormulaVisitor{
     constructor() {
@@ -22,8 +23,12 @@ class MyFormulaVisitor extends FormulaVisitor{
     visitPlusMinus(ctx) {
         var value1 = this.visit(ctx.expr(0));
         var value2 = this.visit(ctx.expr(1));
-        if (typeof value1 != 'number') {
-            throw new Error('=======');
+        if (typeof value1 != 'number' || typeof value2 != 'number') {
+            let err = {
+                errCode: 1
+            }
+            throw new QfErr(err);
+            return;
         }
         switch (ctx.op.type){
             case FormulaParser.PLUS:return value1 + value2;
