@@ -1,14 +1,14 @@
 {
-  "name": "qf-formula-test",
-  "version": "1.0.3",
-  "description": "A formula testing tool",
+  "name": "formula-calculator",
+  "version": "1.0.0",
+  "description": "A formula calculator",
   "main": "index.js",
   "scripts": {
     "test": " mocha --reporter spec"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tirelyl/qfFormulaTest.git"
+    "url": "git+https://github.com/QingFlow/FormulaCalculator.git"
   },
   "keywords": [
     "node.js",
@@ -17,9 +17,9 @@
   "author": "Liyulun",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tirelyl/qfFormulaTest/issues"
+    "url": "https://github.com/QingFlow/FormulaCalculator/issues"
   },
-  "homepage": "https://github.com/tirelyl/qfFormulaTest#readme",
+  "homepage": "https://github.com/QingFlow/FormulaCalculator",
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^4.0.1"
@@ -27,5 +27,8 @@
   "dependencies": {
     "antlr4": "^4.7.0",
     "moment": "^2.19.2"
+  },
+  "directories": {
+    "test": "test"
   }
 }
