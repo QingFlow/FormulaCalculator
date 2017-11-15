@@ -5,43 +5,48 @@ var antlr4 = require('antlr4');
 var FormulaParser = require('./generatedCode/FormulaParser');
 var assert = require('assert')
 
-
-function calculate(input, queIdMap) {
-    try {
-    var chars = new antlr4.InputStream(input);
-    var lexer = new FormulaLexer.FormulaLexer(chars);
-    var tokens  = new antlr4.CommonTokenStream(lexer);
-    var parser = new FormulaParser.FormulaParser(tokens);
-    var visitor = new MyFormulaVisitor(queIdMap);
-    var result = visitor.visit(parser.formula());
+// class QfCalc {
+    // function calculate(input) {
+    //     try {
+    //     var chars = new antlr4.InputStream(input);
+    //     var lexer = new FormulaLexer.FormulaLexer(chars);
+    //     var tokens  = new antlr4.CommonTokenStream(lexer);
+    //     var parser = new FormulaParser.FormulaParser(tokens);
+    //     var visitor = new MyFormulaVisitor();
+    //     var result = visitor.visit(parser.formula());
+        
+    //     return result[0]
+    //     }
+    //     catch(e) {
+    //         console.log(e);
+    //     }
+    // }
     
-    return result[0]
-    }
-    catch(e) {
-        console.log(e);
-    }
-}
+    // function test(input) {
+        // var queIdMap = {
+        //     100: '123',
+        //     101: 'abcde',
+        //     102: ['123', '456', '789'],
+        //     103: ['abc', 'def', 'ghi'],
+        //     104: ['123', 'abc'],
+        //     105: '2017-01-02 03:04:00',
+        //     106: '2017-01-02'
+        // }
+        // console.log("测试: " + input);
+        // var result = calculate(input, queIdMap);
+    //     console.log("结果是: " + input);
+    //     return input;
+    // }
+// }
 
-function test(input) {
-    var queIdMap = {
-        100: '123',
-        101: 'abcde',
-        102: ['123', '456', '789'],
-        103: ['abc', 'def', 'ghi'],
-        104: ['123', 'abc'],
-        105: '2017-01-02 03:04:00',
-        106: '2017-01-02'
-    }
-    console.log("测试: " + input);
-    var result = calculate(input, queIdMap);
-    console.log("结果是: " + result);
-    return result;
-}
+// function 
 
 // var r;
+// var u;
 
-// r = test('"1" + 2 * 3 - 4')
-// assert.equal(r, 3)
+// r = test('11+1');
+// u = calculate('SUM(1,1,2)');
+// assert.equal(u, 4);
 // r = test('#queId_100 * 2')
 // assert(r, '246');
 // r = test('(20 + 30) / 5')
@@ -115,4 +120,4 @@ function test(input) {
 // r = test('CURDATE()')
 // r = test('NOW()')
 // r = test('RDID()')
-module.exports = calculate;
+// module.exports = calculate;

@@ -65,7 +65,6 @@ expr :
 INT # int                                               // 整数
 | DOUBLE # double                                       // 浮点数
 | String # str                                          // 字符串
-| '#queId_' INT #field                                  // 问题的值
 | LPAREN expr RPAREN # parens                           // 括号
 | ID LPAREN (expr (COMMA expr)*)? RPAREN # func         // 函数
 | '[' (expr (COMMA expr)*)? ']' #list                   // 数组

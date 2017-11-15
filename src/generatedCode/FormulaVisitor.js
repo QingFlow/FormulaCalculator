@@ -78,12 +78,6 @@ FormulaVisitor.prototype.visitStr = function(ctx) {
 };
 
 
-// Visit a parse tree produced by FormulaParser#field.
-FormulaVisitor.prototype.visitField = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
 // Visit a parse tree produced by FormulaParser#func.
 FormulaVisitor.prototype.visitFunc = function(ctx) {
   return this.visitChildren(ctx);

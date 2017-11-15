@@ -5,9 +5,8 @@ var moment = require('moment');
 // var numFormatter = require('qf-formula-test');
 
 class MyFormulaVisitor extends FormulaVisitor{
-    constructor(queIdValueMap) {
-        super()
-        this.queIdValueMap = queIdValueMap;
+    constructor() {
+        super();
         this.functionMap = new Function().getFuncMap();
     }
 
@@ -26,9 +25,6 @@ class MyFormulaVisitor extends FormulaVisitor{
         if (typeof value1 != 'number') {
             throw new Error('=======');
         }
-        
-        console.log(value1);
-        console.log(value2);
         switch (ctx.op.type){
             case FormulaParser.PLUS:return value1 + value2;
             case FormulaParser.MINUS:return value1 - value2;
@@ -101,12 +97,6 @@ class MyFormulaVisitor extends FormulaVisitor{
     visitStr(ctx) {
         var value = ctx.String().getText();
         return value.substring(1, value.length - 1);
-    }
-    // 解析问题id
-    visitField(ctx) {
-        var queId = Number.parseInt(ctx.INT().getText());
-        var value = this.queIdValueMap[queId];
-        return value;
     }
     // 解析函数
     visitFunc(ctx) {
