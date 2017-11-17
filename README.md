@@ -16,6 +16,35 @@
 
   `console.log(formula.calculate('SUM(1,2,3)'));`
 
+### 支持的公式类型
+
+IF
+CONCAT
+LEFT
+REPLACE
+MID
+TEXT
+SUM
+AVERAGE
+COUNT
+MIN
+MAX
+ROUND
+INT
+MOD
+PRODUCT
+SUMPRODUCT
+YEAR
+MONTH
+DAY
+HOUR
+MINUTE
+SECOND
+DATE
+CURDATE
+NOW
+RDID
+
 ### 规则
 
 1. 字符串要用双引号包裹
