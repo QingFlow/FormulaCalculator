@@ -37,7 +37,7 @@ NOT : 'NOT' | 'not'
 ;
 XOR : 'XOR' | 'xor'
 ;
-COMMA : ','
+COMMA : ',' | '，'
 ;
 ID : [_A-Za-z][_A-Za-z0-9]*
 ;
