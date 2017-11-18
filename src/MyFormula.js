@@ -144,6 +144,13 @@ class MyFormulaVisitor extends FormulaVisitor{
             // todo: 抛出异常
         }
     }
+    // 解析错误输入
+    visitError(ctx) {
+        let err = new QfErr({
+            errCode: 4
+        });
+        throw err;
+    }
 }
 
 

@@ -65,7 +65,7 @@ expr :
 INT # int                                               // 整数
 | DOUBLE # double                                       // 浮点数
 | String # str                                          // 字符串
-| op=(TRUE | FALSE) # bool                                   // 布尔值
+| op=(TRUE | FALSE) # bool                              // 布尔值
 | LPAREN expr RPAREN # parens                           // 括号
 | ID LPAREN (expr (COMMA expr)*)? RPAREN # func         // 函数
 | '[' (expr (COMMA expr)*)? ']' #list                   // 数组
@@ -76,4 +76,5 @@ INT # int                                               // 整数
 | expr XOR expr # xor                                   // 亦或
 | expr AND expr # and                                   // 逻辑与
 | expr OR expr # or                                     // 逻辑或
+| expr expr # error                                     // 错误
 ;

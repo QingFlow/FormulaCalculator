@@ -66,6 +66,12 @@ FormulaVisitor.prototype.visitList = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FormulaParser#error.
+FormulaVisitor.prototype.visitError = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FormulaParser#int.
 FormulaVisitor.prototype.visitInt = function(ctx) {
   return this.visitChildren(ctx);
