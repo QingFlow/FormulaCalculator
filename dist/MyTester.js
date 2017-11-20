@@ -1,5 +1,6 @@
+'use strict';
 
-var MyFormulaVisitor = require('./MyFormula');
+var MyFormulaVisitor = require('./MyFormula').MyFormulaVisitor;
 var FormulaLexer = require('../token_parse/FormulaLexer');
 var antlr4 = require('antlr4');
 var FormulaParser = require('../token_parse/FormulaParser');
