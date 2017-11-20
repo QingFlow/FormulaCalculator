@@ -2,7 +2,7 @@
 var FormulaVisitor = require('../token_parse/FormulaVisitor').FormulaVisitor;
 var FormulaParser = require('../token_parse/FormulaParser').FormulaParser;
 var moment = require('moment');
-var QfErr = require('./FormulaError');
+var QfErr = require('./FormulaError').FormulaError;
 
 class MyFormulaVisitor extends FormulaVisitor{
     constructor() {
@@ -415,4 +415,4 @@ function checkValueType(value, type) {
     }
 }
 
-module.exports = MyFormulaVisitor;
+module.exports.MyFormulaVisitor = MyFormulaVisitor;

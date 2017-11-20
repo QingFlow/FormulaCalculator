@@ -1,9 +1,9 @@
 
-var MyFormulaVisitor = require('./MyFormula');
+var MyFormulaVisitor = require('./MyFormula').MyFormulaVisitor;
 var FormulaLexer = require('../token_parse/FormulaLexer');
 var antlr4 = require('antlr4');
 var FormulaParser = require('../token_parse/FormulaParser');
-var QfErr = require('./FormulaError');
+var QfErr = require('./FormulaError').FormulaError;
 
 function calculate(input) {
   var chars = new antlr4.InputStream(input);

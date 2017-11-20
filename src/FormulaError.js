@@ -10,4 +10,4 @@ class FormulaError {
   }
 }
 
-module.exports = FormulaError;
+module.exports.FormulaError = FormulaError;
