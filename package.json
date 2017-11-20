@@ -4,7 +4,7 @@
   "description": "A formula calculator",
   "main": "index.js",
   "scripts": {
-    "test": " mocha --reporter spec",
+    "test": "mocha --reporter spec",
     "build": "babel src --out-dir dist"
   },
   "repository": {
