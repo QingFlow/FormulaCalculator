@@ -415,4 +415,4 @@ function checkValueType(value, type) {
     }
 }
 
-module.exports.MyFormulaVisitor = MyFormulaVisitor;
+module.exports = MyFormulaVisitor;
