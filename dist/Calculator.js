@@ -7,6 +7,7 @@ var FormulaLexer = require('../token_parse/FormulaLexer');
 var antlr4 = require('antlr4');
 var FormulaParser = require('../token_parse/FormulaParser');
 var QfErr = require('./FormulaError').FormulaError;
+require('babel-polyfill');
 
 function calculate(input) {
   var chars = new antlr4.InputStream(input);

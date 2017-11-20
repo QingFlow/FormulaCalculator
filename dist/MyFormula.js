@@ -16,6 +16,7 @@ var FormulaVisitor = require('../token_parse/FormulaVisitor').FormulaVisitor;
 var FormulaParser = require('../token_parse/FormulaParser').FormulaParser;
 var moment = require('moment');
 var QfErr = require('./FormulaError').FormulaError;
+require('babel-polyfill');
 
 var MyFormulaVisitor = function (_FormulaVisitor) {
     _inherits(MyFormulaVisitor, _FormulaVisitor);
@@ -533,7 +534,11 @@ var Function = function () {
         value: function funcRound(value, n) {
             checkValueType(value, 'number');
             checkValueType(n, 'number');
-            return Math.round(value * 10 ** n) / 10 ** n;
+            var iterValue = 1;
+            for (var i = 0; i < n; i++) {
+                iterValue = 10 * iterValue;
+            }
+            return Math.round(value * iterValue) / iterValue;
         }
         // 取整数
 

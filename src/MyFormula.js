@@ -3,6 +3,7 @@ var FormulaVisitor = require('../token_parse/FormulaVisitor').FormulaVisitor;
 var FormulaParser = require('../token_parse/FormulaParser').FormulaParser;
 var moment = require('moment');
 var QfErr = require('./FormulaError').FormulaError;
+require('babel-polyfill');
 
 class MyFormulaVisitor extends FormulaVisitor{
     constructor() {
@@ -284,7 +285,11 @@ class Function {
     funcRound(value, n) {
         checkValueType(value, 'number');
         checkValueType(n, 'number');
-        return Math.round(value * (10**n)) / (10**n);
+        let iterValue = 1;
+        for(let i=0; i<n; i++) {
+            iterValue = 10*iterValue;
+        }
+        return Math.round(value * iterValue) / (iterValue);
     }
     // 取整数
     funcInt(value) {
