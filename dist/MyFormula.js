@@ -1,11 +1,11 @@
-'use strict'
+'use strict';
 
 var FormulaVisitor = require('../token_parse/FormulaVisitor').FormulaVisitor;
 var FormulaParser = require('../token_parse/FormulaParser').FormulaParser;
 var moment = require('moment');
 var QfErr = require('./FormulaError');
 
-class MyFormulaVisitor extends FormulaVisitor{
+class MyFormulaVisitor extends FormulaVisitor {
     constructor() {
         super();
         this.functionMap = new Function().getFuncMap();
@@ -14,16 +14,16 @@ class MyFormulaVisitor extends FormulaVisitor{
     // 一元操作符
     visitUnaryOperator(ctx) {
         var value = this.visit(ctx.expr());
-        switch(ctx.op.type) {
-            case FormulaParser.NOT: 
+        switch (ctx.op.type) {
+            case FormulaParser.NOT:
                 checkValueType(value, 'boolean');
-                return ! value;
-            case FormulaParser.MINUS: 
+                return !value;
+            case FormulaParser.MINUS:
                 checkValueType(value, 'number');
-                return - Number.parseFloat(value);
+                return -Number.parseFloat(value);
         }
     }
-    
+
     // 解析加减法
     visitPlusMinus(ctx) {
         var value1 = this.visit(ctx.expr(0));
@@ -31,12 +31,14 @@ class MyFormulaVisitor extends FormulaVisitor{
         // 类型检查
         checkValueType(value1, 'number');
         checkValueType(value2, 'number');
-        switch (ctx.op.type){
-            case FormulaParser.PLUS:return value1 + value2;
-            case FormulaParser.MINUS:return value1 - value2;
+        switch (ctx.op.type) {
+            case FormulaParser.PLUS:
+                return value1 + value2;
+            case FormulaParser.MINUS:
+                return value1 - value2;
         }
-    };
-    
+    }
+
     //解析整数
     visitInt(ctx) {
         return Number.parseInt(ctx.INT().getText());
@@ -47,9 +49,11 @@ class MyFormulaVisitor extends FormulaVisitor{
     }
     // 解析布尔值
     visitBool(ctx) {
-        switch (ctx.op.type){
-            case FormulaParser.TRUE: return true;
-            case FormulaParser.FALSE: return false;
+        switch (ctx.op.type) {
+            case FormulaParser.TRUE:
+                return true;
+            case FormulaParser.FALSE:
+                return false;
         }
     }
     // 解析括号
@@ -70,12 +74,18 @@ class MyFormulaVisitor extends FormulaVisitor{
                 checkValueType(value2, 'number');
         }
         switch (ctx.op.type) {
-            case FormulaParser.EQ: return value1 === value2;
-            case FormulaParser.NEQ: return value1 !== value2;
-            case FormulaParser.LT: return value1 < value2;
-            case FormulaParser.LE: return value1 <= value2;
-            case FormulaParser.GT: return value1 > value2;
-            case FormulaParser.GE: return value1 >= value2;
+            case FormulaParser.EQ:
+                return value1 === value2;
+            case FormulaParser.NEQ:
+                return value1 !== value2;
+            case FormulaParser.LT:
+                return value1 < value2;
+            case FormulaParser.LE:
+                return value1 <= value2;
+            case FormulaParser.GT:
+                return value1 > value2;
+            case FormulaParser.GE:
+                return value1 >= value2;
         }
     }
     // 解析or操作
@@ -117,10 +127,13 @@ class MyFormulaVisitor extends FormulaVisitor{
         // 类型解析
         checkValueType(value1, 'number');
         checkValueType(value2, 'number');
-        switch(ctx.op.type) {
-            case FormulaParser.MULTIPLY: return value1 * value2;
-            case FormulaParser.DIVIDE: return value1 / value2;
-            default: return 0; // todo: 报错
+        switch (ctx.op.type) {
+            case FormulaParser.MULTIPLY:
+                return value1 * value2;
+            case FormulaParser.DIVIDE:
+                return value1 / value2;
+            default:
+                return 0; // todo: 报错
         }
     }
     // 解析字符串
@@ -133,14 +146,13 @@ class MyFormulaVisitor extends FormulaVisitor{
         var funcName = ctx.ID().getText();
         // 检查函数名是否存在于 预定义的函数中
         if (funcName in this.functionMap) {
-            var paramList = []
+            var paramList = [];
             // 先拿到参数
             for (var val of ctx.expr()) {
                 paramList.push(this.visit(val));
             }
             return this.functionMap[funcName](...paramList);
-        }
-        else {
+        } else {
             // todo: 抛出异常
         }
     }
@@ -152,7 +164,6 @@ class MyFormulaVisitor extends FormulaVisitor{
         throw err;
     }
 }
-
 
 /**
  * 函数的定义
@@ -186,7 +197,7 @@ class Function {
             'CURDATE': this.funcCurDate,
             'NOW': this.funcNow,
             'RDID': this.funcRDID
-        }
+        };
     }
     // if表达式
     funcIf(test, value1, value2) {
@@ -226,10 +237,10 @@ class Function {
         values.every(val => {
             checkValueType(val, 'number');
             return true;
-        })
+        });
         return values.reduce((pre, next) => {
             return Number.parseFloat(pre) + Number.parseFloat(next);
-        })
+        });
     }
     // 平均数
     funcAverage(...values) {
@@ -238,10 +249,10 @@ class Function {
         values.every(val => {
             checkValueType(val, 'number');
             return true;
-        })
+        });
         var sum = values.reduce((pre, next) => {
             return Number.parseFloat(pre) + Number.parseFloat(next);
-        })
+        });
         return sum / values.length;
     }
     // 计数
@@ -256,7 +267,7 @@ class Function {
         values.every(val => {
             checkValueType(val, 'number');
             return true;
-        })
+        });
         var min = Number.MIN_VALUE;
         for (var v of values) {
             if (min > v) {
@@ -272,7 +283,7 @@ class Function {
         values.every(val => {
             checkValueType(val, 'number');
             return true;
-        })
+        });
         var max = Number.MAX_VALUE;
         for (var v of values) {
             if (max < v) {
@@ -285,7 +296,7 @@ class Function {
     funcRound(value, n) {
         checkValueType(value, 'number');
         checkValueType(n, 'number');
-        return Math.round(value * (10**n)) / (10**n);
+        return Math.round(value * 10 ** n) / 10 ** n;
     }
     // 取整数
     funcInt(value) {
@@ -305,7 +316,7 @@ class Function {
         values.every(val => {
             checkValueType(val, 'number');
             return true;
-        })
+        });
         var result = 1;
         for (var v of values) {
             result *= Number.parseFloat(v);
@@ -326,8 +337,8 @@ class Function {
             }
             // 普通数字
             else {
-                result += Number.parseFloat(v);
-            }
+                    result += Number.parseFloat(v);
+                }
         }
         return result;
     }
@@ -392,13 +403,13 @@ class Function {
  */
 function uuid() {
     var d = new Date().getTime();
-    if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
+    if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
         d += performance.now(); //use high-precision timer if available
     }
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         var r = (d + Math.random() * 16) % 16 | 0;
         d = Math.floor(d / 16);
-        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        return (c === 'x' ? r : r & 0x3 | 0x8).toString(16);
     });
 }
 
@@ -408,7 +419,7 @@ function uuid() {
  * @param {*} type 值应该的类型，如“number”，“boolean”， “string”，必须字符床
  */
 function checkValueType(value, type) {
-    if(typeof value !== type) {
+    if (typeof value !== type) {
         let err = new QfErr({
             errCode: 2
         });

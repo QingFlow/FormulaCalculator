@@ -1,42 +1,43 @@
 'use strict';
+
 var MyFormulaVisitor = require('./MyFormula').MyFormulaVisitor;
 var FormulaLexer = require('../token_parse/FormulaLexer');
 var antlr4 = require('antlr4');
 var FormulaParser = require('../token_parse/FormulaParser');
-var assert = require('assert')
+var assert = require('assert');
 
 // class QfCalc {
-    // function calculate(input) {
-    //     try {
-    //     var chars = new antlr4.InputStream(input);
-    //     var lexer = new FormulaLexer.FormulaLexer(chars);
-    //     var tokens  = new antlr4.CommonTokenStream(lexer);
-    //     var parser = new FormulaParser.FormulaParser(tokens);
-    //     var visitor = new MyFormulaVisitor();
-    //     var result = visitor.visit(parser.formula());
-        
-    //     return result[0]
-    //     }
-    //     catch(e) {
-    //         console.log(e);
-    //     }
-    // }
-    
-    // function test(input) {
-        // var queIdMap = {
-        //     100: '123',
-        //     101: 'abcde',
-        //     102: ['123', '456', '789'],
-        //     103: ['abc', 'def', 'ghi'],
-        //     104: ['123', 'abc'],
-        //     105: '2017-01-02 03:04:00',
-        //     106: '2017-01-02'
-        // }
-        // console.log("测试: " + input);
-        // var result = calculate(input, queIdMap);
-    //     console.log("结果是: " + input);
-    //     return input;
-    // }
+// function calculate(input) {
+//     try {
+//     var chars = new antlr4.InputStream(input);
+//     var lexer = new FormulaLexer.FormulaLexer(chars);
+//     var tokens  = new antlr4.CommonTokenStream(lexer);
+//     var parser = new FormulaParser.FormulaParser(tokens);
+//     var visitor = new MyFormulaVisitor();
+//     var result = visitor.visit(parser.formula());
+
+//     return result[0]
+//     }
+//     catch(e) {
+//         console.log(e);
+//     }
+// }
+
+// function test(input) {
+// var queIdMap = {
+//     100: '123',
+//     101: 'abcde',
+//     102: ['123', '456', '789'],
+//     103: ['abc', 'def', 'ghi'],
+//     104: ['123', 'abc'],
+//     105: '2017-01-02 03:04:00',
+//     106: '2017-01-02'
+// }
+// console.log("测试: " + input);
+// var result = calculate(input, queIdMap);
+//     console.log("结果是: " + input);
+//     return input;
+// }
 // }
 
 // function 

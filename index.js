@@ -2,5 +2,5 @@
 
 module.exports =  Object.assign(
   {},
-  require('./src/Calculator')
+  require('./dist/Calculator')
 );
