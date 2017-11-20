@@ -1,4 +1,3 @@
-'use strict';
 
 var MyFormulaVisitor = require('./MyFormula').MyFormulaVisitor;
 var FormulaLexer = require('../token_parse/FormulaLexer');
