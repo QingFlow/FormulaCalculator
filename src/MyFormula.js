@@ -3,7 +3,6 @@ var FormulaVisitor = require('../token_parse/FormulaVisitor').FormulaVisitor;
 var FormulaParser = require('../token_parse/FormulaParser').FormulaParser;
 var moment = require('moment');
 var QfErr = require('./FormulaError').FormulaError;
-require('babel-polyfill');
 
 class MyFormulaVisitor extends FormulaVisitor{
     constructor() {

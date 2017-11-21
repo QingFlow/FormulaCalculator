@@ -16,7 +16,6 @@ var FormulaVisitor = require('../token_parse/FormulaVisitor').FormulaVisitor;
 var FormulaParser = require('../token_parse/FormulaParser').FormulaParser;
 var moment = require('moment');
 var QfErr = require('./FormulaError').FormulaError;
-require('babel-polyfill');
 
 var MyFormulaVisitor = function (_FormulaVisitor) {
     _inherits(MyFormulaVisitor, _FormulaVisitor);
