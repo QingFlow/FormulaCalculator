@@ -1,16 +1,46 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof2 = require('babel-runtime/helpers/typeof');
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _typeof3 = _interopRequireDefault(_typeof2);
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var _getIterator2 = require('babel-runtime/core-js/get-iterator');
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _getIterator3 = _interopRequireDefault(_getIterator2);
+
+var _parseInt = require('babel-runtime/core-js/number/parse-int');
+
+var _parseInt2 = _interopRequireDefault(_parseInt);
+
+var _parseFloat = require('babel-runtime/core-js/number/parse-float');
+
+var _parseFloat2 = _interopRequireDefault(_parseFloat);
+
+var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var FormulaVisitor = require('../token_parse/FormulaVisitor').FormulaVisitor;
 var FormulaParser = require('../token_parse/FormulaParser').FormulaParser;
@@ -18,12 +48,12 @@ var moment = require('moment');
 var QfErr = require('./FormulaError').FormulaError;
 
 var MyFormulaVisitor = function (_FormulaVisitor) {
-    _inherits(MyFormulaVisitor, _FormulaVisitor);
+    (0, _inherits3.default)(MyFormulaVisitor, _FormulaVisitor);
 
     function MyFormulaVisitor() {
-        _classCallCheck(this, MyFormulaVisitor);
+        (0, _classCallCheck3.default)(this, MyFormulaVisitor);
 
-        var _this = _possibleConstructorReturn(this, (MyFormulaVisitor.__proto__ || Object.getPrototypeOf(MyFormulaVisitor)).call(this));
+        var _this = (0, _possibleConstructorReturn3.default)(this, (MyFormulaVisitor.__proto__ || (0, _getPrototypeOf2.default)(MyFormulaVisitor)).call(this));
 
         _this.functionMap = new Function().getFuncMap();
         return _this;
@@ -32,7 +62,7 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
     // 一元操作符
 
 
-    _createClass(MyFormulaVisitor, [{
+    (0, _createClass3.default)(MyFormulaVisitor, [{
         key: 'visitUnaryOperator',
         value: function visitUnaryOperator(ctx) {
             var value = this.visit(ctx.expr());
@@ -42,7 +72,7 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
                     return !value;
                 case FormulaParser.MINUS:
                     checkValueType(value, 'number');
-                    return -Number.parseFloat(value);
+                    return -(0, _parseFloat2.default)(value);
             }
         }
 
@@ -69,14 +99,14 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
 
         //解析整数
         value: function visitInt(ctx) {
-            return Number.parseInt(ctx.INT().getText());
+            return (0, _parseInt2.default)(ctx.INT().getText());
         }
         //解析浮点数
 
     }, {
         key: 'visitDouble',
         value: function visitDouble(ctx) {
-            return Number.parseFloat(ctx.DOUBLE().getText());
+            return (0, _parseFloat2.default)(ctx.DOUBLE().getText());
         }
         // 解析布尔值
 
@@ -172,7 +202,7 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
             var _iteratorError = undefined;
 
             try {
-                for (var _iterator = ctx.expr()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                for (var _iterator = (0, _getIterator3.default)(ctx.expr()), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                     var val = _step.value;
 
                     result.push(this.visit(val));
@@ -199,8 +229,8 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
     }, {
         key: 'visitMulDiv',
         value: function visitMulDiv(ctx) {
-            var value1 = Number.parseFloat(this.visit(ctx.expr(0)));
-            var value2 = Number.parseFloat(this.visit(ctx.expr(1)));
+            var value1 = (0, _parseFloat2.default)(this.visit(ctx.expr(0)));
+            var value2 = (0, _parseFloat2.default)(this.visit(ctx.expr(1)));
             // 类型解析
             checkValueType(value1, 'number');
             checkValueType(value2, 'number');
@@ -238,7 +268,7 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
                 var _iteratorError2 = undefined;
 
                 try {
-                    for (var _iterator2 = ctx.expr()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    for (var _iterator2 = (0, _getIterator3.default)(ctx.expr()), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
                         var val = _step2.value;
 
                         paramList.push(this.visit(val));
@@ -274,7 +304,6 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
             throw err;
         }
     }]);
-
     return MyFormulaVisitor;
 }(FormulaVisitor);
 
@@ -285,10 +314,10 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
 
 var Function = function () {
     function Function() {
-        _classCallCheck(this, Function);
+        (0, _classCallCheck3.default)(this, Function);
     }
 
-    _createClass(Function, [{
+    (0, _createClass3.default)(Function, [{
         key: 'getFuncMap',
         value: function getFuncMap() {
             return {
@@ -339,7 +368,7 @@ var Function = function () {
                 values[_key] = arguments[_key];
             }
 
-            values = (_ref = []).concat.apply(_ref, _toConsumableArray(values)); // flat
+            values = (_ref = []).concat.apply(_ref, (0, _toConsumableArray3.default)(values)); // flat
             return values.join('');
         }
         // 取左边的n个数
@@ -386,14 +415,14 @@ var Function = function () {
                 values[_key2] = arguments[_key2];
             }
 
-            values = (_ref2 = []).concat.apply(_ref2, _toConsumableArray(values)); // flat
+            values = (_ref2 = []).concat.apply(_ref2, (0, _toConsumableArray3.default)(values)); // flat
             // 类型检查
             values.every(function (val) {
                 checkValueType(val, 'number');
                 return true;
             });
             return values.reduce(function (pre, next) {
-                return Number.parseFloat(pre) + Number.parseFloat(next);
+                return (0, _parseFloat2.default)(pre) + (0, _parseFloat2.default)(next);
             });
         }
         // 平均数
@@ -407,14 +436,14 @@ var Function = function () {
                 values[_key3] = arguments[_key3];
             }
 
-            values = (_ref3 = []).concat.apply(_ref3, _toConsumableArray(values)); // flat
+            values = (_ref3 = []).concat.apply(_ref3, (0, _toConsumableArray3.default)(values)); // flat
             // 类型检查
             values.every(function (val) {
                 checkValueType(val, 'number');
                 return true;
             });
             var sum = values.reduce(function (pre, next) {
-                return Number.parseFloat(pre) + Number.parseFloat(next);
+                return (0, _parseFloat2.default)(pre) + (0, _parseFloat2.default)(next);
             });
             return sum / values.length;
         }
@@ -429,7 +458,7 @@ var Function = function () {
                 values[_key4] = arguments[_key4];
             }
 
-            values = (_ref4 = []).concat.apply(_ref4, _toConsumableArray(values)); // flat
+            values = (_ref4 = []).concat.apply(_ref4, (0, _toConsumableArray3.default)(values)); // flat
             return values.length;
         }
         // 最小值
@@ -443,7 +472,7 @@ var Function = function () {
                 values[_key5] = arguments[_key5];
             }
 
-            values = (_ref5 = []).concat.apply(_ref5, _toConsumableArray(values)); // flat
+            values = (_ref5 = []).concat.apply(_ref5, (0, _toConsumableArray3.default)(values)); // flat
             // 类型检查
             values.every(function (val) {
                 checkValueType(val, 'number');
@@ -455,7 +484,7 @@ var Function = function () {
             var _iteratorError3 = undefined;
 
             try {
-                for (var _iterator3 = values[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                for (var _iterator3 = (0, _getIterator3.default)(values), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
                     var v = _step3.value;
 
                     if (min > v) {
@@ -490,7 +519,7 @@ var Function = function () {
                 values[_key6] = arguments[_key6];
             }
 
-            values = (_ref6 = []).concat.apply(_ref6, _toConsumableArray(values)); // flat
+            values = (_ref6 = []).concat.apply(_ref6, (0, _toConsumableArray3.default)(values)); // flat
             // 类型检查
             values.every(function (val) {
                 checkValueType(val, 'number');
@@ -502,7 +531,7 @@ var Function = function () {
             var _iteratorError4 = undefined;
 
             try {
-                for (var _iterator4 = values[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                for (var _iterator4 = (0, _getIterator3.default)(values), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
                     var v = _step4.value;
 
                     if (max < v) {
@@ -545,7 +574,7 @@ var Function = function () {
         key: 'funcInt',
         value: function funcInt(value) {
             checkValueType(value, 'number');
-            return Number.parseInt(value);
+            return (0, _parseInt2.default)(value);
         }
         // 取余（mod操作）
 
@@ -554,7 +583,7 @@ var Function = function () {
         value: function funcMod(value, divisor) {
             checkValueType(value, 'number');
             checkValueType(divisor, 'number');
-            return Number.parseInt(value) % Number.parseInt(divisor);
+            return (0, _parseInt2.default)(value) % (0, _parseInt2.default)(divisor);
         }
         // 连乘（product是office里面的称呼）
 
@@ -567,7 +596,7 @@ var Function = function () {
                 values[_key7] = arguments[_key7];
             }
 
-            values = (_ref7 = []).concat.apply(_ref7, _toConsumableArray(values)); // flat
+            values = (_ref7 = []).concat.apply(_ref7, (0, _toConsumableArray3.default)(values)); // flat
             // 类型检查
             values.every(function (val) {
                 checkValueType(val, 'number');
@@ -579,10 +608,10 @@ var Function = function () {
             var _iteratorError5 = undefined;
 
             try {
-                for (var _iterator5 = values[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                for (var _iterator5 = (0, _getIterator3.default)(values), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
                     var v = _step5.value;
 
-                    result *= Number.parseFloat(v);
+                    result *= (0, _parseFloat2.default)(v);
                 }
             } catch (err) {
                 _didIteratorError5 = true;
@@ -617,21 +646,21 @@ var Function = function () {
             var _iteratorError6 = undefined;
 
             try {
-                for (var _iterator6 = values[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+                for (var _iterator6 = (0, _getIterator3.default)(values), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
                     var v = _step6.value;
 
                     // 数组
-                    if ((typeof v === 'undefined' ? 'undefined' : _typeof(v)) === 'object') {
+                    if ((typeof v === 'undefined' ? 'undefined' : (0, _typeof3.default)(v)) === 'object') {
                         var r2 = 1;
                         var _iteratorNormalCompletion7 = true;
                         var _didIteratorError7 = false;
                         var _iteratorError7 = undefined;
 
                         try {
-                            for (var _iterator7 = v[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+                            for (var _iterator7 = (0, _getIterator3.default)(v), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
                                 var v2 = _step7.value;
 
-                                r2 *= Number.parseFloat(v2);
+                                r2 *= (0, _parseFloat2.default)(v2);
                             }
                         } catch (err) {
                             _didIteratorError7 = true;
@@ -652,7 +681,7 @@ var Function = function () {
                     }
                     // 普通数字
                     else {
-                            result += Number.parseFloat(v);
+                            result += (0, _parseFloat2.default)(v);
                         }
                 }
             } catch (err) {
@@ -726,12 +755,12 @@ var Function = function () {
         key: 'funcDate',
         value: function funcDate(Y, M, D, H, m, s) {
             var t = moment();
-            t.year(Number.parseInt(Y));
-            t.month(Number.parseInt(M) - 1);
-            t.date(Number.parseInt(D));
-            t.hour(Number.parseInt(H));
-            t.minute(Number.parseInt(m));
-            t.second(Number.parseInt(s));
+            t.year((0, _parseInt2.default)(Y));
+            t.month((0, _parseInt2.default)(M) - 1);
+            t.date((0, _parseInt2.default)(D));
+            t.hour((0, _parseInt2.default)(H));
+            t.minute((0, _parseInt2.default)(m));
+            t.second((0, _parseInt2.default)(s));
             return t.format('YYYY-MM-DD HH:mm:ss');
         }
         // 当前的日期
@@ -757,7 +786,6 @@ var Function = function () {
             return uuid();
         }
     }]);
-
     return Function;
 }();
 
@@ -784,7 +812,7 @@ function uuid() {
  * @param {*} type 值应该的类型，如“number”，“boolean”， “string”，必须字符床
  */
 function checkValueType(value, type) {
-    if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== type) {
+    if ((typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value)) !== type) {
         var err = new QfErr({
             errCode: 2
         });
