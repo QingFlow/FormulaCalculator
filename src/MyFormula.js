@@ -215,8 +215,12 @@ class Function {
     }
     // 把时间转化为字符串
     funcText(value, timeFormat) {
-        var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
-        return t.format(timeFormat);
+        if(timeFormat) {
+            var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
+            return t.format(timeFormat);
+        } else {
+            return `"${value}"`;
+        }
     }
     // 求和
     funcSum(...values) {

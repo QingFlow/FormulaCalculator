@@ -401,8 +401,12 @@ var Function = function () {
     }, {
         key: 'funcText',
         value: function funcText(value, timeFormat) {
-            var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
-            return t.format(timeFormat);
+            if (timeFormat) {
+                var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
+                return t.format(timeFormat);
+            } else {
+                return '"' + value + '"';
+            }
         }
         // 求和
 
