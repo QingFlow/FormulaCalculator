@@ -478,7 +478,7 @@ var Function = function () {
                 checkValueType(val, 'number');
                 return true;
             });
-            var min = Number.MIN_VALUE;
+            var min = Number.MAX_VALUE;
             var _iteratorNormalCompletion3 = true;
             var _didIteratorError3 = false;
             var _iteratorError3 = undefined;
@@ -525,7 +525,7 @@ var Function = function () {
                 checkValueType(val, 'number');
                 return true;
             });
-            var max = Number.MAX_VALUE;
+            var max = Number.MIN_VALUE;
             var _iteratorNormalCompletion4 = true;
             var _didIteratorError4 = false;
             var _iteratorError4 = undefined;

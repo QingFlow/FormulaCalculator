@@ -256,7 +256,7 @@ class Function {
             checkValueType(val, 'number');
             return true;
         })
-        var min = Number.MIN_VALUE;
+        var min = Number.MAX_VALUE;
         for (var v of values) {
             if (min > v) {
                 min = v;
@@ -272,7 +272,7 @@ class Function {
             checkValueType(val, 'number');
             return true;
         })
-        var max = Number.MAX_VALUE;
+        var max = Number.MIN_VALUE;
         for (var v of values) {
             if (max < v) {
                 max = v;
