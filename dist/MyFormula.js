@@ -574,7 +574,7 @@ var Function = function () {
         key: 'funcInt',
         value: function funcInt(value) {
             checkValueType(value, 'number');
-            return (0, _parseInt2.default)(value);
+            return Math.floor(value);
         }
         // 取余（mod操作）
 

@@ -293,7 +293,7 @@ class Function {
     // 取整数
     funcInt(value) {
         checkValueType(value, 'number');
-        return Number.parseInt(value);
+        return Math.floor(value);
     }
     // 取余（mod操作）
     funcMod(value, divisor) {
