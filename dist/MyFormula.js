@@ -749,7 +749,7 @@ var Function = function () {
             var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
             return t.second();
         }
-        // 组装出日期
+        // 组装出日期，时分秒如果没有传递，替换成00
 
     }, {
         key: 'funcDate',
@@ -758,9 +758,9 @@ var Function = function () {
             t.year((0, _parseInt2.default)(Y));
             t.month((0, _parseInt2.default)(M) - 1);
             t.date((0, _parseInt2.default)(D));
-            t.hour((0, _parseInt2.default)(H));
-            t.minute((0, _parseInt2.default)(m));
-            t.second((0, _parseInt2.default)(s));
+            t.hour((0, _parseInt2.default)(H ? H : 0));
+            t.minute((0, _parseInt2.default)(m ? m : 0));
+            t.second((0, _parseInt2.default)(s ? s : 0));
             return t.format('YYYY-MM-DD HH:mm:ss');
         }
         // 当前的日期

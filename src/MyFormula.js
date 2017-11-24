@@ -364,15 +364,15 @@ class Function {
         var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
         return t.second();
     }
-    // 组装出日期
+    // 组装出日期，时分秒如果没有传递，替换成00
     funcDate(Y, M, D, H, m, s) {
         var t = moment();
         t.year(Number.parseInt(Y));
         t.month(Number.parseInt(M) - 1);
         t.date(Number.parseInt(D));
-        t.hour(Number.parseInt(H));
-        t.minute(Number.parseInt(m));
-        t.second(Number.parseInt(s));
+        t.hour(Number.parseInt(H?H:0));
+        t.minute(Number.parseInt(m?m:0));
+        t.second(Number.parseInt(s?s:0));
         return t.format('YYYY-MM-DD HH:mm:ss');
     }
     // 当前的日期
