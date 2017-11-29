@@ -5,9 +5,12 @@ var moment = require('moment');
 var QfErr = require('./FormulaError').FormulaError;
 
 class MyFormulaVisitor extends FormulaVisitor{
+
     constructor() {
         super();
-        this.functionMap = new Function().getFuncMap();
+        this.params = arguments[0];  // 公式计算所需的其他参数
+        this.functionMap = new Function().getFuncMap();  // 获取所有一般方法
+        this.jaFunctionMap = new Function().getJaFuncMap();  // 获取所有ja相关的方法
     }
 
     // 一元操作符
@@ -138,6 +141,10 @@ class MyFormulaVisitor extends FormulaVisitor{
                 paramList.push(this.visit(val));
             }
             return this.functionMap[funcName](...paramList);
+        } 
+        // 如果方法为ja相关方法，则把参数信息传递过去
+        else if(funcName in this.jaFunctionMap) {
+            return this.jaFunctionMap[funcName](this.params);
         }
         else {
             // todo: 抛出异常
@@ -157,6 +164,7 @@ class MyFormulaVisitor extends FormulaVisitor{
  * 函数的定义
  */
 class Function {
+    // 获取一般方法的列表
     getFuncMap() {
         return {
             'IF': this.funcIf,
@@ -185,6 +193,17 @@ class Function {
             'CURDATE': this.funcCurDate,
             'NOW': this.funcNow,
             'RDID': this.funcRDID
+        }
+    }
+
+    // 获取ja相关的所有方法
+    getJaFuncMap() {
+        return {
+            'JAID': this.funJAaId,
+            'JANAME': this.funJaName,
+            'JATYPE': this.funJaType,
+            'JADEPTID': this.funJaDeptId,
+            'JADEPTNAME': this.funJaDeptName
         }
     }
     // if表达式
@@ -391,6 +410,45 @@ class Function {
     // 生成随机码
     funcRDID() {
         return uuid();
+    }
+
+    // 获取ja学工号
+    funJAaId(params) {
+        return params['jaInfo']['sid']?params['jaInfo']['sid']:"";
+    }
+
+    // 获取ja姓名
+    funJaName(params) {
+        return params['userInfo']['wsRemark']?params['userInfo']['wsRemark']:"";
+    }
+
+    // 获取ja用户类型
+    funJaType(params) {
+        let userType = params['jaInfo']['userType'];
+        switch(userType) {
+            case "student":
+                return "学生";
+            case "schoolFellow":
+                return "校友";
+            case "faculty":
+                return "教职工";
+            case "postphd":
+                return "博士后";
+            case "team":
+                return "集体账号";
+            default:
+                return "其他";
+        }
+    }
+
+    // 获取ja学院ID
+    funJaDeptId(params) {
+        return params['jaInfo']['organizeId'];
+    }
+
+    // 获取ja学院名称
+    funJaDeptName(params) {
+        return params['jaInfo']['organize'];
     }
 }
 

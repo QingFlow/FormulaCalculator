@@ -55,7 +55,9 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
 
         var _this = (0, _possibleConstructorReturn3.default)(this, (MyFormulaVisitor.__proto__ || (0, _getPrototypeOf2.default)(MyFormulaVisitor)).call(this));
 
-        _this.functionMap = new Function().getFuncMap();
+        _this.params = arguments[0]; // 公式计算所需的其他参数
+        _this.functionMap = new Function().getFuncMap(); // 获取所有一般方法
+        _this.jaFunctionMap = new Function().getJaFuncMap(); // 获取所有jaccount相关的方法
         return _this;
     }
 
@@ -289,9 +291,13 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
                 }
 
                 return (_functionMap = this.functionMap)[funcName].apply(_functionMap, paramList);
-            } else {
-                // todo: 抛出异常
             }
+            // 如果方法为jaccount相关方法，则把参数信息传递过去
+            else if (funcName in this.jaFunctionMap) {
+                    return this.jaFunctionMap[funcName](this.params);
+                } else {
+                    // todo: 抛出异常
+                }
         }
         // 解析错误输入
 
@@ -319,6 +325,8 @@ var Function = function () {
 
     (0, _createClass3.default)(Function, [{
         key: 'getFuncMap',
+
+        // 获取一般方法的列表
         value: function getFuncMap() {
             return {
                 'IF': this.funcIf,
@@ -347,6 +355,20 @@ var Function = function () {
                 'CURDATE': this.funcCurDate,
                 'NOW': this.funcNow,
                 'RDID': this.funcRDID
+            };
+        }
+
+        // 获取jaccount相关的所有方法
+
+    }, {
+        key: 'getJaFuncMap',
+        value: function getJaFuncMap() {
+            return {
+                'JAID': this.funJAaId,
+                'JANAME': this.funJaName,
+                'JATYPE': this.funJaType,
+                'JADEPTID': this.funJaDeptId,
+                'JADEPTNAME': this.funJaDeptName
             };
         }
         // if表达式
@@ -788,6 +810,60 @@ var Function = function () {
         key: 'funcRDID',
         value: function funcRDID() {
             return uuid();
+        }
+
+        // 获取jaccount学工号
+
+    }, {
+        key: 'funJAaId',
+        value: function funJAaId(params) {
+            return params['jaInfo']['sid'] ? params['jaInfo']['sid'] : "";
+        }
+
+        // 获取jaccount姓名
+
+    }, {
+        key: 'funJaName',
+        value: function funJaName(params) {
+            return params['userInfo']['wsRemark'] ? params['userInfo']['wsRemark'] : "";
+        }
+
+        // 获取jaccount用户类型
+
+    }, {
+        key: 'funJaType',
+        value: function funJaType(params) {
+            var userType = params['jaInfo']['userType'];
+            switch (userType) {
+                case "student":
+                    return "学生";
+                case "schoolFellow":
+                    return "校友";
+                case "faculty":
+                    return "教职工";
+                case "postphd":
+                    return "博士后";
+                case "team":
+                    return "集体账号";
+                default:
+                    return "其他";
+            }
+        }
+
+        // 获取jaccount学院ID
+
+    }, {
+        key: 'funJaDeptId',
+        value: function funJaDeptId(params) {
+            return params['jaInfo']['organizeId'];
+        }
+
+        // 获取jaccount学院名称
+
+    }, {
+        key: 'funJaDeptName',
+        value: function funJaDeptName(params) {
+            return params['jaInfo']['organize'];
         }
     }]);
     return Function;

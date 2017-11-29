@@ -45,6 +45,26 @@ CURDATE
 NOW
 RDID
 
+#### Ja相关的方法
+
+JAID  (获取ja学工号)
+JANAME  （获取ja姓名）
+JATYPE  （获取ja用户类型）
+JADEPTID  （获取ja部门id）
+JADEPTNAME  （获取ja部门名称）
+> 调用方法不一样,需要传递用户信息进来：calculate('JAID()', params)
+> params数据结构: {
+  jaInfo: {
+    sid: "11134456666", 
+    organize: "03728",
+    organizeId: "organizeId",
+    userType: "student|schoolFellow|faculty|postphd|team"
+  }, 
+  userInfo: {
+    wsRemark: '备注名称'
+  }
+}
+
 ### 规则
 
 1. 字符串要用双引号包裹
