@@ -60,10 +60,8 @@
     sid: "11134456666", 
     organize: "03728",
     organizeId: "organizeId",
-    userType: "student|schoolFellow|faculty|postphd|team"
-  }, 
-  userInfo: {
-    wsRemark: '备注名称'
+    userType: "student|schoolFellow|faculty|postphd|team",
+    name: "姓名"
   }
 }
 ```

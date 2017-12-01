@@ -419,7 +419,7 @@ class Function {
 
     // 获取ja姓名
     funJaName(params) {
-        return params['userInfo']['wsRemark']?params['userInfo']['wsRemark']:"";
+        return params['jaInfo']['name']?params['jaInfo']['name']:"";
     }
 
     // 获取ja用户类型

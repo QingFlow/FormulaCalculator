@@ -6,11 +6,8 @@ try {
       sid: "1140379009", 
       organize: "软件学院",
       organizeId: "03700",
-      userType: "student"
-    }, 
-    userInfo: {
-      wsRemark: '工作区备注', 
-      email: 'exiao'
+      userType: "student",
+      name: "姓名"
     }
   }
   let a = calc.calculate('CONCAT(JAID(), "asdasd")', params);

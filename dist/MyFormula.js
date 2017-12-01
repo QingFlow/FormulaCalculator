@@ -57,7 +57,7 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
 
         _this.params = arguments[0]; // 公式计算所需的其他参数
         _this.functionMap = new Function().getFuncMap(); // 获取所有一般方法
-        _this.jaFunctionMap = new Function().getJaFuncMap(); // 获取所有jaccount相关的方法
+        _this.jaFunctionMap = new Function().getJaFuncMap(); // 获取所有ja相关的方法
         return _this;
     }
 
@@ -292,7 +292,7 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
 
                 return (_functionMap = this.functionMap)[funcName].apply(_functionMap, paramList);
             }
-            // 如果方法为jaccount相关方法，则把参数信息传递过去
+            // 如果方法为ja相关方法，则把参数信息传递过去
             else if (funcName in this.jaFunctionMap) {
                     return this.jaFunctionMap[funcName](this.params);
                 } else {
@@ -358,7 +358,7 @@ var Function = function () {
             };
         }
 
-        // 获取jaccount相关的所有方法
+        // 获取ja相关的所有方法
 
     }, {
         key: 'getJaFuncMap',
@@ -812,7 +812,7 @@ var Function = function () {
             return uuid();
         }
 
-        // 获取jaccount学工号
+        // 获取ja学工号
 
     }, {
         key: 'funJAaId',
@@ -820,15 +820,15 @@ var Function = function () {
             return params['jaInfo']['sid'] ? params['jaInfo']['sid'] : "";
         }
 
-        // 获取jaccount姓名
+        // 获取ja姓名
 
     }, {
         key: 'funJaName',
         value: function funJaName(params) {
-            return params['userInfo']['wsRemark'] ? params['userInfo']['wsRemark'] : "";
+            return params['jaInfo']['name'] ? params['jaInfo']['name'] : "";
         }
 
-        // 获取jaccount用户类型
+        // 获取ja用户类型
 
     }, {
         key: 'funJaType',
@@ -850,7 +850,7 @@ var Function = function () {
             }
         }
 
-        // 获取jaccount学院ID
+        // 获取ja学院ID
 
     }, {
         key: 'funJaDeptId',
@@ -858,7 +858,7 @@ var Function = function () {
             return params['jaInfo']['organizeId'];
         }
 
-        // 获取jaccount学院名称
+        // 获取ja学院名称
 
     }, {
         key: 'funJaDeptName',
