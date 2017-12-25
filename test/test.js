@@ -10,12 +10,14 @@ try {
       name: "姓名"
     }
   }
-  let a = calc.calculate('CONCAT(JAID(), "asdasd")', params);
+  // let a = calc.calculate('CONCAT(JAID(), "asdasd")', params);
+  // console.log(a);
+  // console.log(calc.calculate('JANAME()', params));
+  // console.log(calc.calculate('JATYPE()', params));
+  // console.log(calc.calculate('JADEPTID()', params));
+  // console.log(calc.calculate('JADEPTNAME()', params));
+  let a = calc.calculate('SUM(1.2,0.23235)');
   console.log(a);
-  console.log(calc.calculate('JANAME()', params));
-  console.log(calc.calculate('JATYPE()', params));
-  console.log(calc.calculate('JADEPTID()', params));
-  console.log(calc.calculate('JADEPTNAME()', params));
 }
 catch(err) {
   console.log('inside err');
