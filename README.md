@@ -69,3 +69,7 @@
 ### 规则
 
 1. 字符串要用双引号包裹
+
+###
+
+1. 打补丁： npm version patch , npm publish
