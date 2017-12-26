@@ -335,6 +335,7 @@ var Function = function () {
                 'REPLACE': this.funcReplace,
                 'MID': this.funcMid,
                 'TEXT': this.funcText,
+                'NUM': this.funNum,
                 'SUM': this.funcSum,
                 'AVERAGE': this.funcAverage,
                 'COUNT': this.funcCount,
@@ -429,6 +430,13 @@ var Function = function () {
             } else {
                 return '"' + value + '"';
             }
+        }
+        // 把其他类型的字段转换成数字类型，可以识别浮点类型
+
+    }, {
+        key: 'funNum',
+        value: function funNum(value) {
+            return (0, _parseFloat2.default)(value);
         }
         // 求和
 

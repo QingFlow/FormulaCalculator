@@ -16,7 +16,7 @@ try {
   // console.log(calc.calculate('JATYPE()', params));
   // console.log(calc.calculate('JADEPTID()', params));
   // console.log(calc.calculate('JADEPTNAME()', params));
-  let a = calc.calculate('SUM(1.2,0.23235)');
+  let a = calc.calculate('SUM(NUM("1991-"),33)');
   console.log(a);
 }
 catch(err) {

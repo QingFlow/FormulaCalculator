@@ -173,6 +173,7 @@ class Function {
             'REPLACE': this.funcReplace,
             'MID': this.funcMid,
             'TEXT': this.funcText,
+            'NUM': this.funNum,
             'SUM': this.funcSum,
             'AVERAGE': this.funcAverage,
             'COUNT': this.funcCount,
@@ -240,6 +241,10 @@ class Function {
         } else {
             return `"${value}"`;
         }
+    }
+    // 把其他类型的字段转换成数字类型，可以识别浮点类型
+    funNum(value) {
+        return Number.parseFloat(value);
     }
     // 求和
     funcSum(...values) {
