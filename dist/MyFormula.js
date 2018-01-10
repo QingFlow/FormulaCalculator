@@ -450,6 +450,10 @@ var Function = function () {
             }
 
             values = (_ref2 = []).concat.apply(_ref2, (0, _toConsumableArray3.default)(values)); // flat
+            // 如果没有值的话，返回0
+            if (values.length === 0) {
+                return 0;
+            }
             // 类型检查
             values.every(function (val) {
                 checkValueType(val, 'number');
@@ -471,6 +475,10 @@ var Function = function () {
             }
 
             values = (_ref3 = []).concat.apply(_ref3, (0, _toConsumableArray3.default)(values)); // flat
+            // 如果没有值的话，返回0
+            if (values.length === 0) {
+                return 0;
+            }
             // 类型检查
             values.every(function (val) {
                 checkValueType(val, 'number');

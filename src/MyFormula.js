@@ -249,6 +249,10 @@ class Function {
     // 求和
     funcSum(...values) {
         values = [].concat(...values); // flat
+        // 如果没有值的话，返回0
+        if (values.length === 0) {
+            return 0;
+        }
         // 类型检查
         values.every(val => {
             checkValueType(val, 'number');
@@ -261,6 +265,10 @@ class Function {
     // 平均数
     funcAverage(...values) {
         values = [].concat(...values); // flat
+        // 如果没有值的话，返回0
+        if (values.length === 0) {
+            return 0;
+        }
         // 类型检查
         values.every(val => {
             checkValueType(val, 'number');
