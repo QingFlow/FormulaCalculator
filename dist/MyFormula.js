@@ -355,7 +355,9 @@ var Function = function () {
                 'DATE': this.funcDate,
                 'CURDATE': this.funcCurDate,
                 'NOW': this.funcNow,
-                'RDID': this.funcRDID
+                'RDID': this.funcRDID,
+                'UPPER': this.funcUpper,
+                'LOWER': this.funcLower
             };
         }
 
@@ -828,6 +830,22 @@ var Function = function () {
         key: 'funcRDID',
         value: function funcRDID() {
             return uuid();
+        }
+
+        // 把字符串中英文字符转换成大写
+
+    }, {
+        key: 'funcUpper',
+        value: function funcUpper(value) {
+            return value.toString().toUpperCase();
+        }
+
+        // 把字符串中英文字符转换成小写
+
+    }, {
+        key: 'funcLower',
+        value: function funcLower(value) {
+            return value.toString().toLowerCase();
         }
 
         // 获取用户名，根据工作区备注>昵称>邮箱的优先级返回用户的用户名

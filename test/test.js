@@ -19,8 +19,9 @@ try {
   // console.log(calc.calculate('JATYPE()', params));
   // console.log(calc.calculate('JADEPTID()', params));
   // console.log(calc.calculate('JADEPTNAME()', params));
-  let a = calc.calculate('CONCAT(GETUSERNAME(), GETUSEREMAIL())', params);
-  console.log(a);
+  // console.log(calc.calculate('CONCAT(GETUSERNAME(), GETUSEREMAIL())', params));
+  console.log(calc.calculate('UPPER("ss看见阿斯顿好.,ssmin11")'));
+  console.log(calc.calculate('LOWER("ss看见JHUHU阿斯顿好.,ssmin11")'));
 }
 catch(err) {
   console.log('inside err');
