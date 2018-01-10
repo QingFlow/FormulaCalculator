@@ -10,7 +10,7 @@ class MyFormulaVisitor extends FormulaVisitor{
         super();
         this.params = arguments[0];  // 公式计算所需的其他参数
         this.functionMap = new Function().getFuncMap();  // 获取所有一般方法
-        this.jaFunctionMap = new Function().getJaFuncMap();  // 获取所有ja相关的方法
+        this.userInfoFunctionMap = new Function().getUserInfoFuncMap();  // 获取所有需要用户信息来计算的方法
     }
 
     // 一元操作符
@@ -142,9 +142,9 @@ class MyFormulaVisitor extends FormulaVisitor{
             }
             return this.functionMap[funcName](...paramList);
         } 
-        // 如果方法为ja相关方法，则把参数信息传递过去
-        else if(funcName in this.jaFunctionMap) {
-            return this.jaFunctionMap[funcName](this.params);
+        // 如果方法为用户信息相关方法，则把参数信息传递过去
+        else if(funcName in this.userInfoFunctionMap) {
+            return this.userInfoFunctionMap[funcName](this.params);
         }
         else {
             // todo: 抛出异常
@@ -197,9 +197,11 @@ class Function {
         }
     }
 
-    // 获取ja相关的所有方法
-    getJaFuncMap() {
+    // 获取所有需要用户信息来计算的方法
+    getUserInfoFuncMap() {
         return {
+            'GETUSERNAME': this.funcGetUserName,
+            'GETUSEREMAIL': this.funcGetUserEmail,
             'JAID': this.funJAaId,
             'JANAME': this.funJaName,
             'JATYPE': this.funJaType,
@@ -423,6 +425,19 @@ class Function {
     // 生成随机码
     funcRDID() {
         return uuid();
+    }
+
+    // 获取用户名，根据工作区备注>昵称>邮箱的优先级返回用户的用户名
+    funcGetUserName(params) {
+        if (params['alias']) { return params['alias']; }
+        if (params['nickName']) { return params['nickName']; }
+        if (params['email']) { return params['email']; }
+        return "";
+    }
+
+    // 返回用户的邮箱
+    funcGetUserEmail(params) {
+        return params['email'];
     }
 
     // 获取ja学工号

@@ -56,6 +56,9 @@
 > params数据结构: 
 ```javascript
 {
+  email: "",  // 用户邮箱
+  nickName: "",  // 用户的昵称
+  alias: "",  // 用户在工作区的备注名称
   jaInfo: {
     sid: "11134456666", 
     organize: "03728",

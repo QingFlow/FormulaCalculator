@@ -57,7 +57,7 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
 
         _this.params = arguments[0]; // 公式计算所需的其他参数
         _this.functionMap = new Function().getFuncMap(); // 获取所有一般方法
-        _this.jaFunctionMap = new Function().getJaFuncMap(); // 获取所有ja相关的方法
+        _this.userInfoFunctionMap = new Function().getUserInfoFuncMap(); // 获取所有需要用户信息来计算的方法
         return _this;
     }
 
@@ -292,9 +292,9 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
 
                 return (_functionMap = this.functionMap)[funcName].apply(_functionMap, paramList);
             }
-            // 如果方法为ja相关方法，则把参数信息传递过去
-            else if (funcName in this.jaFunctionMap) {
-                    return this.jaFunctionMap[funcName](this.params);
+            // 如果方法为用户信息相关方法，则把参数信息传递过去
+            else if (funcName in this.userInfoFunctionMap) {
+                    return this.userInfoFunctionMap[funcName](this.params);
                 } else {
                     // todo: 抛出异常
                 }
@@ -359,12 +359,14 @@ var Function = function () {
             };
         }
 
-        // 获取ja相关的所有方法
+        // 获取所有需要用户信息来计算的方法
 
     }, {
-        key: 'getJaFuncMap',
-        value: function getJaFuncMap() {
+        key: 'getUserInfoFuncMap',
+        value: function getUserInfoFuncMap() {
             return {
+                'GETUSERNAME': this.funcGetUserName,
+                'GETUSEREMAIL': this.funcGetUserEmail,
                 'JAID': this.funJAaId,
                 'JANAME': this.funJaName,
                 'JATYPE': this.funJaType,
@@ -826,6 +828,31 @@ var Function = function () {
         key: 'funcRDID',
         value: function funcRDID() {
             return uuid();
+        }
+
+        // 获取用户名，根据工作区备注>昵称>邮箱的优先级返回用户的用户名
+
+    }, {
+        key: 'funcGetUserName',
+        value: function funcGetUserName(params) {
+            if (params['alias']) {
+                return params['alias'];
+            }
+            if (params['nickName']) {
+                return params['nickName'];
+            }
+            if (params['email']) {
+                return params['email'];
+            }
+            return "";
+        }
+
+        // 返回用户的邮箱
+
+    }, {
+        key: 'funcGetUserEmail',
+        value: function funcGetUserEmail(params) {
+            return params['email'];
         }
 
         // 获取ja学工号
