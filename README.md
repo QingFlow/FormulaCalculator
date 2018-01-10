@@ -44,6 +44,10 @@
 - CURDATE
 - NOW
 - RDID
+- GETUSERNAME
+- GETUSEREMAIL
+- UPPER
+- LOWER
 
 #### Ja相关的方法
 
