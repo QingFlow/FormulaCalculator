@@ -9,9 +9,9 @@ MULTIPLY : '*'
 ;
 DIVIDE : '/'
 ;
-LPAREN : '('
+LPAREN : '(' | '（'
 ;
-RPAREN : ')'
+RPAREN : ')' | '）'
 ;
 EQ : '=='
 ;

@@ -63,8 +63,8 @@ var decisionsToDFA = atn.decisionToState.map( function(ds, index) { return new a
 
 var sharedContextCache = new antlr4.PredictionContextCache();
 
-var literalNames = [ null, "'['", "']'", "'+'", "'-'", "'*'", "'/'", "'('", 
-                     "')'", "'=='", "'!='", "'<'", "'<='", "'>'", "'>='" ];
+var literalNames = [ null, "'['", "']'", "'+'", "'-'", "'*'", "'/'", null, 
+                     null, "'=='", "'!='", "'<'", "'<='", "'>'", "'>='" ];
 
 var symbolicNames = [ null, null, null, "PLUS", "MINUS", "MULTIPLY", "DIVIDE", 
                       "LPAREN", "RPAREN", "EQ", "NEQ", "LT", "LE", "GT", 
