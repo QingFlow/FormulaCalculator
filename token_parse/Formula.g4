@@ -47,11 +47,11 @@ DOUBLE : ('0' | [1-9][0-9]*)('.'[0-9]*)?
 ;
 WS : [ \t\r\n]+ -> skip
 ;
-String :   '"' (StringCharacter+)? '"'
+String :   '"' (StringCharacter+)? '"' | '“' (StringCharacter+)? '”'
 ;
-StringCharacter :   ~["\\] |  EscapeSequence
+StringCharacter :   ~["“\\] |  EscapeSequence
 ;
-EscapeSequence :   '\\' [btnfr"'\\] |  UnicodeEscape
+EscapeSequence :   '\\' [btnfr"“'\\] |  UnicodeEscape
 ;
 UnicodeEscape :   '\\' 'u' HexDigit HexDigit HexDigit HexDigit
 ;
