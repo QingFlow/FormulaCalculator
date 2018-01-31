@@ -319,7 +319,10 @@ var Function = function () {
                 'RDID': this.funcRDID,
                 'UPPER': this.funcUpper,
                 'LOWER': this.funcLower,
-                'AND': this.funcAnd
+                'AND': this.funcAnd,
+                'OR': this.funcOr,
+                'XOR': this.funcXor,
+                'NOT': this.funcNot
             };
         }
 
@@ -819,6 +822,36 @@ var Function = function () {
             checkValueType(value1, 'boolean');
             checkValueType(value2, 'boolean');
             return value1 && value2;
+        }
+
+        // 或操作
+
+    }, {
+        key: 'funcOr',
+        value: function funcOr(value1, value2) {
+            // 类型检查
+            checkValueType(value1, 'boolean');
+            checkValueType(value2, 'boolean');
+            return value1 || value2;
+        }
+        // 异或操作
+
+    }, {
+        key: 'funcXor',
+        value: function funcXor(value1, value2) {
+            // 类型检查
+            checkValueType(value1, 'boolean');
+            checkValueType(value2, 'boolean');
+            return value1 ^ value2 ? true : false;
+        }
+        // 非操作
+
+    }, {
+        key: 'funcNot',
+        value: function funcNot(value) {
+            // 类型检查
+            checkValueType(value, 'boolean');
+            return !value;
         }
 
         // 获取用户名，根据工作区备注>昵称>邮箱的优先级返回用户的用户名

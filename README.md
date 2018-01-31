@@ -48,6 +48,11 @@
 - GETUSEREMAIL
 - UPPER
 - LOWER
+// 以下是新增的方法
+- AND
+- OR
+- NOT
+- XOR
 
 #### Ja相关的方法
 
