@@ -24,7 +24,7 @@ try {
   // console.log(calc.calculate('CONCAT(GETUSERNAME(), GETUSEREMAIL())', params));
   // console.log(calc.calculate('UPPER("ss看见阿斯顿好.,ssmin11")'));
   // console.log(calc.calculate('LOWER("ss看见JHUHU阿斯顿好.,ssmin11")'));
-  console.log(calc.calculate('CONCAT（“时”，“是”，“啊实打实的”）', a))
+  console.log(calc.calculate('AND(true, true)'))
 }
 catch(err) {
   console.log('inside err');

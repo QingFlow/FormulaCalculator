@@ -16,14 +16,8 @@ class MyFormulaVisitor extends FormulaVisitor{
     // 一元操作符
     visitUnaryOperator(ctx) {
         var value = this.visit(ctx.expr());
-        switch(ctx.op.type) {
-            case FormulaParser.NOT: 
-                checkValueType(value, 'boolean');
-                return ! value;
-            case FormulaParser.MINUS: 
-                checkValueType(value, 'number');
-                return - Number.parseFloat(value);
-        }
+        checkValueType(value, 'number');
+        return - Number.parseFloat(value);
     }
     
     // 解析加减法
@@ -79,30 +73,6 @@ class MyFormulaVisitor extends FormulaVisitor{
             case FormulaParser.GT: return value1 > value2;
             case FormulaParser.GE: return value1 >= value2;
         }
-    }
-    // 解析or操作
-    visitOr(ctx) {
-        var value1 = this.visit(ctx.expr(0));
-        var value2 = this.visit(ctx.expr(1));
-        // 类型检查
-        checkValueType(value1, 'boolean');
-        checkValueType(value2, 'boolean');
-        return value1 || value2;
-    }
-    // 解析and操作
-    visitAnd(ctx) {
-        var value1 = this.visit(ctx.expr(0));
-        var value2 = this.visit(ctx.expr(1));
-        // 类型检查
-        checkValueType(value1, 'boolean');
-        checkValueType(value2, 'boolean');
-        return value1 && value2;
-    }
-    // 解析抑或
-    visitXor(ctx) {
-        var value1 = this.visit(ctx.expr(0));
-        var value2 = this.visit(ctx.expr(1));
-        return value1 ^ value2;
     }
     // 解析数组
     visitList(ctx) {
@@ -195,7 +165,8 @@ class Function {
             'NOW': this.funcNow,
             'RDID': this.funcRDID,
             'UPPER': this.funcUpper,
-            'LOWER': this.funcLower
+            'LOWER': this.funcLower,
+            'AND': this.funcAnd
         }
     }
 
@@ -437,6 +408,14 @@ class Function {
     // 把字符串中英文字符转换成小写
     funcLower(value) {
         return value.toString().toLowerCase();
+    }
+    
+    // 与操作
+    funcAnd(value1, value2) {
+        // 类型检查
+        checkValueType(value1, 'boolean');
+        checkValueType(value2, 'boolean');
+        return value1 && value2;
     }
 
     // 获取用户名，根据工作区备注>昵称>邮箱的优先级返回用户的用户名

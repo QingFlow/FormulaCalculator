@@ -68,14 +68,8 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
         key: 'visitUnaryOperator',
         value: function visitUnaryOperator(ctx) {
             var value = this.visit(ctx.expr());
-            switch (ctx.op.type) {
-                case FormulaParser.NOT:
-                    checkValueType(value, 'boolean');
-                    return !value;
-                case FormulaParser.MINUS:
-                    checkValueType(value, 'number');
-                    return -(0, _parseFloat2.default)(value);
-            }
+            checkValueType(value, 'number');
+            return -(0, _parseFloat2.default)(value);
         }
 
         // 解析加减法
@@ -159,39 +153,6 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
                 case FormulaParser.GE:
                     return value1 >= value2;
             }
-        }
-        // 解析or操作
-
-    }, {
-        key: 'visitOr',
-        value: function visitOr(ctx) {
-            var value1 = this.visit(ctx.expr(0));
-            var value2 = this.visit(ctx.expr(1));
-            // 类型检查
-            checkValueType(value1, 'boolean');
-            checkValueType(value2, 'boolean');
-            return value1 || value2;
-        }
-        // 解析and操作
-
-    }, {
-        key: 'visitAnd',
-        value: function visitAnd(ctx) {
-            var value1 = this.visit(ctx.expr(0));
-            var value2 = this.visit(ctx.expr(1));
-            // 类型检查
-            checkValueType(value1, 'boolean');
-            checkValueType(value2, 'boolean');
-            return value1 && value2;
-        }
-        // 解析抑或
-
-    }, {
-        key: 'visitXor',
-        value: function visitXor(ctx) {
-            var value1 = this.visit(ctx.expr(0));
-            var value2 = this.visit(ctx.expr(1));
-            return value1 ^ value2;
         }
         // 解析数组
 
@@ -357,7 +318,8 @@ var Function = function () {
                 'NOW': this.funcNow,
                 'RDID': this.funcRDID,
                 'UPPER': this.funcUpper,
-                'LOWER': this.funcLower
+                'LOWER': this.funcLower,
+                'AND': this.funcAnd
             };
         }
 
@@ -846,6 +808,17 @@ var Function = function () {
         key: 'funcLower',
         value: function funcLower(value) {
             return value.toString().toLowerCase();
+        }
+
+        // 与操作
+
+    }, {
+        key: 'funcAnd',
+        value: function funcAnd(value1, value2) {
+            // 类型检查
+            checkValueType(value1, 'boolean');
+            checkValueType(value2, 'boolean');
+            return value1 && value2;
         }
 
         // 获取用户名，根据工作区备注>昵称>邮箱的优先级返回用户的用户名
