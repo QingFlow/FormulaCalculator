@@ -6,12 +6,15 @@ var FormulaError = require('./FormulaError').FormulaError;
 * @param {*} type 值应该的类型，如“number”，“boolean”， “string”，必须字符床
 * @param {*} funcName 函数名称，用于类型检查报错
 */
-export function checkValueType(value, type, funcName) {
-   if(typeof value !== type) {
-       let err = new FormulaError({
-           errCode: 1,
-           funcName: funcName
-       });
-       throw err;
-   }
+export function checkValueType(type, funcName, ...values) {
+  values = [].concat(...values);
+  values.forEach(value => {
+    if(typeof value !== type) {
+      let err = new FormulaError({
+          errCode: 1,
+          funcName: funcName
+      });
+      throw err;
+    }
+  })
 }

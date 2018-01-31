@@ -108,7 +108,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcIf',
         value: function funcIf(test, value1, value2) {
-            checkValueType(test, 'boolean', 'IF');
+            checkValueType('boolean', 'IF', test);
             return test ? value1 : value2;
         }
         // 把字符串串起来
@@ -186,10 +186,7 @@ var Function = exports.Function = function () {
                 return 0;
             }
             // 类型检查
-            values.every(function (val) {
-                checkValueType(val, 'number', 'SUM');
-                return true;
-            });
+            checkValueType('number', 'SUM', values);
             return values.reduce(function (pre, next) {
                 return (0, _parseFloat2.default)(pre) + (0, _parseFloat2.default)(next);
             });
@@ -211,10 +208,7 @@ var Function = exports.Function = function () {
                 return 0;
             }
             // 类型检查
-            values.every(function (val) {
-                checkValueType(val, 'number', 'AVERAGE');
-                return true;
-            });
+            checkValueType('number', 'AVERAGE', values);
             var sum = values.reduce(function (pre, next) {
                 return (0, _parseFloat2.default)(pre) + (0, _parseFloat2.default)(next);
             });
@@ -247,10 +241,7 @@ var Function = exports.Function = function () {
 
             values = (_ref5 = []).concat.apply(_ref5, (0, _toConsumableArray3.default)(values)); // flat
             // 类型检查
-            values.every(function (val) {
-                checkValueType(val, 'number', 'MIN');
-                return true;
-            });
+            checkValueType('number', 'MIN', values);
             var min = Number.MAX_VALUE;
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
@@ -294,10 +285,7 @@ var Function = exports.Function = function () {
 
             values = (_ref6 = []).concat.apply(_ref6, (0, _toConsumableArray3.default)(values)); // flat
             // 类型检查
-            values.every(function (val) {
-                checkValueType(val, 'number', 'MAX');
-                return true;
-            });
+            checkValueType('number', 'MAX', values);
             var max = Number.MIN_VALUE;
             var _iteratorNormalCompletion2 = true;
             var _didIteratorError2 = false;
@@ -333,8 +321,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcRound',
         value: function funcRound(value, n) {
-            checkValueType(value, 'number', 'ROUND');
-            checkValueType(n, 'number', 'ROUND');
+            checkValueType('number', 'ROUND', value, n);
             var iterValue = 1;
             for (var i = 0; i < n; i++) {
                 iterValue = 10 * iterValue;
@@ -346,7 +333,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcInt',
         value: function funcInt(value) {
-            checkValueType(value, 'number', 'INT');
+            checkValueType('number', 'INT', value);
             return Math.floor(value);
         }
         // 取余（mod操作）
@@ -354,8 +341,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcMod',
         value: function funcMod(value, divisor) {
-            checkValueType(value, 'number', 'MOD');
-            checkValueType(divisor, 'number', 'MOD');
+            checkValueType('number', 'MOD', value, divisor);
             return (0, _parseInt2.default)(value) % (0, _parseInt2.default)(divisor);
         }
         // 连乘（product是office里面的称呼）
@@ -371,10 +357,7 @@ var Function = exports.Function = function () {
 
             values = (_ref7 = []).concat.apply(_ref7, (0, _toConsumableArray3.default)(values)); // flat
             // 类型检查
-            values.every(function (val) {
-                checkValueType(val, 'number', 'PRODUCT');
-                return true;
-            });
+            checkValueType('number', 'PRODUCT', values);
             var result = 1;
             var _iteratorNormalCompletion3 = true;
             var _didIteratorError3 = false;
@@ -589,8 +572,7 @@ var Function = exports.Function = function () {
         key: 'funcAnd',
         value: function funcAnd(value1, value2) {
             // 类型检查
-            checkValueType(value1, 'boolean', 'AND');
-            checkValueType(value2, 'boolean', 'AND');
+            checkValueType('boolean', 'AND', value1, value2);
             return value1 && value2;
         }
 
@@ -600,8 +582,7 @@ var Function = exports.Function = function () {
         key: 'funcOr',
         value: function funcOr(value1, value2) {
             // 类型检查
-            checkValueType(value1, 'boolean', 'OR');
-            checkValueType(value2, 'boolean', 'OR');
+            checkValueType('boolean', 'OR', value1, value2);
             return value1 || value2;
         }
         // 非操作
@@ -610,7 +591,7 @@ var Function = exports.Function = function () {
         key: 'funcNot',
         value: function funcNot(value) {
             // 类型检查
-            checkValueType(value, 'boolean', 'NOT');
+            checkValueType('boolean', 'NOT', value);
             return !value;
         }
         // 异或操作
@@ -619,8 +600,7 @@ var Function = exports.Function = function () {
         key: 'funcXor',
         value: function funcXor(value1, value2) {
             // 类型检查
-            checkValueType(value1, 'boolean', 'XOR');
-            checkValueType(value2, 'boolean', 'XOR');
+            checkValueType('boolean', 'XOR', value1, value2);
             return value1 ^ value2 ? true : false;
         }
 

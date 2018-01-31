@@ -57,7 +57,7 @@ export class Function {
   }
   // if表达式
   funcIf(test, value1, value2) {
-      checkValueType(test, 'boolean', 'IF');
+      checkValueType('boolean', 'IF', test);
       return test ? value1 : value2;
   }
   // 把字符串串起来
@@ -102,10 +102,7 @@ export class Function {
           return 0;
       }
       // 类型检查
-      values.every(val => {
-          checkValueType(val, 'number', 'SUM');
-          return true;
-      })
+      checkValueType('number', 'SUM', values);
       return values.reduce((pre, next) => {
           return Number.parseFloat(pre) + Number.parseFloat(next);
       })
@@ -118,10 +115,7 @@ export class Function {
           return 0;
       }
       // 类型检查
-      values.every(val => {
-          checkValueType(val, 'number', 'AVERAGE');
-          return true;
-      })
+      checkValueType('number', 'AVERAGE', values);
       var sum = values.reduce((pre, next) => {
           return Number.parseFloat(pre) + Number.parseFloat(next);
       })
@@ -136,10 +130,7 @@ export class Function {
   funcMin(...values) {
       values = [].concat(...values); // flat
       // 类型检查
-      values.every(val => {
-          checkValueType(val, 'number', 'MIN');
-          return true;
-      })
+      checkValueType('number', 'MIN', values);
       var min = Number.MAX_VALUE;
       for (var v of values) {
           if (min > v) {
@@ -152,10 +143,7 @@ export class Function {
   funcMax(...values) {
       values = [].concat(...values); // flat
       // 类型检查
-      values.every(val => {
-          checkValueType(val, 'number', 'MAX');
-          return true;
-      })
+      checkValueType('number', 'MAX', values);
       var max = Number.MIN_VALUE;
       for (var v of values) {
           if (max < v) {
@@ -166,8 +154,7 @@ export class Function {
   }
   // 四舍五入
   funcRound(value, n) {
-      checkValueType(value, 'number', 'ROUND');
-      checkValueType(n, 'number', 'ROUND');
+      checkValueType('number', 'ROUND', value, n);
       let iterValue = 1;
       for(let i=0; i<n; i++) {
           iterValue = 10*iterValue;
@@ -176,23 +163,19 @@ export class Function {
   }
   // 取整数
   funcInt(value) {
-      checkValueType(value, 'number', 'INT');
+      checkValueType('number', 'INT', value);
       return Math.floor(value);
   }
   // 取余（mod操作）
   funcMod(value, divisor) {
-      checkValueType(value, 'number', 'MOD');
-      checkValueType(divisor, 'number', 'MOD');
+      checkValueType('number', 'MOD', value, divisor);
       return Number.parseInt(value) % Number.parseInt(divisor);
   }
   // 连乘（product是office里面的称呼）
   funcProduct(...values) {
       values = [].concat(...values); // flat
       // 类型检查
-      values.every(val => {
-          checkValueType(val, 'number', 'PRODUCT');
-          return true;
-      })
+      checkValueType('number', 'PRODUCT', values);
       var result = 1;
       for (var v of values) {
           result *= Number.parseFloat(v);
@@ -294,29 +277,26 @@ export class Function {
   // 与操作
   funcAnd(value1, value2) {
       // 类型检查
-      checkValueType(value1, 'boolean', 'AND');
-      checkValueType(value2, 'boolean', 'AND');
+      checkValueType('boolean', 'AND', value1, value2);
       return value1 && value2;
   }
 
   // 或操作
   funcOr(value1, value2) {
       // 类型检查
-      checkValueType(value1, 'boolean', 'OR');
-      checkValueType(value2, 'boolean', 'OR');
+      checkValueType('boolean', 'OR', value1, value2);
       return value1 || value2;
   }
   // 非操作
   funcNot(value) {
       // 类型检查
-      checkValueType(value, 'boolean', 'NOT');
+      checkValueType('boolean', 'NOT', value);
       return !value;
   }
   // 异或操作
   funcXor(value1, value2) {
       // 类型检查
-      checkValueType(value1, 'boolean', 'XOR');
-      checkValueType(value2, 'boolean', 'XOR');
+      checkValueType('boolean', 'XOR', value1, value2);
       return value1 ^ value2 ? true : false;
   }
 

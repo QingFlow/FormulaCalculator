@@ -24,7 +24,9 @@ try {
   // console.log(calc.calculate('CONCAT(GETUSERNAME(), GETUSEREMAIL())', params));
   // console.log(calc.calculate('UPPER("ss看见阿斯顿好.,ssmin11")'));
   // console.log(calc.calculate('LOWER("ss看见JHUHU阿斯顿好.,ssmin11")'));
-  console.log(calc.calculate(''));
+  console.log(calc.calculate('IF(TRUE,"ss", "false")'));
+  console.log(calc.calculate('ROUND(2.222,2)'))
+  console.log(calc.calculate('SUM(1,2,3,4,[3,4,5])'))
 }
 catch(err) {
   console.log('inside err');

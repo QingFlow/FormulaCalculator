@@ -62,7 +62,7 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
         key: 'visitUnaryOperator',
         value: function visitUnaryOperator(ctx) {
             var value = this.visit(ctx.expr());
-            checkValueType(value, 'number', 'MINUS');
+            checkValueType('number', 'MINUS', value);
             return -(0, _parseFloat2.default)(value);
         }
 
@@ -74,8 +74,7 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
             var value1 = this.visit(ctx.expr(0));
             var value2 = this.visit(ctx.expr(1));
             // 类型检查
-            checkValueType(value1, 'number', 'MINUS');
-            checkValueType(value2, 'number', 'MINUS');
+            checkValueType('number', 'MINUS', value1, value2);
             switch (ctx.op.type) {
                 case FormulaParser.PLUS:
                     return value1 + value2;
@@ -130,8 +129,7 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
                 case FormulaParser.LE:
                 case FormulaParser.GT:
                 case FormulaParser.GE:
-                    checkValueType(value1, 'number', 'COMPARE');
-                    checkValueType(value2, 'number', 'COMPARE');
+                    checkValueType('number', 'COMPARE', value1, value2);
             }
             switch (ctx.op.type) {
                 case FormulaParser.EQ:
@@ -191,13 +189,11 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
             switch (ctx.op.type) {
                 case FormulaParser.MULTIPLY:
                     // 类型解析
-                    checkValueType(value1, 'number', 'MULTIPLE');
-                    checkValueType(value2, 'number', 'MULTIPLE');
+                    checkValueType('number', 'MULTIPLE', value1, value2);
                     return value1 * value2;
                 case FormulaParser.DIVIDE:
                     // 类型解析
-                    checkValueType(value1, 'number', 'DIVIDE');
-                    checkValueType(value2, 'number', 'DIVIDE');
+                    checkValueType('number', 'DIVIDE', value1, value2);
                     return value1 / value2;
                 default:
                     return 0; // todo: 报错
