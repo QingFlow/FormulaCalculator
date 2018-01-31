@@ -24,10 +24,7 @@ try {
   // console.log(calc.calculate('CONCAT(GETUSERNAME(), GETUSEREMAIL())', params));
   // console.log(calc.calculate('UPPER("ss看见阿斯顿好.,ssmin11")'));
   // console.log(calc.calculate('LOWER("ss看见JHUHU阿斯顿好.,ssmin11")'));
-  console.log(calc.calculate('XOR(true, true)'));
-  console.log(calc.calculate('XOR(true, false)'));
-  console.log(calc.calculate('XOR(false, true)'));
-  console.log(calc.calculate('XOR(false, false)'));
+  console.log(calc.calculate(''));
 }
 catch(err) {
   console.log('inside err');

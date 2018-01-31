@@ -7,6 +7,7 @@ class FormulaError {
 
   constructor(data) {
     this.errCode = data.errCode;
+    this.funcName = data.funcName;
   }
 }
 

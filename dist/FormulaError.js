@@ -14,6 +14,7 @@ var FormulaError = function FormulaError(data) {
   (0, _classCallCheck3.default)(this, FormulaError);
 
   this.errCode = data.errCode;
+  this.funcName = data.funcName;
 };
 
 module.exports.FormulaError = FormulaError;
