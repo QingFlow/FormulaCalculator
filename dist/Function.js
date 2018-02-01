@@ -140,6 +140,7 @@ var Function = exports.Function = function () {
         value: function funcReplace(value, start, n, newValue) {
             value = String(value);
             newValue = String(newValue);
+            checkValueType('number', 'REPLACE', start, n);
             return value.substring(0, start - 1) + newValue + value.substr(start + n - 1);
         }
         // 取中间的子串，从start开始，取长度为n的子串

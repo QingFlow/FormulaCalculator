@@ -32,11 +32,12 @@ function checkValueType(type, funcName) {
   var _ref;
 
   values = (_ref = []).concat.apply(_ref, (0, _toConsumableArray3.default)(values));
-  values.forEach(function (value) {
+  values.forEach(function (value, index) {
     if ((typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value)) !== type) {
       var err = new FormulaError({
         errCode: 1,
-        funcName: funcName
+        funcName: funcName,
+        paramIdx: index
       });
       throw err;
     }

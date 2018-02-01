@@ -8,11 +8,12 @@ var FormulaError = require('./FormulaError').FormulaError;
 */
 export function checkValueType(type, funcName, ...values) {
   values = [].concat(...values);
-  values.forEach(value => {
+  values.forEach((value, index) => {
     if(typeof value !== type) {
       let err = new FormulaError({
           errCode: 1,
-          funcName: funcName
+          funcName: funcName,
+          paramIdx: index
       });
       throw err;
     }
