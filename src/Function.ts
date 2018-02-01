@@ -1,4 +1,6 @@
-var checkValueType = require('./Utils').checkValueType;
+// var checkValueType = require('./Utils').checkValueType;
+import { checkValueType } from './Utils';
+import * as moment from 'moment';
 
 /**
  * 函数的定义
@@ -93,7 +95,7 @@ export class Function {
   }
   // 把其他类型的字段转换成数字类型，可以识别浮点类型
   funNum(value) {
-      return Number.parseFloat(value);
+      return parseFloat(value);
   }
   // 求和
   funcSum(...values) {
@@ -105,7 +107,7 @@ export class Function {
       // 类型检查
       checkValueType('number', 'SUM', values);
       return values.reduce((pre, next) => {
-          return Number.parseFloat(pre) + Number.parseFloat(next);
+          return parseFloat(pre) + parseFloat(next);
       })
   }
   // 平均数
@@ -118,7 +120,7 @@ export class Function {
       // 类型检查
       checkValueType('number', 'AVERAGE', values);
       var sum = values.reduce((pre, next) => {
-          return Number.parseFloat(pre) + Number.parseFloat(next);
+          return parseFloat(pre) + parseFloat(next);
       })
       return sum / values.length;
   }
@@ -170,7 +172,7 @@ export class Function {
   // 取余（mod操作）
   funcMod(value, divisor) {
       checkValueType('number', 'MOD', value, divisor);
-      return Number.parseInt(value) % Number.parseInt(divisor);
+      return parseInt(value) % parseInt(divisor);
   }
   // 连乘（product是office里面的称呼）
   funcProduct(...values) {
@@ -179,7 +181,7 @@ export class Function {
       checkValueType('number', 'PRODUCT', values);
       var result = 1;
       for (var v of values) {
-          result *= Number.parseFloat(v);
+          result *= parseFloat(v);
       }
       return result;
   }
@@ -191,13 +193,13 @@ export class Function {
           if (typeof v === 'object') {
               var r2 = 1;
               for (var v2 of v) {
-                  r2 *= Number.parseFloat(v2);
+                  r2 *= parseFloat(v2);
               }
               result += r2;
           }
           // 普通数字
           else {
-              result += Number.parseFloat(v);
+              result += parseFloat(v);
           }
       }
       return result;
@@ -235,12 +237,12 @@ export class Function {
   // 组装出日期，时分秒如果没有传递，替换成00
   funcDate(Y, M, D, H, m, s) {
       var t = moment();
-      t.year(Number.parseInt(Y));
-      t.month(Number.parseInt(M) - 1);
-      t.date(Number.parseInt(D));
-      t.hour(Number.parseInt(H?H:0));
-      t.minute(Number.parseInt(m?m:0));
-      t.second(Number.parseInt(s?s:0));
+      t.year(parseInt(Y));
+      t.month(parseInt(M) - 1);
+      t.date(parseInt(D));
+      t.hour(parseInt(H?H:0));
+      t.minute(parseInt(m?m:0));
+      t.second(parseInt(s?s:0));
       return t.format('YYYY-MM-DD HH:mm:ss');
   }
   // 当前的日期

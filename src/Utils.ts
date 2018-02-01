@@ -1,5 +1,5 @@
-var FormulaError = require('./FormulaError').FormulaError;
-
+// var FormulaError = require('./FormulaError').FormulaError;
+import { FormulaError } from './FormulaError';
 /**
 * 检查值的类型，并抛出错误
 * @param {*} value 要检查类型的值

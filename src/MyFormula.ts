@@ -1,31 +1,43 @@
 
-var FormulaVisitor = require('../token_parse/FormulaVisitor').FormulaVisitor;
-var FormulaParser = require('../token_parse/FormulaParser').FormulaParser;
-var moment = require('moment');
-var FormulaError = require('./FormulaError').FormulaError;
-var Function = require('./Function').Function;
-var checkValueType = require('./Utils').checkValueType;
+// var FormulaVisitor = require('../token_parse/FormulaVisitor').FormulaVisitor;
 
-class MyFormulaVisitor extends FormulaVisitor{
+// var FormulaParser = require('../token_parse/FormulaParser').FormulaParser;
+// var moment = require('moment');
+// var FormulaError = require('./FormulaError').FormulaError;
+// var Function = require('./Function').Function;
+// var checkValueType = require('./Utils').checkValueType;
+import * as FormulaVisitor from '../token_parse/FormulaVisitor';
+import * as FormulaParser from '../token_parse/FormulaParser';
+import * as moment from 'moment';
+import { FormulaError } from './FormulaError';
+import { Function } from './Function';
+import { checkValueType } from './Utils';
 
-    constructor() {
+export class MyFormulaVisitor extends FormulaVisitor{
+
+    params;
+    functionMap;
+    userInfoFunctionMap;
+    visit;
+    constructor(params: any) {
         super();
-        this.params = arguments[0];  // 公式计算所需的其他参数
+        this.visit = super.visit;
+        this.params = params;  // 公式计算所需的其他参数
         this.functionMap = new Function().getFuncMap();  // 获取所有一般方法
         this.userInfoFunctionMap = new Function().getUserInfoFuncMap();  // 获取所有需要用户信息来计算的方法
     }
 
     // 一元操作符
     visitUnaryOperator(ctx) {
-        var value = this.visit(ctx.expr());
+        var value = super.visit(ctx.expr());
         checkValueType('number', 'MINUS', value);
-        return - Number.parseFloat(value);
+        return - parseFloat(value);
     }
     
     // 解析加减法
     visitPlusMinus(ctx) {
-        var value1 = this.visit(ctx.expr(0));
-        var value2 = this.visit(ctx.expr(1));
+        var value1 = super.visit(ctx.expr(0));
+        var value2 = super.visit(ctx.expr(1));
         // 类型检查
         checkValueType('number', 'MINUS', value1, value2);
         switch (ctx.op.type){
@@ -36,11 +48,11 @@ class MyFormulaVisitor extends FormulaVisitor{
     
     //解析整数
     visitInt(ctx) {
-        return Number.parseInt(ctx.INT().getText());
+        return parseInt(ctx.INT().getText());
     }
     //解析浮点数
     visitDouble(ctx) {
-        return Number.parseFloat(ctx.DOUBLE().getText());
+        return parseFloat(ctx.DOUBLE().getText());
     }
     // 解析布尔值
     visitBool(ctx) {
@@ -51,12 +63,12 @@ class MyFormulaVisitor extends FormulaVisitor{
     }
     // 解析括号
     visitParens(ctx) {
-        return this.visit(ctx.expr());
+        return super.visit(ctx.expr());
     }
     // 解析一些比较符号
     visitCompare(ctx) {
-        var value1 = this.visit(ctx.expr(0));
-        var value2 = this.visit(ctx.expr(1));
+        var value1 = super.visit(ctx.expr(0));
+        var value2 = super.visit(ctx.expr(1));
         // 类型检查
         switch (ctx.op.type) {
             case FormulaParser.LT:
@@ -78,14 +90,14 @@ class MyFormulaVisitor extends FormulaVisitor{
     visitList(ctx) {
         var result = [];
         for (var val of ctx.expr()) {
-            result.push(this.visit(val));
+            result.push(super.visit(val));
         }
         return result;
     }
     // 解析乘除法[todo: 因为都转化成了浮点数，所以会有问题]
     visitMulDiv(ctx) {
-        var value1 = Number.parseFloat(this.visit(ctx.expr(0)));
-        var value2 = Number.parseFloat(this.visit(ctx.expr(1)));
+        var value1 = parseFloat(super.visit(ctx.expr(0)));
+        var value2 = parseFloat(super.visit(ctx.expr(1)));
         switch(ctx.op.type) {
             case FormulaParser.MULTIPLY: 
                 // 类型解析
@@ -111,7 +123,7 @@ class MyFormulaVisitor extends FormulaVisitor{
             var paramList = []
             // 先拿到参数
             for (var val of ctx.expr()) {
-                paramList.push(this.visit(val));
+                paramList.push(super.visit(val));
             }
             return this.functionMap[funcName](...paramList);
         } 
@@ -132,4 +144,4 @@ class MyFormulaVisitor extends FormulaVisitor{
     }
 }
 
-module.exports.MyFormulaVisitor = MyFormulaVisitor;
+// module.exports.MyFormulaVisitor = MyFormulaVisitor;

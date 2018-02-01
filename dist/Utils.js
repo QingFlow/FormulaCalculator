@@ -1,23 +1,7 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof2 = require('babel-runtime/helpers/typeof');
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
-exports.checkValueType = checkValueType;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var FormulaError = require('./FormulaError').FormulaError;
-
+"use strict";
+exports.__esModule = true;
+// var FormulaError = require('./FormulaError').FormulaError;
+var FormulaError_1 = require("./FormulaError");
 /**
 * 检查值的类型，并抛出错误
 * @param {*} value 要检查类型的值
@@ -25,21 +9,20 @@ var FormulaError = require('./FormulaError').FormulaError;
 * @param {*} funcName 函数名称，用于类型检查报错
 */
 function checkValueType(type, funcName) {
-  for (var _len = arguments.length, values = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-    values[_key - 2] = arguments[_key];
-  }
-
-  var _ref;
-
-  values = (_ref = []).concat.apply(_ref, (0, _toConsumableArray3.default)(values));
-  values.forEach(function (value, index) {
-    if ((typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value)) !== type) {
-      var err = new FormulaError({
-        errCode: 1,
-        funcName: funcName,
-        paramIdx: index
-      });
-      throw err;
+    var values = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+        values[_i - 2] = arguments[_i];
     }
-  });
+    values = [].concat.apply([], values);
+    values.forEach(function (value, index) {
+        if (typeof value !== type) {
+            var err = new FormulaError_1.FormulaError({
+                errCode: 1,
+                funcName: funcName,
+                paramIdx: index
+            });
+            throw err;
+        }
+    });
 }
+exports.checkValueType = checkValueType;

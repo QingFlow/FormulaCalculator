@@ -1,4 +1,5 @@
 var calc = require('../index');
+// import * as cacl from '../index';
 
 try {
   let params = {
