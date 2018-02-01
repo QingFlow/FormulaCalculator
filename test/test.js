@@ -1,3 +1,5 @@
+var calculate = require('../dist/Calculator');
+
 var calc = require('../index');
 
 try {
@@ -13,7 +15,7 @@ try {
       name: "姓名"
     }
   }
-  let a = {email: "13402171010@126.com", nickName: "李婷婷", alias: "这是134的备注"};
+  let a = { email: "13402171010@126.com", nickName: "李婷婷", alias: "这是134的备注" };
 
   // let a = calc.calculate('CONCAT(JAID(), "asdasd")', params);
   // console.log(a);
@@ -24,7 +26,9 @@ try {
   // console.log(calc.calculate('CONCAT(GETUSERNAME(), GETUSEREMAIL())', params));
   // console.log(calc.calculate('UPPER("ss看见阿斯顿好.,ssmin11")'));
   // console.log(calc.calculate('LOWER("ss看见JHUHU阿斯顿好.,ssmin11")'));
-  console.log(calc.calculate('SUM(2,3,4,"s")'));
+  // console.log(calc.calculate('REPLACE("今天是星期日，好开心", SEARCH("星期日","今天是星期日，好开心"), 3, "星期一")'));
+  console.log(calculate.calculate('RIGHT("hellossss", 6)'))
+
 }
 catch(err) {
   console.log(err);

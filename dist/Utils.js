@@ -1,18 +1,19 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _typeof2 = require('babel-runtime/helpers/typeof');
+var _typeof2 = require("babel-runtime/helpers/typeof");
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+var _toConsumableArray2 = require("babel-runtime/helpers/toConsumableArray");
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
 exports.checkValueType = checkValueType;
+exports.reverse = reverse;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33,7 +34,7 @@ function checkValueType(type, funcName) {
 
   values = (_ref = []).concat.apply(_ref, (0, _toConsumableArray3.default)(values));
   values.forEach(function (value, index) {
-    if ((typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value)) !== type) {
+    if ((typeof value === "undefined" ? "undefined" : (0, _typeof3.default)(value)) !== type) {
       var err = new FormulaError({
         errCode: 1,
         funcName: funcName,
@@ -42,4 +43,9 @@ function checkValueType(type, funcName) {
       throw err;
     }
   });
+}
+
+// 字符串反转
+function reverse(value) {
+  return String(value).split("").reverse().join("");
 }

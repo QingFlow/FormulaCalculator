@@ -19,3 +19,8 @@ export function checkValueType(type, funcName, ...values) {
     }
   })
 }
+
+// 字符串反转
+export function reverse(value) {
+    return String(value).split("").reverse().join("");
+}

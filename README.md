@@ -53,6 +53,9 @@
 - OR
 - NOT
 - XOR
+- ISEMPTY
+- SEARCH
+- RIGHT
 
 #### Ja相关的方法
 

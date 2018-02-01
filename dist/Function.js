@@ -36,6 +36,7 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var checkValueType = require('./Utils').checkValueType;
+var reverse = require('./Utils').reverse;
 
 /**
  * 函数的定义
@@ -55,6 +56,7 @@ var Function = exports.Function = function () {
                 'IF': this.funcIf,
                 'CONCAT': this.funcConcat,
                 'LEFT': this.funcLeft,
+                'RIGHT': this.funcRight,
                 'REPLACE': this.funcReplace,
                 'MID': this.funcMid,
                 'TEXT': this.funcText,
@@ -84,7 +86,9 @@ var Function = exports.Function = function () {
                 'AND': this.funcAnd,
                 'OR': this.funcOr,
                 'NOT': this.funcNot,
-                'XOR': this.funcXor
+                'XOR': this.funcXor,
+                'ISEMPTY': this.funcIsEmpty,
+                'SEARCH': this.funcSearch
             };
         }
 
@@ -130,8 +134,17 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcLeft',
         value: function funcLeft(value, n) {
+            checkValueType('number', 'LEFT', n);
             value = String(value);
             return value.substr(0, n);
+        }
+        // 取右边的n个数
+
+    }, {
+        key: 'funcRight',
+        value: function funcRight(value, n) {
+            checkValueType('number', 'RIGHT', n);
+            return reverse(reverse(value).substr(0, n));
         }
         // 取代从start开始的长度为n的位置的字符串（注意，用户使用时，第一个位置是1，而不是0）
 
@@ -603,6 +616,25 @@ var Function = exports.Function = function () {
             // 类型检查
             checkValueType('boolean', 'XOR', value1, value2);
             return value1 ^ value2 ? true : false;
+        }
+
+        // 检查传入的值是否为空
+
+    }, {
+        key: 'funcIsEmpty',
+        value: function funcIsEmpty(value) {
+            if (value === undefined || value === "" || (typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value)) === 'object' && value.length === 0) {
+                return true;
+            }
+            return false;
+        }
+
+        // 查找字符串,在targetText中查找searchText所在位置，返回出现位置索引，没找到返回0
+
+    }, {
+        key: 'funcSearch',
+        value: function funcSearch(searchText, targetText) {
+            return String(targetText).indexOf(String(searchText)) + 1;
         }
 
         // 获取用户名，根据工作区备注>昵称>邮箱的优先级返回用户的用户名
