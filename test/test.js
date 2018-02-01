@@ -1,6 +1,12 @@
 var calculate = require('../dist/Calculator');
 
 var calc = require('../index');
+var moment = require('moment');
+
+var start = "2018-02-02 12:12:12";
+var end = "2018-02-03 12:12:12";
+var result = moment.duration(moment(end).unix() - moment(start).unix()).asDays() * 1000;
+// console.log(result);
 
 try {
   let params = {
@@ -29,21 +35,24 @@ try {
   // console.log(calc.calculate('REPLACE("今天是星期日，好开心", SEARCH("星期日","今天是星期日，好开心"), 3, "星期一")'));
   // console.log(calc.calculate('RIGHT("hellossss", 6)'))
   // console.log(calc.calculate('LEN("hellossss")'))
-  console.log(calc.calculate('TEXT("2018-02-04 12:12:12", "E")'));
-  console.log(calc.calculate('TEXT("2018-02-05 12:12:12", "E")'));
-  console.log(calc.calculate('TEXT("2018-02-06 12:12:12", "E")'));
-  console.log(calc.calculate('TEXT("2018-02-07 12:12:12", "E")'));
-  console.log(calc.calculate('TEXT("2018-02-01 12:12:12", "E")'));
-  console.log(calc.calculate('TEXT("2018-02-02 12:12:12", "E")'));
-  console.log(calc.calculate('TEXT("2018-02-03 12:12:12", "E")'));
+  // console.log(calc.calculate('TEXT("2018-02-04 12:12:12", "E")'));
+  // console.log(calc.calculate('TEXT("2018-02-05 12:12:12", "E")'));
+  // console.log(calc.calculate('TEXT("2018-02-06 12:12:12", "E")'));
+  // console.log(calc.calculate('TEXT("2018-02-07 12:12:12", "E")'));
+  // console.log(calc.calculate('TEXT("2018-02-01 12:12:12", "E")'));
+  // console.log(calc.calculate('TEXT("2018-02-02 12:12:12", "E")'));
+  // console.log(calc.calculate('TEXT("2018-02-03 12:12:12", "E")'));
   
-  console.log(calc.calculate('TEXT("2018-02-04 12:12:12", "EE")'));
-  console.log(calc.calculate('TEXT("2018-02-05 12:12:12", "EE")'));
-  console.log(calc.calculate('TEXT("2018-02-06 12:12:12", "EE")'));
-  console.log(calc.calculate('TEXT("2018-02-07 12:12:12", "EE")'));
-  console.log(calc.calculate('TEXT("2018-02-01 12:12:12", "EE")'));
-  console.log(calc.calculate('TEXT("2018-02-02 12:12:12", "EE")'));
-  console.log(calc.calculate('TEXT("2018-02-03 12:12:12", "EE")'));
+  // console.log(calc.calculate('TEXT("2018-02-04 12:12:12", "EE")'));
+  // console.log(calc.calculate('TEXT("2018-02-05 12:12:12", "EE")'));
+  // console.log(calc.calculate('TEXT("2018-02-06 12:12:12", "EE")'));
+  // console.log(calc.calculate('TEXT("2018-02-07 12:12:12", "EE")'));
+  // console.log(calc.calculate('TEXT("2018-02-01 12:12:12", "EE")'));
+  // console.log(calc.calculate('TEXT("2018-02-02 12:12:12", "EE")'));
+  // console.log(calc.calculate('TEXT("2018-02-03 12:12:12", "EE")'));
+  console.log(calc.calculate('DATEDELTA("2018-02-01", -3)'));
+  console.log(calc.calculate('DATEDELTA("2018-02-01", 3)'));
+  // console.log(calc.calculate('DAYS("2018-02-04 12:12:12", "2018-02-02 12:12:12")'));
 }
 catch(err) {
   console.log(err);

@@ -58,6 +58,7 @@
 - RIGHT
 - LEN
 - DAYS
+- DATEDELTA
 
 #### Ja相关的方法
 

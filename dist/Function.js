@@ -90,7 +90,8 @@ var Function = exports.Function = function () {
                 'ISEMPTY': this.funcIsEmpty,
                 'SEARCH': this.funcSearch,
                 'LEN': this.funcLen,
-                'DAYS': this.funcDays
+                'DAYS': this.funcDays,
+                'DATEDELTA': this.funcDateDelta
             };
         }
 
@@ -656,11 +657,27 @@ var Function = exports.Function = function () {
             return String(value).length;
         }
 
-        // 计算endTime和startTime之间相差的天数
+        // 计算end和start之间相差的天数
 
     }, {
         key: 'funcDays',
-        value: function funcDays(endTime, startTime) {}
+        value: function funcDays(end, start) {
+            return moment.duration(moment(end).unix() - moment(start).unix()).asDays() * 1000;
+        }
+
+        // 计算出date增加或减少days天的日期（days可以为正数/负数）
+
+    }, {
+        key: 'funcDateDelta',
+        value: function funcDateDelta(date, days) {
+            checkValueType('number', 'DATEDELTA', days);
+            //   if (days > 0) {
+            return moment(date).add(days, 'days').format("YYYY-MM-DD HH:mm:ss");
+            //   }
+            //   else {
+            //       return moment(date).subtract(days, 'days').format("YYYY-MM-DD HH:mm:ss");
+            //   }
+        }
 
         // 获取用户名，根据工作区备注>昵称>邮箱的优先级返回用户的用户名
 
