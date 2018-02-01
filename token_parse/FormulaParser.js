@@ -6,55 +6,49 @@ var FormulaVisitor = require('./FormulaVisitor').FormulaVisitor;
 var grammarFileName = "Formula.g4";
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-    "\u0003 H\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0003\u0002\u0003\u0002",
+    "\u0003\u001c?\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0003\u0002\u0003",
+    "\u0002\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003",
     "\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003",
+    "\u0003\u0003\u0003\u0003\u0003\u0007\u0003\u0017\n\u0003\f\u0003\u000e",
+    "\u0003\u001a\u000b\u0003\u0005\u0003\u001c\n\u0003\u0003\u0003\u0003",
+    "\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0007\u0003#\n\u0003\f\u0003",
+    "\u000e\u0003&\u000b\u0003\u0005\u0003(\n\u0003\u0003\u0003\u0003\u0003",
+    "\u0003\u0003\u0005\u0003-\n\u0003\u0003\u0003\u0003\u0003\u0003\u0003",
     "\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003",
-    "\u0003\u0003\u0003\u0003\u0007\u0003\u0017\n\u0003\f\u0003\u000e\u0003",
-    "\u001a\u000b\u0003\u0005\u0003\u001c\n\u0003\u0003\u0003\u0003\u0003",
-    "\u0003\u0003\u0003\u0003\u0003\u0003\u0007\u0003#\n\u0003\f\u0003\u000e",
-    "\u0003&\u000b\u0003\u0005\u0003(\n\u0003\u0003\u0003\u0003\u0003\u0003",
-    "\u0003\u0005\u0003-\n\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003",
-    "\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003",
-    "\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003",
-    "\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0007\u0003C",
-    "\n\u0003\f\u0003\u000e\u0003F\u000b\u0003\u0003\u0003\u0002\u0003\u0004",
-    "\u0004\u0002\u0004\u0002\u0007\u0003\u0002\u0013\u0014\u0004\u0002\u0006",
-    "\u0006\u0015\u0015\u0003\u0002\u0007\b\u0003\u0002\u0005\u0006\u0003",
-    "\u0002\u000b\u0010\u0002W\u0002\u0006\u0003\u0002\u0002\u0002\u0004",
+    "\u0003\u0003\u0003\u0003\u0007\u0003:\n\u0003\f\u0003\u000e\u0003=\u000b",
+    "\u0003\u0003\u0003\u0002\u0003\u0004\u0004\u0002\u0004\u0002\u0006\u0003",
+    "\u0002\u0011\u0012\u0003\u0002\u0007\b\u0003\u0002\u0005\u0006\u0003",
+    "\u0002\u000b\u0010\u0002K\u0002\u0006\u0003\u0002\u0002\u0002\u0004",
     ",\u0003\u0002\u0002\u0002\u0006\u0007\u0005\u0004\u0003\u0002\u0007",
-    "\u0003\u0003\u0002\u0002\u0002\b\t\b\u0003\u0001\u0002\t-\u0007\u0019",
-    "\u0002\u0002\n-\u0007\u001a\u0002\u0002\u000b-\u0007\u001c\u0002\u0002",
+    "\u0003\u0003\u0002\u0002\u0002\b\t\b\u0003\u0001\u0002\t-\u0007\u0015",
+    "\u0002\u0002\n-\u0007\u0016\u0002\u0002\u000b-\u0007\u0018\u0002\u0002",
     "\f-\t\u0002\u0002\u0002\r\u000e\u0007\t\u0002\u0002\u000e\u000f\u0005",
     "\u0004\u0003\u0002\u000f\u0010\u0007\n\u0002\u0002\u0010-\u0003\u0002",
-    "\u0002\u0002\u0011\u0012\u0007\u0018\u0002\u0002\u0012\u001b\u0007\t",
-    "\u0002\u0002\u0013\u0018\u0005\u0004\u0003\u0002\u0014\u0015\u0007\u0017",
+    "\u0002\u0002\u0011\u0012\u0007\u0014\u0002\u0002\u0012\u001b\u0007\t",
+    "\u0002\u0002\u0013\u0018\u0005\u0004\u0003\u0002\u0014\u0015\u0007\u0013",
     "\u0002\u0002\u0015\u0017\u0005\u0004\u0003\u0002\u0016\u0014\u0003\u0002",
     "\u0002\u0002\u0017\u001a\u0003\u0002\u0002\u0002\u0018\u0016\u0003\u0002",
     "\u0002\u0002\u0018\u0019\u0003\u0002\u0002\u0002\u0019\u001c\u0003\u0002",
     "\u0002\u0002\u001a\u0018\u0003\u0002\u0002\u0002\u001b\u0013\u0003\u0002",
     "\u0002\u0002\u001b\u001c\u0003\u0002\u0002\u0002\u001c\u001d\u0003\u0002",
     "\u0002\u0002\u001d-\u0007\n\u0002\u0002\u001e\'\u0007\u0003\u0002\u0002",
-    "\u001f$\u0005\u0004\u0003\u0002 !\u0007\u0017\u0002\u0002!#\u0005\u0004",
+    "\u001f$\u0005\u0004\u0003\u0002 !\u0007\u0013\u0002\u0002!#\u0005\u0004",
     "\u0003\u0002\" \u0003\u0002\u0002\u0002#&\u0003\u0002\u0002\u0002$\"",
     "\u0003\u0002\u0002\u0002$%\u0003\u0002\u0002\u0002%(\u0003\u0002\u0002",
     "\u0002&$\u0003\u0002\u0002\u0002\'\u001f\u0003\u0002\u0002\u0002\'(",
     "\u0003\u0002\u0002\u0002()\u0003\u0002\u0002\u0002)-\u0007\u0004\u0002",
-    "\u0002*+\t\u0003\u0002\u0002+-\u0005\u0004\u0003\n,\b\u0003\u0002\u0002",
-    "\u0002,\n\u0003\u0002\u0002\u0002,\u000b\u0003\u0002\u0002\u0002,\f",
-    "\u0003\u0002\u0002\u0002,\r\u0003\u0002\u0002\u0002,\u0011\u0003\u0002",
-    "\u0002\u0002,\u001e\u0003\u0002\u0002\u0002,*\u0003\u0002\u0002\u0002",
-    "-D\u0003\u0002\u0002\u0002./\f\t\u0002\u0002/0\t\u0004\u0002\u00020",
-    "C\u0005\u0004\u0003\n12\f\b\u0002\u000223\t\u0005\u0002\u00023C\u0005",
-    "\u0004\u0003\t45\f\u0007\u0002\u000256\t\u0006\u0002\u00026C\u0005\u0004",
-    "\u0003\b78\f\u0006\u0002\u000289\u0007\u0016\u0002\u00029C\u0005\u0004",
-    "\u0003\u0007:;\f\u0005\u0002\u0002;<\u0007\u0011\u0002\u0002<C\u0005",
-    "\u0004\u0003\u0006=>\f\u0004\u0002\u0002>?\u0007\u0012\u0002\u0002?",
-    "C\u0005\u0004\u0003\u0005@A\f\u0003\u0002\u0002AC\u0005\u0004\u0003",
-    "\u0004B.\u0003\u0002\u0002\u0002B1\u0003\u0002\u0002\u0002B4\u0003\u0002",
-    "\u0002\u0002B7\u0003\u0002\u0002\u0002B:\u0003\u0002\u0002\u0002B=\u0003",
-    "\u0002\u0002\u0002B@\u0003\u0002\u0002\u0002CF\u0003\u0002\u0002\u0002",
-    "DB\u0003\u0002\u0002\u0002DE\u0003\u0002\u0002\u0002E\u0005\u0003\u0002",
-    "\u0002\u0002FD\u0003\u0002\u0002\u0002\t\u0018\u001b$\',BD"].join("");
+    "\u0002*+\u0007\u0006\u0002\u0002+-\u0005\u0004\u0003\u0007,\b\u0003",
+    "\u0002\u0002\u0002,\n\u0003\u0002\u0002\u0002,\u000b\u0003\u0002\u0002",
+    "\u0002,\f\u0003\u0002\u0002\u0002,\r\u0003\u0002\u0002\u0002,\u0011",
+    "\u0003\u0002\u0002\u0002,\u001e\u0003\u0002\u0002\u0002,*\u0003\u0002",
+    "\u0002\u0002-;\u0003\u0002\u0002\u0002./\f\u0006\u0002\u0002/0\t\u0003",
+    "\u0002\u00020:\u0005\u0004\u0003\u000712\f\u0005\u0002\u000223\t\u0004",
+    "\u0002\u00023:\u0005\u0004\u0003\u000645\f\u0004\u0002\u000256\t\u0005",
+    "\u0002\u00026:\u0005\u0004\u0003\u000578\f\u0003\u0002\u00028:\u0005",
+    "\u0004\u0003\u00049.\u0003\u0002\u0002\u000291\u0003\u0002\u0002\u0002",
+    "94\u0003\u0002\u0002\u000297\u0003\u0002\u0002\u0002:=\u0003\u0002\u0002",
+    "\u0002;9\u0003\u0002\u0002\u0002;<\u0003\u0002\u0002\u0002<\u0005\u0003",
+    "\u0002\u0002\u0002=;\u0003\u0002\u0002\u0002\t\u0018\u001b$\',9;"].join("");
 
 
 var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -68,9 +62,9 @@ var literalNames = [ null, "'['", "']'", "'+'", "'-'", "'*'", "'/'", null,
 
 var symbolicNames = [ null, null, null, "PLUS", "MINUS", "MULTIPLY", "DIVIDE", 
                       "LPAREN", "RPAREN", "EQ", "NEQ", "LT", "LE", "GT", 
-                      "GE", "AND", "OR", "FALSE", "TRUE", "NOT", "XOR", 
-                      "COMMA", "ID", "INT", "DOUBLE", "WS", "String", "StringCharacter", 
-                      "EscapeSequence", "UnicodeEscape", "HexDigit" ];
+                      "GE", "FALSE", "TRUE", "COMMA", "ID", "INT", "DOUBLE", 
+                      "WS", "String", "StringCharacter", "EscapeSequence", 
+                      "UnicodeEscape", "HexDigit" ];
 
 var ruleNames =  [ "formula", "expr" ];
 
@@ -107,22 +101,18 @@ FormulaParser.LT = 11;
 FormulaParser.LE = 12;
 FormulaParser.GT = 13;
 FormulaParser.GE = 14;
-FormulaParser.AND = 15;
-FormulaParser.OR = 16;
-FormulaParser.FALSE = 17;
-FormulaParser.TRUE = 18;
-FormulaParser.NOT = 19;
-FormulaParser.XOR = 20;
-FormulaParser.COMMA = 21;
-FormulaParser.ID = 22;
-FormulaParser.INT = 23;
-FormulaParser.DOUBLE = 24;
-FormulaParser.WS = 25;
-FormulaParser.String = 26;
-FormulaParser.StringCharacter = 27;
-FormulaParser.EscapeSequence = 28;
-FormulaParser.UnicodeEscape = 29;
-FormulaParser.HexDigit = 30;
+FormulaParser.FALSE = 15;
+FormulaParser.TRUE = 16;
+FormulaParser.COMMA = 17;
+FormulaParser.ID = 18;
+FormulaParser.INT = 19;
+FormulaParser.DOUBLE = 20;
+FormulaParser.WS = 21;
+FormulaParser.String = 22;
+FormulaParser.StringCharacter = 23;
+FormulaParser.EscapeSequence = 24;
+FormulaParser.UnicodeEscape = 25;
+FormulaParser.HexDigit = 26;
 
 FormulaParser.RULE_formula = 0;
 FormulaParser.RULE_expr = 1;
@@ -203,6 +193,29 @@ ExprContext.prototype.constructor = ExprContext;
 ExprContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
+
+function StrContext(parser, ctx) {
+	ExprContext.call(this, parser);
+    ExprContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+StrContext.prototype = Object.create(ExprContext.prototype);
+StrContext.prototype.constructor = StrContext;
+
+FormulaParser.StrContext = StrContext;
+
+StrContext.prototype.String = function() {
+    return this.getToken(FormulaParser.String, 0);
+};
+StrContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof FormulaVisitor ) {
+        return visitor.visitStr(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
 
 function ParensContext(parser, ctx) {
 	ExprContext.call(this, parser);
@@ -348,47 +361,9 @@ UnaryOperatorContext.prototype.expr = function() {
 UnaryOperatorContext.prototype.MINUS = function() {
     return this.getToken(FormulaParser.MINUS, 0);
 };
-
-UnaryOperatorContext.prototype.NOT = function() {
-    return this.getToken(FormulaParser.NOT, 0);
-};
 UnaryOperatorContext.prototype.accept = function(visitor) {
     if ( visitor instanceof FormulaVisitor ) {
         return visitor.visitUnaryOperator(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-
-function OrContext(parser, ctx) {
-	ExprContext.call(this, parser);
-    ExprContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-OrContext.prototype = Object.create(ExprContext.prototype);
-OrContext.prototype.constructor = OrContext;
-
-FormulaParser.OrContext = OrContext;
-
-OrContext.prototype.expr = function(i) {
-    if(i===undefined) {
-        i = null;
-    }
-    if(i===null) {
-        return this.getTypedRuleContexts(ExprContext);
-    } else {
-        return this.getTypedRuleContext(ExprContext,i);
-    }
-};
-
-OrContext.prototype.OR = function() {
-    return this.getToken(FormulaParser.OR, 0);
-};
-OrContext.prototype.accept = function(visitor) {
-    if ( visitor instanceof FormulaVisitor ) {
-        return visitor.visitOr(this);
     } else {
         return visitor.visitChildren(this);
     }
@@ -417,6 +392,60 @@ BoolContext.prototype.FALSE = function() {
 BoolContext.prototype.accept = function(visitor) {
     if ( visitor instanceof FormulaVisitor ) {
         return visitor.visitBool(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+function FuncContext(parser, ctx) {
+	ExprContext.call(this, parser);
+    ExprContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+FuncContext.prototype = Object.create(ExprContext.prototype);
+FuncContext.prototype.constructor = FuncContext;
+
+FormulaParser.FuncContext = FuncContext;
+
+FuncContext.prototype.ID = function() {
+    return this.getToken(FormulaParser.ID, 0);
+};
+
+FuncContext.prototype.LPAREN = function() {
+    return this.getToken(FormulaParser.LPAREN, 0);
+};
+
+FuncContext.prototype.RPAREN = function() {
+    return this.getToken(FormulaParser.RPAREN, 0);
+};
+
+FuncContext.prototype.expr = function(i) {
+    if(i===undefined) {
+        i = null;
+    }
+    if(i===null) {
+        return this.getTypedRuleContexts(ExprContext);
+    } else {
+        return this.getTypedRuleContext(ExprContext,i);
+    }
+};
+
+FuncContext.prototype.COMMA = function(i) {
+	if(i===undefined) {
+		i = null;
+	}
+    if(i===null) {
+        return this.getTokens(FormulaParser.COMMA);
+    } else {
+        return this.getToken(FormulaParser.COMMA, i);
+    }
+};
+
+FuncContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof FormulaVisitor ) {
+        return visitor.visitFunc(this);
     } else {
         return visitor.visitChildren(this);
     }
@@ -580,151 +609,6 @@ MulDivContext.prototype.accept = function(visitor) {
 };
 
 
-function StrContext(parser, ctx) {
-	ExprContext.call(this, parser);
-    ExprContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-StrContext.prototype = Object.create(ExprContext.prototype);
-StrContext.prototype.constructor = StrContext;
-
-FormulaParser.StrContext = StrContext;
-
-StrContext.prototype.String = function() {
-    return this.getToken(FormulaParser.String, 0);
-};
-StrContext.prototype.accept = function(visitor) {
-    if ( visitor instanceof FormulaVisitor ) {
-        return visitor.visitStr(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-
-function FuncContext(parser, ctx) {
-	ExprContext.call(this, parser);
-    ExprContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-FuncContext.prototype = Object.create(ExprContext.prototype);
-FuncContext.prototype.constructor = FuncContext;
-
-FormulaParser.FuncContext = FuncContext;
-
-FuncContext.prototype.ID = function() {
-    return this.getToken(FormulaParser.ID, 0);
-};
-
-FuncContext.prototype.LPAREN = function() {
-    return this.getToken(FormulaParser.LPAREN, 0);
-};
-
-FuncContext.prototype.RPAREN = function() {
-    return this.getToken(FormulaParser.RPAREN, 0);
-};
-
-FuncContext.prototype.expr = function(i) {
-    if(i===undefined) {
-        i = null;
-    }
-    if(i===null) {
-        return this.getTypedRuleContexts(ExprContext);
-    } else {
-        return this.getTypedRuleContext(ExprContext,i);
-    }
-};
-
-FuncContext.prototype.COMMA = function(i) {
-	if(i===undefined) {
-		i = null;
-	}
-    if(i===null) {
-        return this.getTokens(FormulaParser.COMMA);
-    } else {
-        return this.getToken(FormulaParser.COMMA, i);
-    }
-};
-
-FuncContext.prototype.accept = function(visitor) {
-    if ( visitor instanceof FormulaVisitor ) {
-        return visitor.visitFunc(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-
-function AndContext(parser, ctx) {
-	ExprContext.call(this, parser);
-    ExprContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-AndContext.prototype = Object.create(ExprContext.prototype);
-AndContext.prototype.constructor = AndContext;
-
-FormulaParser.AndContext = AndContext;
-
-AndContext.prototype.expr = function(i) {
-    if(i===undefined) {
-        i = null;
-    }
-    if(i===null) {
-        return this.getTypedRuleContexts(ExprContext);
-    } else {
-        return this.getTypedRuleContext(ExprContext,i);
-    }
-};
-
-AndContext.prototype.AND = function() {
-    return this.getToken(FormulaParser.AND, 0);
-};
-AndContext.prototype.accept = function(visitor) {
-    if ( visitor instanceof FormulaVisitor ) {
-        return visitor.visitAnd(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-
-function XorContext(parser, ctx) {
-	ExprContext.call(this, parser);
-    ExprContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-XorContext.prototype = Object.create(ExprContext.prototype);
-XorContext.prototype.constructor = XorContext;
-
-FormulaParser.XorContext = XorContext;
-
-XorContext.prototype.expr = function(i) {
-    if(i===undefined) {
-        i = null;
-    }
-    if(i===null) {
-        return this.getTypedRuleContexts(ExprContext);
-    } else {
-        return this.getTypedRuleContext(ExprContext,i);
-    }
-};
-
-XorContext.prototype.XOR = function() {
-    return this.getToken(FormulaParser.XOR, 0);
-};
-XorContext.prototype.accept = function(visitor) {
-    if ( visitor instanceof FormulaVisitor ) {
-        return visitor.visitXor(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-
 
 FormulaParser.prototype.expr = function(_p) {
 	if(_p===undefined) {
@@ -802,7 +686,7 @@ FormulaParser.prototype.expr = function(_p) {
             this.state = 25;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << FormulaParser.T__0) | (1 << FormulaParser.MINUS) | (1 << FormulaParser.LPAREN) | (1 << FormulaParser.FALSE) | (1 << FormulaParser.TRUE) | (1 << FormulaParser.NOT) | (1 << FormulaParser.ID) | (1 << FormulaParser.INT) | (1 << FormulaParser.DOUBLE) | (1 << FormulaParser.String))) !== 0)) {
+            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << FormulaParser.T__0) | (1 << FormulaParser.MINUS) | (1 << FormulaParser.LPAREN) | (1 << FormulaParser.FALSE) | (1 << FormulaParser.TRUE) | (1 << FormulaParser.ID) | (1 << FormulaParser.INT) | (1 << FormulaParser.DOUBLE) | (1 << FormulaParser.String))) !== 0)) {
                 this.state = 17;
                 this.expr(0);
                 this.state = 22;
@@ -831,7 +715,7 @@ FormulaParser.prototype.expr = function(_p) {
             this.state = 37;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << FormulaParser.T__0) | (1 << FormulaParser.MINUS) | (1 << FormulaParser.LPAREN) | (1 << FormulaParser.FALSE) | (1 << FormulaParser.TRUE) | (1 << FormulaParser.NOT) | (1 << FormulaParser.ID) | (1 << FormulaParser.INT) | (1 << FormulaParser.DOUBLE) | (1 << FormulaParser.String))) !== 0)) {
+            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << FormulaParser.T__0) | (1 << FormulaParser.MINUS) | (1 << FormulaParser.LPAREN) | (1 << FormulaParser.FALSE) | (1 << FormulaParser.TRUE) | (1 << FormulaParser.ID) | (1 << FormulaParser.INT) | (1 << FormulaParser.DOUBLE) | (1 << FormulaParser.String))) !== 0)) {
                 this.state = 29;
                 this.expr(0);
                 this.state = 34;
@@ -852,28 +736,19 @@ FormulaParser.prototype.expr = function(_p) {
             this.match(FormulaParser.T__1);
             break;
         case FormulaParser.MINUS:
-        case FormulaParser.NOT:
             localctx = new UnaryOperatorContext(this, localctx);
             this._ctx = localctx;
             _prevctx = localctx;
             this.state = 40;
-            localctx.op = this._input.LT(1);
-            _la = this._input.LA(1);
-            if(!(_la===FormulaParser.MINUS || _la===FormulaParser.NOT)) {
-                localctx.op = this._errHandler.recoverInline(this);
-            }
-            else {
-            	this._errHandler.reportMatch(this);
-                this.consume();
-            }
+            localctx.op = this.match(FormulaParser.MINUS);
             this.state = 41;
-            this.expr(8);
+            this.expr(5);
             break;
         default:
             throw new antlr4.error.NoViableAltException(this);
         }
         this._ctx.stop = this._input.LT(-1);
-        this.state = 66;
+        this.state = 57;
         this._errHandler.sync(this);
         var _alt = this._interp.adaptivePredict(this._input,6,this._ctx)
         while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
@@ -882,7 +757,7 @@ FormulaParser.prototype.expr = function(_p) {
                     this.triggerExitRuleEvent();
                 }
                 _prevctx = localctx;
-                this.state = 64;
+                this.state = 55;
                 this._errHandler.sync(this);
                 var la_ = this._interp.adaptivePredict(this._input,5,this._ctx);
                 switch(la_) {
@@ -890,8 +765,8 @@ FormulaParser.prototype.expr = function(_p) {
                     localctx = new MulDivContext(this, new ExprContext(this, _parentctx, _parentState));
                     this.pushNewRecursionContext(localctx, _startState, FormulaParser.RULE_expr);
                     this.state = 44;
-                    if (!( this.precpred(this._ctx, 7))) {
-                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 7)");
+                    if (!( this.precpred(this._ctx, 4))) {
+                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 4)");
                     }
                     this.state = 45;
                     localctx.op = this._input.LT(1);
@@ -904,15 +779,15 @@ FormulaParser.prototype.expr = function(_p) {
                         this.consume();
                     }
                     this.state = 46;
-                    this.expr(8);
+                    this.expr(5);
                     break;
 
                 case 2:
                     localctx = new PlusMinusContext(this, new ExprContext(this, _parentctx, _parentState));
                     this.pushNewRecursionContext(localctx, _startState, FormulaParser.RULE_expr);
                     this.state = 47;
-                    if (!( this.precpred(this._ctx, 6))) {
-                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 6)");
+                    if (!( this.precpred(this._ctx, 3))) {
+                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 3)");
                     }
                     this.state = 48;
                     localctx.op = this._input.LT(1);
@@ -925,15 +800,15 @@ FormulaParser.prototype.expr = function(_p) {
                         this.consume();
                     }
                     this.state = 49;
-                    this.expr(7);
+                    this.expr(4);
                     break;
 
                 case 3:
                     localctx = new CompareContext(this, new ExprContext(this, _parentctx, _parentState));
                     this.pushNewRecursionContext(localctx, _startState, FormulaParser.RULE_expr);
                     this.state = 50;
-                    if (!( this.precpred(this._ctx, 5))) {
-                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 5)");
+                    if (!( this.precpred(this._ctx, 2))) {
+                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 2)");
                     }
                     this.state = 51;
                     localctx.op = this._input.LT(1);
@@ -946,62 +821,23 @@ FormulaParser.prototype.expr = function(_p) {
                         this.consume();
                     }
                     this.state = 52;
-                    this.expr(6);
-                    break;
-
-                case 4:
-                    localctx = new XorContext(this, new ExprContext(this, _parentctx, _parentState));
-                    this.pushNewRecursionContext(localctx, _startState, FormulaParser.RULE_expr);
-                    this.state = 53;
-                    if (!( this.precpred(this._ctx, 4))) {
-                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 4)");
-                    }
-                    this.state = 54;
-                    this.match(FormulaParser.XOR);
-                    this.state = 55;
-                    this.expr(5);
-                    break;
-
-                case 5:
-                    localctx = new AndContext(this, new ExprContext(this, _parentctx, _parentState));
-                    this.pushNewRecursionContext(localctx, _startState, FormulaParser.RULE_expr);
-                    this.state = 56;
-                    if (!( this.precpred(this._ctx, 3))) {
-                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 3)");
-                    }
-                    this.state = 57;
-                    this.match(FormulaParser.AND);
-                    this.state = 58;
-                    this.expr(4);
-                    break;
-
-                case 6:
-                    localctx = new OrContext(this, new ExprContext(this, _parentctx, _parentState));
-                    this.pushNewRecursionContext(localctx, _startState, FormulaParser.RULE_expr);
-                    this.state = 59;
-                    if (!( this.precpred(this._ctx, 2))) {
-                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 2)");
-                    }
-                    this.state = 60;
-                    this.match(FormulaParser.OR);
-                    this.state = 61;
                     this.expr(3);
                     break;
 
-                case 7:
+                case 4:
                     localctx = new ErrorContext(this, new ExprContext(this, _parentctx, _parentState));
                     this.pushNewRecursionContext(localctx, _startState, FormulaParser.RULE_expr);
-                    this.state = 62;
+                    this.state = 53;
                     if (!( this.precpred(this._ctx, 1))) {
                         throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 1)");
                     }
-                    this.state = 63;
+                    this.state = 54;
                     this.expr(2);
                     break;
 
                 } 
             }
-            this.state = 68;
+            this.state = 59;
             this._errHandler.sync(this);
             _alt = this._interp.adaptivePredict(this._input,6,this._ctx);
         }
@@ -1033,18 +869,12 @@ FormulaParser.prototype.sempred = function(localctx, ruleIndex, predIndex) {
 FormulaParser.prototype.expr_sempred = function(localctx, predIndex) {
 	switch(predIndex) {
 		case 0:
-			return this.precpred(this._ctx, 7);
-		case 1:
-			return this.precpred(this._ctx, 6);
-		case 2:
-			return this.precpred(this._ctx, 5);
-		case 3:
 			return this.precpred(this._ctx, 4);
-		case 4:
+		case 1:
 			return this.precpred(this._ctx, 3);
-		case 5:
+		case 2:
 			return this.precpred(this._ctx, 2);
-		case 6:
+		case 3:
 			return this.precpred(this._ctx, 1);
 		default:
 			throw "No predicate with index:" + predIndex;

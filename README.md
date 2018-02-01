@@ -48,6 +48,18 @@
 - GETUSEREMAIL
 - UPPER
 - LOWER
+// 以下是新增的方法
+- AND
+- OR
+- NOT
+- XOR
+- ISEMPTY
+- SEARCH
+- RIGHT
+- LEN
+- DAYS
+- DATEDELTA
+- RECNO
 
 #### Ja相关的方法
 
@@ -80,3 +92,18 @@
 ###
 
 1. 打补丁： npm version patch , npm publish
+
+
+### 错误码说明
+抛出的错误结构为
+
+```
+{
+  "errCode": 1,  // 错误码
+  "funcName": "SUM",  // 发生错误方法/操作符名称
+  "paramIdx": 0,  // 错误参数索引，从0开始
+}
+```
+
+错误码说明
+- 1: 参数类型错误

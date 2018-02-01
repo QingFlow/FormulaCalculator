@@ -25,17 +25,9 @@ GT : '>'
 ;
 GE : '>='
 ;
-AND : 'AND' | 'and'
-;
-OR : 'OR' | 'or'
-;
 FALSE : 'FALSE' | 'false'
 ;
 TRUE : 'TRUE' | 'true'
-;
-NOT : 'NOT' | 'not'
-;
-XOR : 'XOR' | 'xor'
 ;
 COMMA : ',' | '，'
 ;
@@ -69,12 +61,9 @@ INT # int                                               // 整数
 | LPAREN expr RPAREN # parens                           // 括号
 | ID LPAREN (expr (COMMA expr)*)? RPAREN # func         // 函数
 | '[' (expr (COMMA expr)*)? ']' #list                   // 数组
-| op=(MINUS | NOT) expr # unaryOperator                 // 一元运算符：负号(-)、否(NOT)
+| op=MINUS expr # unaryOperator                         // 一元运算符：负号(-)
 | expr op=(MULTIPLY | DIVIDE) expr # mulDiv             // 乘除法
 | expr op=(PLUS | MINUS) expr # plusMinus               // 加减法
 | expr op=(EQ | NEQ | LT | LE | GT | GE) expr # compare // 比较符
-| expr XOR expr # xor                                   // 亦或
-| expr AND expr # and                                   // 逻辑与
-| expr OR expr # or                                     // 逻辑或
 | expr expr # error                                     // 错误
 ;
