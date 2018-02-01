@@ -59,6 +59,7 @@
 - LEN
 - DAYS
 - DATEDELTA
+- RECNO
 
 #### Ja相关的方法
 

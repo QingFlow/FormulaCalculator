@@ -51,7 +51,7 @@ export class Function {
   }
 
   // 获取所有需要用户信息来计算的方法
-  getUserInfoFuncMap() {
+  getFuncMapWithParam() {
       return {
           'GETUSERNAME': this.funcGetUserName,
           'GETUSEREMAIL': this.funcGetUserEmail,
@@ -59,7 +59,8 @@ export class Function {
           'JANAME': this.funJaName,
           'JATYPE': this.funJaType,
           'JADEPTID': this.funJaDeptId,
-          'JADEPTNAME': this.funJaDeptName
+          'JADEPTNAME': this.funJaDeptName,
+          'RECNO': this.funcRecno
       }
   }
   // if表达式
@@ -405,5 +406,10 @@ export class Function {
   // 获取ja学院名称
   funJaDeptName(params) {
       return params['jaInfo']['organize'];
+  }
+
+  // 获取表单打开次数
+  funcRecno(params) {
+      return params['openCount'];
   }
 }

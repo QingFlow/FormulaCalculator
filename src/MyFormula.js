@@ -12,7 +12,7 @@ class MyFormulaVisitor extends FormulaVisitor{
         super();
         this.params = arguments[0];  // 公式计算所需的其他参数
         this.functionMap = new Function().getFuncMap();  // 获取所有一般方法
-        this.userInfoFunctionMap = new Function().getUserInfoFuncMap();  // 获取所有需要用户信息来计算的方法
+        this.userInfoFunctionMap = new Function().getFuncMapWithParam();  // 获取所有需要用户信息来计算的方法
     }
 
     // 一元操作符

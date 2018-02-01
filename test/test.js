@@ -13,6 +13,7 @@ try {
     email: "邮箱",
     nickName: "昵称",
     alias: "备注",
+    openCount: 11,  // 表单打开次数
     jaInfo: {
       sid: "1140379009", 
       organize: "软件学院",
@@ -53,6 +54,7 @@ try {
   console.log(calc.calculate('DATEDELTA("2018-02-01", -3)'));
   console.log(calc.calculate('DATEDELTA("2018-02-01", 3)'));
   // console.log(calc.calculate('DAYS("2018-02-04 12:12:12", "2018-02-02 12:12:12")'));
+  console.log(calc.calculate('RECNO()', params))
 }
 catch(err) {
   console.log(err);

@@ -98,8 +98,8 @@ var Function = exports.Function = function () {
         // 获取所有需要用户信息来计算的方法
 
     }, {
-        key: 'getUserInfoFuncMap',
-        value: function getUserInfoFuncMap() {
+        key: 'getFuncMapWithParam',
+        value: function getFuncMapWithParam() {
             return {
                 'GETUSERNAME': this.funcGetUserName,
                 'GETUSEREMAIL': this.funcGetUserEmail,
@@ -107,7 +107,8 @@ var Function = exports.Function = function () {
                 'JANAME': this.funJaName,
                 'JATYPE': this.funJaType,
                 'JADEPTID': this.funJaDeptId,
-                'JADEPTNAME': this.funJaDeptName
+                'JADEPTNAME': this.funJaDeptName,
+                'RECNO': this.funcRecno
             };
         }
         // if表达式
@@ -671,12 +672,7 @@ var Function = exports.Function = function () {
         key: 'funcDateDelta',
         value: function funcDateDelta(date, days) {
             checkValueType('number', 'DATEDELTA', days);
-            //   if (days > 0) {
             return moment(date).add(days, 'days').format("YYYY-MM-DD HH:mm:ss");
-            //   }
-            //   else {
-            //       return moment(date).subtract(days, 'days').format("YYYY-MM-DD HH:mm:ss");
-            //   }
         }
 
         // 获取用户名，根据工作区备注>昵称>邮箱的优先级返回用户的用户名
@@ -756,6 +752,14 @@ var Function = exports.Function = function () {
         key: 'funJaDeptName',
         value: function funJaDeptName(params) {
             return params['jaInfo']['organize'];
+        }
+
+        // 获取表单打开次数
+
+    }, {
+        key: 'funcRecno',
+        value: function funcRecno(params) {
+            return params['openCount'];
         }
     }]);
     return Function;
