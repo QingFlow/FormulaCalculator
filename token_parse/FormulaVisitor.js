@@ -18,6 +18,12 @@ FormulaVisitor.prototype.visitFormula = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FormulaParser#str.
+FormulaVisitor.prototype.visitStr = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FormulaParser#parens.
 FormulaVisitor.prototype.visitParens = function(ctx) {
   return this.visitChildren(ctx);
@@ -42,14 +48,14 @@ FormulaVisitor.prototype.visitUnaryOperator = function(ctx) {
 };
 
 
-// Visit a parse tree produced by FormulaParser#or.
-FormulaVisitor.prototype.visitOr = function(ctx) {
+// Visit a parse tree produced by FormulaParser#bool.
+FormulaVisitor.prototype.visitBool = function(ctx) {
   return this.visitChildren(ctx);
 };
 
 
-// Visit a parse tree produced by FormulaParser#bool.
-FormulaVisitor.prototype.visitBool = function(ctx) {
+// Visit a parse tree produced by FormulaParser#func.
+FormulaVisitor.prototype.visitFunc = function(ctx) {
   return this.visitChildren(ctx);
 };
 
@@ -80,30 +86,6 @@ FormulaVisitor.prototype.visitInt = function(ctx) {
 
 // Visit a parse tree produced by FormulaParser#mulDiv.
 FormulaVisitor.prototype.visitMulDiv = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by FormulaParser#str.
-FormulaVisitor.prototype.visitStr = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by FormulaParser#func.
-FormulaVisitor.prototype.visitFunc = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by FormulaParser#and.
-FormulaVisitor.prototype.visitAnd = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by FormulaParser#xor.
-FormulaVisitor.prototype.visitXor = function(ctx) {
   return this.visitChildren(ctx);
 };
 
