@@ -37,7 +37,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var checkValueType = require('./Utils').checkValueType;
 var reverse = require('./Utils').reverse;
-
+var moment = require('moment');
 /**
  * 函数的定义
  */
@@ -88,7 +88,9 @@ var Function = exports.Function = function () {
                 'NOT': this.funcNot,
                 'XOR': this.funcXor,
                 'ISEMPTY': this.funcIsEmpty,
-                'SEARCH': this.funcSearch
+                'SEARCH': this.funcSearch,
+                'LEN': this.funcLen,
+                'DAYS': this.funcDays
             };
         }
 
@@ -169,7 +171,16 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcText',
         value: function funcText(value, timeFormat) {
-            if (timeFormat) {
+            if (timeFormat === 'E') {
+                moment.locale('en');
+                return moment(value).format('e');
+            } else if (timeFormat === 'EE') {
+                moment.locale('zh-cn');
+                return moment(value).format('ddd');
+            } else if (timeFormat === 'EEE') {
+                moment.locale('zh-cn');
+                return moment(value).format('dddd');
+            } else if (timeFormat) {
                 var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
                 return t.format(timeFormat);
             } else {
@@ -636,6 +647,20 @@ var Function = exports.Function = function () {
         value: function funcSearch(searchText, targetText) {
             return String(targetText).indexOf(String(searchText)) + 1;
         }
+
+        // 获取字符串的长度
+
+    }, {
+        key: 'funcLen',
+        value: function funcLen(value) {
+            return String(value).length;
+        }
+
+        // 计算endTime和startTime之间相差的天数
+
+    }, {
+        key: 'funcDays',
+        value: function funcDays(endTime, startTime) {}
 
         // 获取用户名，根据工作区备注>昵称>邮箱的优先级返回用户的用户名
 

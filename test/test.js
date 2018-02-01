@@ -27,8 +27,23 @@ try {
   // console.log(calc.calculate('UPPER("ss看见阿斯顿好.,ssmin11")'));
   // console.log(calc.calculate('LOWER("ss看见JHUHU阿斯顿好.,ssmin11")'));
   // console.log(calc.calculate('REPLACE("今天是星期日，好开心", SEARCH("星期日","今天是星期日，好开心"), 3, "星期一")'));
-  console.log(calculate.calculate('RIGHT("hellossss", 6)'))
-
+  // console.log(calc.calculate('RIGHT("hellossss", 6)'))
+  // console.log(calc.calculate('LEN("hellossss")'))
+  console.log(calc.calculate('TEXT("2018-02-04 12:12:12", "E")'));
+  console.log(calc.calculate('TEXT("2018-02-05 12:12:12", "E")'));
+  console.log(calc.calculate('TEXT("2018-02-06 12:12:12", "E")'));
+  console.log(calc.calculate('TEXT("2018-02-07 12:12:12", "E")'));
+  console.log(calc.calculate('TEXT("2018-02-01 12:12:12", "E")'));
+  console.log(calc.calculate('TEXT("2018-02-02 12:12:12", "E")'));
+  console.log(calc.calculate('TEXT("2018-02-03 12:12:12", "E")'));
+  
+  console.log(calc.calculate('TEXT("2018-02-04 12:12:12", "EE")'));
+  console.log(calc.calculate('TEXT("2018-02-05 12:12:12", "EE")'));
+  console.log(calc.calculate('TEXT("2018-02-06 12:12:12", "EE")'));
+  console.log(calc.calculate('TEXT("2018-02-07 12:12:12", "EE")'));
+  console.log(calc.calculate('TEXT("2018-02-01 12:12:12", "EE")'));
+  console.log(calc.calculate('TEXT("2018-02-02 12:12:12", "EE")'));
+  console.log(calc.calculate('TEXT("2018-02-03 12:12:12", "EE")'));
 }
 catch(err) {
   console.log(err);

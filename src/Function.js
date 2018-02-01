@@ -1,6 +1,6 @@
 var checkValueType = require('./Utils').checkValueType;
 var reverse = require('./Utils').reverse;
-
+var moment = require('moment');
 /**
  * 函数的定义
  */
@@ -43,7 +43,9 @@ export class Function {
           'NOT': this.funcNot,
           'XOR': this.funcXor,
           'ISEMPTY': this.funcIsEmpty,
-          'SEARCH': this.funcSearch
+          'SEARCH': this.funcSearch,
+          'LEN': this.funcLen,
+          'DAYS': this.funcDays
       }
   }
 
@@ -94,7 +96,19 @@ export class Function {
   }
   // 把时间转化为字符串
   funcText(value, timeFormat) {
-      if(timeFormat) {
+      if (timeFormat === 'E') {
+          moment.locale('en');
+        return moment(value).format('e');
+      }
+      else if (timeFormat === 'EE') {
+        moment.locale('zh-cn');
+        return moment(value).format('ddd');
+      }
+      else if (timeFormat === 'EEE') {
+        moment.locale('zh-cn');
+        return moment(value).format('dddd');
+      }
+      else if(timeFormat) {
           var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
           return t.format(timeFormat);
       } else {
@@ -322,6 +336,16 @@ export class Function {
   // 查找字符串,在targetText中查找searchText所在位置，返回出现位置索引，没找到返回0
   funcSearch(searchText, targetText) {
       return String(targetText).indexOf(String(searchText)) + 1;
+  }
+
+  // 获取字符串的长度
+  funcLen(value) {
+      return String(value).length;
+  }
+
+  // 计算endTime和startTime之间相差的天数
+  funcDays(endTime, startTime) {
+
   }
 
   // 获取用户名，根据工作区备注>昵称>邮箱的优先级返回用户的用户名

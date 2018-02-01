@@ -56,6 +56,8 @@
 - ISEMPTY
 - SEARCH
 - RIGHT
+- LEN
+- DAYS
 
 #### Ja相关的方法
 
