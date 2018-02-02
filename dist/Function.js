@@ -36,6 +36,7 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var checkValueType = require('./Utils').checkValueType;
+var checkParamCount = require('./Utils').checkParamCount;
 var reverse = require('./Utils').reverse;
 var moment = require('moment');
 /**
@@ -116,7 +117,8 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcIf',
         value: function funcIf(test, value1, value2) {
-            checkValueType('boolean', 'IF', test);
+            checkValueType('boolean', 'IF', 0, test);
+            checkParamCount('IF', 3, arguments);
             return test ? value1 : value2;
         }
         // 把字符串串起来
@@ -138,7 +140,8 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcLeft',
         value: function funcLeft(value, n) {
-            checkValueType('number', 'LEFT', n);
+            checkValueType('number', 'LEFT', 1, n);
+            checkParamCount('LEFT', 2, arguments);
             value = String(value);
             return value.substr(0, n);
         }
@@ -147,7 +150,8 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcRight',
         value: function funcRight(value, n) {
-            checkValueType('number', 'RIGHT', n);
+            checkValueType('number', 'RIGHT', 1, n);
+            checkParamCount('RIGHT', 2, arguments);
             return reverse(reverse(value).substr(0, n));
         }
         // 取代从start开始的长度为n的位置的字符串（注意，用户使用时，第一个位置是1，而不是0）
@@ -157,7 +161,8 @@ var Function = exports.Function = function () {
         value: function funcReplace(value, start, n, newValue) {
             value = String(value);
             newValue = String(newValue);
-            checkValueType('number', 'REPLACE', start, n);
+            checkValueType('number', 'REPLACE', 1, start, n);
+            checkParamCount('REPLACE', 4, arguments);
             return value.substring(0, start - 1) + newValue + value.substr(start + n - 1);
         }
         // 取中间的子串，从start开始，取长度为n的子串
@@ -165,6 +170,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcMid',
         value: function funcMid(value, start, n) {
+            checkParamCount('MID', 3, arguments);
             value = String(value);
             return value.substr(start - 1, n);
         }
@@ -173,6 +179,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcText',
         value: function funcText(value, timeFormat) {
+            checkParamCount('TEXT', 2, arguments);
             if (timeFormat === 'E') {
                 moment.locale('en');
                 return moment(value).format('e');
@@ -194,6 +201,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funNum',
         value: function funNum(value) {
+            checkParamCount('NUM', 1, arguments);
             return (0, _parseFloat2.default)(value);
         }
         // 求和
@@ -213,7 +221,7 @@ var Function = exports.Function = function () {
                 return 0;
             }
             // 类型检查
-            checkValueType('number', 'SUM', values);
+            checkValueType('number', 'SUM', 0, values);
             return values.reduce(function (pre, next) {
                 return (0, _parseFloat2.default)(pre) + (0, _parseFloat2.default)(next);
             });
@@ -235,7 +243,7 @@ var Function = exports.Function = function () {
                 return 0;
             }
             // 类型检查
-            checkValueType('number', 'AVERAGE', values);
+            checkValueType('number', 'AVERAGE', 0, values);
             var sum = values.reduce(function (pre, next) {
                 return (0, _parseFloat2.default)(pre) + (0, _parseFloat2.default)(next);
             });
@@ -268,7 +276,7 @@ var Function = exports.Function = function () {
 
             values = (_ref5 = []).concat.apply(_ref5, (0, _toConsumableArray3.default)(values)); // flat
             // 类型检查
-            checkValueType('number', 'MIN', values);
+            checkValueType('number', 'MIN', 0, values);
             var min = Number.MAX_VALUE;
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
@@ -312,7 +320,7 @@ var Function = exports.Function = function () {
 
             values = (_ref6 = []).concat.apply(_ref6, (0, _toConsumableArray3.default)(values)); // flat
             // 类型检查
-            checkValueType('number', 'MAX', values);
+            checkValueType('number', 'MAX', 0, values);
             var max = Number.MIN_VALUE;
             var _iteratorNormalCompletion2 = true;
             var _didIteratorError2 = false;
@@ -348,7 +356,8 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcRound',
         value: function funcRound(value, n) {
-            checkValueType('number', 'ROUND', value, n);
+            checkParamCount('ROUND', 2, arguments);
+            checkValueType('number', 'ROUND', 0, value, n);
             var iterValue = 1;
             for (var i = 0; i < n; i++) {
                 iterValue = 10 * iterValue;
@@ -360,7 +369,8 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcInt',
         value: function funcInt(value) {
-            checkValueType('number', 'INT', value);
+            checkValueType('number', 'INT', 0, value);
+            checkParamCount('INT', 1, arguments);
             return Math.floor(value);
         }
         // 取余（mod操作）
@@ -368,7 +378,8 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcMod',
         value: function funcMod(value, divisor) {
-            checkValueType('number', 'MOD', value, divisor);
+            checkValueType('number', 'MOD', 0, value, divisor);
+            checkParamCount('MOD', 2, arguments);
             return (0, _parseInt2.default)(value) % (0, _parseInt2.default)(divisor);
         }
         // 连乘（product是office里面的称呼）
@@ -384,7 +395,7 @@ var Function = exports.Function = function () {
 
             values = (_ref7 = []).concat.apply(_ref7, (0, _toConsumableArray3.default)(values)); // flat
             // 类型检查
-            checkValueType('number', 'PRODUCT', values);
+            checkValueType('number', 'PRODUCT', 0, values);
             var result = 1;
             var _iteratorNormalCompletion3 = true;
             var _didIteratorError3 = false;
@@ -489,6 +500,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcYear',
         value: function funcYear(value) {
+            checkParamCount('YEAR', 1, arguments);
             var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
             return t.year();
         }
@@ -497,6 +509,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcMonth',
         value: function funcMonth(value) {
+            checkParamCount('MONTH', 1, arguments);
             var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
             return t.month() + 1;
         }
@@ -505,6 +518,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcDay',
         value: function funcDay(value) {
+            checkParamCount('DAY', 1, arguments);
             var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
             return t.date();
         }
@@ -513,6 +527,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcHour',
         value: function funcHour(value) {
+            checkParamCount('HOUR', 1, arguments);
             var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
             return t.hour();
         }
@@ -521,6 +536,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcMinite',
         value: function funcMinite(value) {
+            checkParamCount('MINITE', 1, arguments);
             var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
             return t.minute();
         }
@@ -529,6 +545,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcSecond',
         value: function funcSecond(value) {
+            checkParamCount('SECOND', 1, arguments);
             var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
             return t.second();
         }
@@ -582,6 +599,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcUpper',
         value: function funcUpper(value) {
+            checkParamCount('UPPER', 1, arguments);
             return value.toString().toUpperCase();
         }
 
@@ -590,6 +608,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcLower',
         value: function funcLower(value) {
+            checkParamCount('LOWER', 1, arguments);
             return value.toString().toLowerCase();
         }
 
@@ -599,7 +618,8 @@ var Function = exports.Function = function () {
         key: 'funcAnd',
         value: function funcAnd(value1, value2) {
             // 类型检查
-            checkValueType('boolean', 'AND', value1, value2);
+            checkValueType('boolean', 'AND', 0, value1, value2);
+            checkParamCount('AND', 2, arguments);
             return value1 && value2;
         }
 
@@ -609,7 +629,8 @@ var Function = exports.Function = function () {
         key: 'funcOr',
         value: function funcOr(value1, value2) {
             // 类型检查
-            checkValueType('boolean', 'OR', value1, value2);
+            checkValueType('boolean', 'OR', 0, value1, value2);
+            checkParamCount('OR', 2, arguments);
             return value1 || value2;
         }
         // 非操作
@@ -618,7 +639,8 @@ var Function = exports.Function = function () {
         key: 'funcNot',
         value: function funcNot(value) {
             // 类型检查
-            checkValueType('boolean', 'NOT', value);
+            checkValueType('boolean', 'NOT', 0, value);
+            checkParamCount('NOT', 1, arguments);
             return !value;
         }
         // 异或操作
@@ -627,7 +649,8 @@ var Function = exports.Function = function () {
         key: 'funcXor',
         value: function funcXor(value1, value2) {
             // 类型检查
-            checkValueType('boolean', 'XOR', value1, value2);
+            checkValueType('boolean', 'XOR', 0, value1, value2);
+            checkParamCount('XOR', 2, arguments);
             return value1 ^ value2 ? true : false;
         }
 
@@ -650,7 +673,8 @@ var Function = exports.Function = function () {
             if (!beginPos) {
                 beginPos = 1;
             }
-            checkValueType('number', 'SEARCH', beginPos);
+            checkValueType('number', 'SEARCH', 2, beginPos);
+            checkParamCount('SEARCH', 3, arguments);
             return String(targetText).indexOf(String(searchText), beginPos - 1) + 1;
         }
 
@@ -659,6 +683,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcLen',
         value: function funcLen(value) {
+            checkParamCount('LEN', 1, arguments);
             return String(value).length;
         }
 
@@ -667,6 +692,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcDays',
         value: function funcDays(end, start) {
+            checkParamCount('DAYS', 2, arguments);
             return moment.duration(moment(end).unix() - moment(start).unix()).asDays() * 1000;
         }
 
@@ -675,7 +701,8 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcDateDelta',
         value: function funcDateDelta(date, days) {
-            checkValueType('number', 'DATEDELTA', days);
+            checkValueType('number', 'DATEDELTA', 1, days);
+            checkParamCount('DATEDELTA', 2, arguments);
             return moment(date).add(days, 'days').format("YYYY-MM-DD HH:mm:ss");
         }
 

@@ -1,4 +1,5 @@
 var checkValueType = require('./Utils').checkValueType;
+var checkParamCount = require('./Utils').checkParamCount;
 var reverse = require('./Utils').reverse;
 var moment = require('moment');
 /**
@@ -65,7 +66,8 @@ export class Function {
   }
   // if表达式
   funcIf(test, value1, value2) {
-      checkValueType('boolean', 'IF', test);
+      checkValueType('boolean', 'IF', 0, test);
+      checkParamCount('IF', 3, arguments);
       return test ? value1 : value2;
   }
   // 把字符串串起来
@@ -75,29 +77,34 @@ export class Function {
   }
   // 取左边的n个数
   funcLeft(value, n) {
-      checkValueType('number', 'LEFT', n);
+      checkValueType('number', 'LEFT', 1, n);
+      checkParamCount('LEFT', 2, arguments);
       value = String(value);
       return value.substr(0, n);
   }
   // 取右边的n个数
   funcRight(value, n) {
-    checkValueType('number', 'RIGHT', n);
+    checkValueType('number', 'RIGHT', 1, n);
+    checkParamCount('RIGHT', 2, arguments);
     return reverse(reverse(value).substr(0, n));
   }
   // 取代从start开始的长度为n的位置的字符串（注意，用户使用时，第一个位置是1，而不是0）
   funcReplace(value, start, n, newValue) {
       value = String(value);
       newValue = String(newValue);
-      checkValueType('number', 'REPLACE', start, n);
+      checkValueType('number', 'REPLACE', 1, start, n);
+      checkParamCount('REPLACE', 4, arguments);
       return value.substring(0, start - 1) + newValue + value.substr(start + n - 1);
   }
   // 取中间的子串，从start开始，取长度为n的子串
   funcMid(value, start, n) {
+      checkParamCount('MID', 3, arguments);
       value = String(value);
       return value.substr(start - 1, n);
   }
   // 把时间转化为字符串
   funcText(value, timeFormat) {
+      checkParamCount('TEXT', 2, arguments);
       if (timeFormat === 'E') {
           moment.locale('en');
         return moment(value).format('e');
@@ -119,6 +126,7 @@ export class Function {
   }
   // 把其他类型的字段转换成数字类型，可以识别浮点类型
   funNum(value) {
+      checkParamCount('NUM', 1, arguments);
       return Number.parseFloat(value);
   }
   // 求和
@@ -129,7 +137,7 @@ export class Function {
           return 0;
       }
       // 类型检查
-      checkValueType('number', 'SUM', values);
+      checkValueType('number', 'SUM', 0, values);
       return values.reduce((pre, next) => {
           return Number.parseFloat(pre) + Number.parseFloat(next);
       })
@@ -142,7 +150,7 @@ export class Function {
           return 0;
       }
       // 类型检查
-      checkValueType('number', 'AVERAGE', values);
+      checkValueType('number', 'AVERAGE', 0, values);
       var sum = values.reduce((pre, next) => {
           return Number.parseFloat(pre) + Number.parseFloat(next);
       })
@@ -157,7 +165,7 @@ export class Function {
   funcMin(...values) {
       values = [].concat(...values); // flat
       // 类型检查
-      checkValueType('number', 'MIN', values);
+      checkValueType('number', 'MIN', 0, values);
       var min = Number.MAX_VALUE;
       for (var v of values) {
           if (min > v) {
@@ -170,7 +178,7 @@ export class Function {
   funcMax(...values) {
       values = [].concat(...values); // flat
       // 类型检查
-      checkValueType('number', 'MAX', values);
+      checkValueType('number', 'MAX', 0, values);
       var max = Number.MIN_VALUE;
       for (var v of values) {
           if (max < v) {
@@ -181,7 +189,8 @@ export class Function {
   }
   // 四舍五入
   funcRound(value, n) {
-      checkValueType('number', 'ROUND', value, n);
+      checkParamCount('ROUND', 2, arguments);
+      checkValueType('number', 'ROUND', 0, value, n);
       let iterValue = 1;
       for(let i=0; i<n; i++) {
           iterValue = 10*iterValue;
@@ -190,19 +199,21 @@ export class Function {
   }
   // 取整数
   funcInt(value) {
-      checkValueType('number', 'INT', value);
+      checkValueType('number', 'INT', 0, value);
+      checkParamCount('INT', 1, arguments);
       return Math.floor(value);
   }
   // 取余（mod操作）
   funcMod(value, divisor) {
-      checkValueType('number', 'MOD', value, divisor);
+      checkValueType('number', 'MOD', 0, value, divisor);
+      checkParamCount('MOD', 2, arguments);
       return Number.parseInt(value) % Number.parseInt(divisor);
   }
   // 连乘（product是office里面的称呼）
   funcProduct(...values) {
       values = [].concat(...values); // flat
       // 类型检查
-      checkValueType('number', 'PRODUCT', values);
+      checkValueType('number', 'PRODUCT', 0, values);
       var result = 1;
       for (var v of values) {
           result *= Number.parseFloat(v);
@@ -230,31 +241,37 @@ export class Function {
   }
   // 拿到年份
   funcYear(value) {
+      checkParamCount('YEAR', 1, arguments);
       var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
       return t.year();
   }
   // 拿到月份：注意，用moment拿月份时，是从0~11来计算的
   funcMonth(value) {
+      checkParamCount('MONTH', 1, arguments);
       var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
       return t.month() + 1;
   }
   // 拿到月份中的day
   funcDay(value) {
+      checkParamCount('DAY', 1, arguments);
       var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
       return t.date();
   }
   // 时
   funcHour(value) {
+      checkParamCount('HOUR', 1, arguments);
       var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
       return t.hour();
   }
   // 分
   funcMinite(value) {
+      checkParamCount('MINITE', 1, arguments);
       var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
       return t.minute();
   }
   // 秒
   funcSecond(value) {
+      checkParamCount('SECOND', 1, arguments);
       var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
       return t.second();
   }
@@ -293,37 +310,43 @@ export class Function {
 
   // 把字符串中英文字符转换成大写
   funcUpper(value) {
+      checkParamCount('UPPER', 1, arguments);
       return value.toString().toUpperCase();
   }
 
   // 把字符串中英文字符转换成小写
   funcLower(value) {
+      checkParamCount('LOWER', 1, arguments);
       return value.toString().toLowerCase();
   }
   
   // 与操作
   funcAnd(value1, value2) {
       // 类型检查
-      checkValueType('boolean', 'AND', value1, value2);
+      checkValueType('boolean', 'AND', 0, value1, value2);
+      checkParamCount('AND', 2, arguments);
       return value1 && value2;
   }
 
   // 或操作
   funcOr(value1, value2) {
       // 类型检查
-      checkValueType('boolean', 'OR', value1, value2);
+      checkValueType('boolean', 'OR', 0, value1, value2);
+      checkParamCount('OR', 2, arguments);
       return value1 || value2;
   }
   // 非操作
   funcNot(value) {
       // 类型检查
-      checkValueType('boolean', 'NOT', value);
+      checkValueType('boolean', 'NOT', 0, value);
+      checkParamCount('NOT', 1, arguments);
       return !value;
   }
   // 异或操作
   funcXor(value1, value2) {
       // 类型检查
-      checkValueType('boolean', 'XOR', value1, value2);
+      checkValueType('boolean', 'XOR', 0, value1, value2);
+      checkParamCount('XOR', 2, arguments);
       return value1 ^ value2 ? true : false;
   }
 
@@ -340,23 +363,27 @@ export class Function {
       if (!beginPos) {
           beginPos = 1;
       }
-      checkValueType('number', 'SEARCH', beginPos);
+      checkValueType('number', 'SEARCH', 2, beginPos);
+      checkParamCount('SEARCH', 3, arguments);
       return String(targetText).indexOf(String(searchText), beginPos-1) + 1;
   }
 
   // 获取字符串的长度
   funcLen(value) {
+      checkParamCount('LEN', 1, arguments);
       return String(value).length;
   }
 
   // 计算end和start之间相差的天数
   funcDays(end, start) {
+      checkParamCount('DAYS', 2, arguments);
       return moment.duration(moment(end).unix() - moment(start).unix()).asDays() * 1000;
   }
 
   // 计算出date增加或减少days天的日期（days可以为正数/负数）
   funcDateDelta(date, days) {
-      checkValueType('number', 'DATEDELTA', days);
+      checkValueType('number', 'DATEDELTA', 1, days);
+      checkParamCount('DATEDELTA', 2, arguments);
       return moment(date).add(days, 'days').format("YYYY-MM-DD HH:mm:ss");
   }
 

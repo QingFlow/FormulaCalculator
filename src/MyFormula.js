@@ -18,7 +18,7 @@ class MyFormulaVisitor extends FormulaVisitor{
     // 一元操作符
     visitUnaryOperator(ctx) {
         var value = this.visit(ctx.expr());
-        checkValueType('number', 'MINUS', value);
+        checkValueType('number', 'MINUS', 0, value);
         return - Number.parseFloat(value);
     }
     
@@ -27,7 +27,7 @@ class MyFormulaVisitor extends FormulaVisitor{
         var value1 = this.visit(ctx.expr(0));
         var value2 = this.visit(ctx.expr(1));
         // 类型检查
-        checkValueType('number', 'MINUS', value1, value2);
+        checkValueType('number', 'MINUS', 0, value1, value2);
         switch (ctx.op.type){
             case FormulaParser.PLUS:return value1 + value2;
             case FormulaParser.MINUS:return value1 - value2;
@@ -63,7 +63,7 @@ class MyFormulaVisitor extends FormulaVisitor{
             case FormulaParser.LE:
             case FormulaParser.GT:
             case FormulaParser.GE:
-                checkValueType('number', 'COMPARE', value1, value2);
+                checkValueType('number', 'COMPARE', 0, value1, value2);
         }
         switch (ctx.op.type) {
             case FormulaParser.EQ: return value1 === value2;
@@ -89,11 +89,11 @@ class MyFormulaVisitor extends FormulaVisitor{
         switch(ctx.op.type) {
             case FormulaParser.MULTIPLY: 
                 // 类型解析
-                checkValueType('number', 'MULTIPLE', value1, value2);
+                checkValueType('number', 'MULTIPLE', 0, value1, value2);
                 return value1 * value2;
             case FormulaParser.DIVIDE:
                 // 类型解析
-                checkValueType('number', 'DIVIDE', value1, value2);
+                checkValueType('number', 'DIVIDE', 0, value1, value2);
                 return value1 / value2;
             default: return 0; // todo: 报错
         }
