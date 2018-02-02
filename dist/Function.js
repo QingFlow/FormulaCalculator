@@ -648,10 +648,10 @@ var Function = exports.Function = function () {
         key: 'funcSearch',
         value: function funcSearch(searchText, targetText, beginPos) {
             if (!beginPos) {
-                beginPos = 0;
+                beginPos = 1;
             }
             checkValueType('number', 'SEARCH', beginPos);
-            return String(targetText).indexOf(String(searchText), beginPos) + 1;
+            return String(targetText).indexOf(String(searchText), beginPos - 1) + 1;
         }
 
         // 获取字符串的长度
