@@ -335,9 +335,13 @@ export class Function {
       return false;
   }
 
-  // 查找字符串,在targetText中查找searchText所在位置，返回出现位置索引，没找到返回0
-  funcSearch(searchText, targetText) {
-      return String(targetText).indexOf(String(searchText)) + 1;
+  // 查找字符串,在targetText中查找searchText所在位置，返回出现位置索引，没找到返回0,beginPos为开始查找的位置
+  funcSearch(searchText, targetText, beginPos) {
+      if (!beginPos) {
+          beginPos = 0;
+      }
+      checkValueType('number', 'SEARCH', beginPos);
+      return String(targetText).indexOf(String(searchText), beginPos) + 1;
   }
 
   // 获取字符串的长度
