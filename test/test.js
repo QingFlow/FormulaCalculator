@@ -56,7 +56,7 @@ try {
   // console.log(calc.calculate('DAYS("2018-01-04 12:12:12", "2018-02-02 12:12:12")'));
   // console.log(calc.calculate('RECNO()', params))
   // console.log(calc.calculate('LEFT("hello world","sdds")'));
-  console.log(calc.calculate('IF(TRUE, "")'))
+  console.log(calc.calculate('SUMPRODUCT([1,2,3],[2,3,4])'))
   // console.log(calc.calculate('SEARCH("aa","haaeekjaa", 2)'))
 }
 catch(err) {

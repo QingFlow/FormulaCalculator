@@ -424,75 +424,17 @@ var Function = exports.Function = function () {
 
             return result;
         }
-        // 连乘后相加
+        // 对应相乘后相加
 
     }, {
         key: 'funcSumProduct',
-        value: function funcSumProduct() {
+        value: function funcSumProduct(value1, value2) {
             var result = 0;
-
-            for (var _len8 = arguments.length, values = Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-                values[_key8] = arguments[_key8];
+            // 获取两个数组的最小长度
+            var length = value1.length < value2.length ? value1.length : value2.length;
+            for (var index = 0; index < length; index++) {
+                result += value1[index] * value2[index];
             }
-
-            var _iteratorNormalCompletion4 = true;
-            var _didIteratorError4 = false;
-            var _iteratorError4 = undefined;
-
-            try {
-                for (var _iterator4 = (0, _getIterator3.default)(values), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-                    var v = _step4.value;
-
-                    // 数组
-                    if ((typeof v === 'undefined' ? 'undefined' : (0, _typeof3.default)(v)) === 'object') {
-                        var r2 = 1;
-                        var _iteratorNormalCompletion5 = true;
-                        var _didIteratorError5 = false;
-                        var _iteratorError5 = undefined;
-
-                        try {
-                            for (var _iterator5 = (0, _getIterator3.default)(v), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-                                var v2 = _step5.value;
-
-                                r2 *= (0, _parseFloat2.default)(v2);
-                            }
-                        } catch (err) {
-                            _didIteratorError5 = true;
-                            _iteratorError5 = err;
-                        } finally {
-                            try {
-                                if (!_iteratorNormalCompletion5 && _iterator5.return) {
-                                    _iterator5.return();
-                                }
-                            } finally {
-                                if (_didIteratorError5) {
-                                    throw _iteratorError5;
-                                }
-                            }
-                        }
-
-                        result += r2;
-                    }
-                    // 普通数字
-                    else {
-                            result += (0, _parseFloat2.default)(v);
-                        }
-                }
-            } catch (err) {
-                _didIteratorError4 = true;
-                _iteratorError4 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
-                        _iterator4.return();
-                    }
-                } finally {
-                    if (_didIteratorError4) {
-                        throw _iteratorError4;
-                    }
-                }
-            }
-
             return result;
         }
         // 拿到年份

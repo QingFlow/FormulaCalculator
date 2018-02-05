@@ -220,22 +220,13 @@ export class Function {
       }
       return result;
   }
-  // 连乘后相加
-  funcSumProduct(...values) {
+  // 对应相乘后相加
+  funcSumProduct(value1, value2) {
       var result = 0;
-      for (var v of values) {
-          // 数组
-          if (typeof v === 'object') {
-              var r2 = 1;
-              for (var v2 of v) {
-                  r2 *= Number.parseFloat(v2);
-              }
-              result += r2;
-          }
-          // 普通数字
-          else {
-              result += Number.parseFloat(v);
-          }
+      // 获取两个数组的最小长度
+      var length = value1.length < value2.length?value1.length:value2.length;
+      for (let index = 0; index < length; index++) {
+          result += value1[index] * value2[index];
       }
       return result;
   }
