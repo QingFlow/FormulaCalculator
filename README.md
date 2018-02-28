@@ -25,6 +25,7 @@
 - MID
 - TEXT
 - SUM
+- SUMIF
 - AVERAGE
 - COUNT
 - MIN
@@ -34,6 +35,7 @@
 - MOD
 - PRODUCT
 - SUMPRODUCT
+- POWER
 - YEAR
 - MONTH
 - DAY

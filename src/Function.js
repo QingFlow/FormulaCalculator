@@ -18,6 +18,7 @@ export class Function {
           'TEXT': this.funcText,
           'NUM': this.funNum,
           'SUM': this.funcSum,
+          'SUMIF': this.funcSumIf,
           'AVERAGE': this.funcAverage,
           'COUNT': this.funcCount,
           'MIN': this.funcMin,
@@ -27,6 +28,7 @@ export class Function {
           'MOD': this.funcMod,
           'PRODUCT': this.funcProduct,
           'SUMPRODUCT': this.funcSumProduct,
+          'POWER': this.funcPower,
           'YEAR': this.funcYear,
           'MONTH': this.funcMonth,
           'DAY': this.funcDay,
@@ -142,6 +144,18 @@ export class Function {
           return Number.parseFloat(pre) + Number.parseFloat(next);
       })
   }
+  funcSumIf(value1, value2, ...values) {
+      values = [].concat(...values);
+      // 如果values为空或者判定条件不满足，返回0
+      if (values.length === 0 || value1 !== value2) {
+          return 0;
+      }
+      // 类型检查
+      checkValueType('number', 'SUMIF', 2, values);
+      return values.reduce((pre, next) => {
+          return Number.parseFloat(pre) + Number.parseFloat(next);
+      })
+  }
   // 平均数
   funcAverage(...values) {
       values = [].concat(...values); // flat
@@ -229,6 +243,11 @@ export class Function {
           result += value1[index] * value2[index];
       }
       return result;
+  }
+  // 对number求power次方
+  funcPower(number, power) {
+    checkValueType('number', 'POWER', 0, number, power);
+    return Math.pow(number, power);
   }
   // 拿到年份
   funcYear(value) {

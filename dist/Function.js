@@ -63,6 +63,7 @@ var Function = exports.Function = function () {
                 'TEXT': this.funcText,
                 'NUM': this.funNum,
                 'SUM': this.funcSum,
+                'SUMIF': this.funcSumIf,
                 'AVERAGE': this.funcAverage,
                 'COUNT': this.funcCount,
                 'MIN': this.funcMin,
@@ -72,6 +73,7 @@ var Function = exports.Function = function () {
                 'MOD': this.funcMod,
                 'PRODUCT': this.funcProduct,
                 'SUMPRODUCT': this.funcSumProduct,
+                'POWER': this.funcPower,
                 'YEAR': this.funcYear,
                 'MONTH': this.funcMonth,
                 'DAY': this.funcDay,
@@ -226,18 +228,38 @@ var Function = exports.Function = function () {
                 return (0, _parseFloat2.default)(pre) + (0, _parseFloat2.default)(next);
             });
         }
+    }, {
+        key: 'funcSumIf',
+        value: function funcSumIf(value1, value2) {
+            for (var _len3 = arguments.length, values = Array(_len3 > 2 ? _len3 - 2 : 0), _key3 = 2; _key3 < _len3; _key3++) {
+                values[_key3 - 2] = arguments[_key3];
+            }
+
+            var _ref3;
+
+            values = (_ref3 = []).concat.apply(_ref3, (0, _toConsumableArray3.default)(values));
+            // 如果values为空或者判定条件不满足，返回0
+            if (values.length === 0 || value1 !== value2) {
+                return 0;
+            }
+            // 类型检查
+            checkValueType('number', 'SUMIF', 2, values);
+            return values.reduce(function (pre, next) {
+                return (0, _parseFloat2.default)(pre) + (0, _parseFloat2.default)(next);
+            });
+        }
         // 平均数
 
     }, {
         key: 'funcAverage',
         value: function funcAverage() {
-            var _ref3;
+            var _ref4;
 
-            for (var _len3 = arguments.length, values = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-                values[_key3] = arguments[_key3];
+            for (var _len4 = arguments.length, values = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+                values[_key4] = arguments[_key4];
             }
 
-            values = (_ref3 = []).concat.apply(_ref3, (0, _toConsumableArray3.default)(values)); // flat
+            values = (_ref4 = []).concat.apply(_ref4, (0, _toConsumableArray3.default)(values)); // flat
             // 如果没有值的话，返回0
             if (values.length === 0) {
                 return 0;
@@ -254,20 +276,6 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcCount',
         value: function funcCount() {
-            var _ref4;
-
-            for (var _len4 = arguments.length, values = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-                values[_key4] = arguments[_key4];
-            }
-
-            values = (_ref4 = []).concat.apply(_ref4, (0, _toConsumableArray3.default)(values)); // flat
-            return values.length;
-        }
-        // 最小值
-
-    }, {
-        key: 'funcMin',
-        value: function funcMin() {
             var _ref5;
 
             for (var _len5 = arguments.length, values = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
@@ -275,6 +283,20 @@ var Function = exports.Function = function () {
             }
 
             values = (_ref5 = []).concat.apply(_ref5, (0, _toConsumableArray3.default)(values)); // flat
+            return values.length;
+        }
+        // 最小值
+
+    }, {
+        key: 'funcMin',
+        value: function funcMin() {
+            var _ref6;
+
+            for (var _len6 = arguments.length, values = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+                values[_key6] = arguments[_key6];
+            }
+
+            values = (_ref6 = []).concat.apply(_ref6, (0, _toConsumableArray3.default)(values)); // flat
             // 类型检查
             checkValueType('number', 'MIN', 0, values);
             var min = Number.MAX_VALUE;
@@ -312,13 +334,13 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcMax',
         value: function funcMax() {
-            var _ref6;
+            var _ref7;
 
-            for (var _len6 = arguments.length, values = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-                values[_key6] = arguments[_key6];
+            for (var _len7 = arguments.length, values = Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+                values[_key7] = arguments[_key7];
             }
 
-            values = (_ref6 = []).concat.apply(_ref6, (0, _toConsumableArray3.default)(values)); // flat
+            values = (_ref7 = []).concat.apply(_ref7, (0, _toConsumableArray3.default)(values)); // flat
             // 类型检查
             checkValueType('number', 'MAX', 0, values);
             var max = Number.MIN_VALUE;
@@ -387,13 +409,13 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcProduct',
         value: function funcProduct() {
-            var _ref7;
+            var _ref8;
 
-            for (var _len7 = arguments.length, values = Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-                values[_key7] = arguments[_key7];
+            for (var _len8 = arguments.length, values = Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+                values[_key8] = arguments[_key8];
             }
 
-            values = (_ref7 = []).concat.apply(_ref7, (0, _toConsumableArray3.default)(values)); // flat
+            values = (_ref8 = []).concat.apply(_ref8, (0, _toConsumableArray3.default)(values)); // flat
             // 类型检查
             checkValueType('number', 'PRODUCT', 0, values);
             var result = 1;
@@ -436,6 +458,14 @@ var Function = exports.Function = function () {
                 result += value1[index] * value2[index];
             }
             return result;
+        }
+        // 对number求power次方
+
+    }, {
+        key: 'funcPower',
+        value: function funcPower(number, power) {
+            checkValueType('number', 'POWER', 0, number, power);
+            return Math.pow(number, power);
         }
         // 拿到年份
 
