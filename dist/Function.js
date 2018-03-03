@@ -238,15 +238,19 @@ var Function = exports.Function = function () {
             var _ref3;
 
             values = (_ref3 = []).concat.apply(_ref3, (0, _toConsumableArray3.default)(values));
-            // 如果values为空或者判定条件不满足，返回0
-            if (values.length === 0 || value1 !== value2) {
+            // 如果values为空或者判定条件为空
+            if (values.length === 0 || value1.length === 0) {
                 return 0;
             }
             // 类型检查
             checkValueType('number', 'SUMIF', 2, values);
-            return values.reduce(function (pre, next) {
-                return (0, _parseFloat2.default)(pre) + (0, _parseFloat2.default)(next);
+            var result = 0;
+            value1.forEach(function (compareVal, index) {
+                if (compareVal === value2 && index < values.length) {
+                    result += values[index];
+                }
             });
+            return result;
         }
         // 平均数
 

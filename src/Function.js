@@ -144,17 +144,22 @@ export class Function {
           return Number.parseFloat(pre) + Number.parseFloat(next);
       })
   }
+  // 满足条件的情况下再求和
   funcSumIf(value1, value2, ...values) {
       values = [].concat(...values);
-      // 如果values为空或者判定条件不满足，返回0
-      if (values.length === 0 || value1 !== value2) {
+      // 如果values为空或者判定条件为空
+      if (values.length === 0 || value1.length === 0) {
           return 0;
       }
       // 类型检查
       checkValueType('number', 'SUMIF', 2, values);
-      return values.reduce((pre, next) => {
-          return Number.parseFloat(pre) + Number.parseFloat(next);
+      let result = 0;
+      value1.forEach((compareVal, index) => {
+          if (compareVal === value2 && index < values.length) {
+            result += values[index];
+          }
       })
+      return result;
   }
   // 平均数
   funcAverage(...values) {
