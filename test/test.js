@@ -58,7 +58,7 @@ try {
   // console.log(calc.calculate('LEFT("hello world","sdds")'));
   // console.log(calc.calculate('IF("a"="s","ss")'))
   // console.log(calc.calculate('SEARCH("aa","haaeekjaa", 2)'))
-  console.log(calc.calculate('SUMIF(["aa","","aa","aa"], "aa", 1,2,5,7,8)'));
+  console.log(calc.calculate('SUMIF(["aa","","aa","aa"], ["aa"], 1,2,5,7,8)'));
   // console.log(calc.calculate('POWER("s",1/4)'))
 }
 catch(err) {

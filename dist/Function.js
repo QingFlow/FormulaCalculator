@@ -33,6 +33,8 @@ var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
+var _util = require('util');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var checkValueType = require('./Utils').checkValueType;
@@ -228,6 +230,8 @@ var Function = exports.Function = function () {
                 return (0, _parseFloat2.default)(pre) + (0, _parseFloat2.default)(next);
             });
         }
+        // 满足条件的情况下再求和
+
     }, {
         key: 'funcSumIf',
         value: function funcSumIf(value1, value2) {
@@ -245,6 +249,9 @@ var Function = exports.Function = function () {
             // 类型检查
             checkValueType('number', 'SUMIF', 2, values);
             var result = 0;
+            if (value2.constructor.name === 'Array') {
+                value2 = value2[0];
+            }
             value1.forEach(function (compareVal, index) {
                 if (compareVal === value2 && index < values.length) {
                     result += values[index];

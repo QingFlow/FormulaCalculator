@@ -1,3 +1,5 @@
+import { isNullOrUndefined } from 'util';
+
 var checkValueType = require('./Utils').checkValueType;
 var checkParamCount = require('./Utils').checkParamCount;
 var reverse = require('./Utils').reverse;
@@ -154,6 +156,9 @@ export class Function {
       // 类型检查
       checkValueType('number', 'SUMIF', 2, values);
       let result = 0;
+      if (value2.constructor.name === 'Array') {
+          value2 = value2[0];
+      }
       value1.forEach((compareVal, index) => {
           if (compareVal === value2 && index < values.length) {
             result += values[index];
