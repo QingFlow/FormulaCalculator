@@ -39,9 +39,9 @@ DOUBLE : ('0' | [1-9][0-9]*)('.'[0-9]*)?
 ;
 WS : [ \t\r\n]+ -> skip
 ;
-String :   '"' (StringCharacter+)? '"' | '“' (StringCharacter+)? '”'
+String :   '"' [\s\S]* '"' | '“' [\s\S]* '”'
 ;
-StringCharacter :  ["“\\] | EscapeSequence
+StringCharacter :  ~["“\\] | EscapeSequence
 ;
 EscapeSequence :   '\\' [btnfr"“'\\] |  UnicodeEscape
 ;
