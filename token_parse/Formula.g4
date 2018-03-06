@@ -43,7 +43,7 @@ String :   '"' (StringCharacter+)? '"' | '“' (StringCharacter+)? '”'
 ;
 StringCharacter :  ~["“\\] | EscapeSequence
 ;
-EscapeSequence :   '\\' [btnfr"“'\\] |  UnicodeEscape
+EscapeSequence :   '\\' [btnfr"“'\\] | '"' ( '""' | ~["] )* '"' |  UnicodeEscape
 ;
 UnicodeEscape :   '\\' 'u' HexDigit HexDigit HexDigit HexDigit
 ;
