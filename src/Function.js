@@ -147,25 +147,38 @@ export class Function {
       })
   }
   // 满足条件的情况下再求和
-  funcSumIf(value1, value2, ...values) {
-      values = [].concat(...values);
+  funcSumIf(base, compare, values) {
       // 如果values为空或者判定条件为空
-      if (values.length === 0 || value1.length === 0) {
+      if (base.length === 0 || values.length === 0) {
           return 0;
       }
       // 类型检查
       checkValueType('number', 'SUMIF', 2, values);
-      let result = 0;
-      if (value2.constructor.name === 'Array') {
-          value2 = value2[0];
+      // compare传递的是一个数组时，对数组中每一个值求对比结果
+      if (compare.constructor.name === 'Array') {
+          let result = [];
+          compare.forEach(compareVal => {
+            let tmpResult = 0;
+            base.forEach((baseVal, index) => {
+                if (baseVal === compareVal && index < values.length) {
+                    tmpResult += values[index];
+                }
+            })
+            result.push(tmpResult);
+          })
+          return result;
+      } else {
+        let result = 0;
+        base.forEach((baseVal, index) => {
+            if (baseVal === compare && index < values.length) {
+                result += values[index];
+            }
+        })
+        return result;
       }
-      value1.forEach((compareVal, index) => {
-          if (compareVal === value2 && index < values.length) {
-            result += values[index];
-          }
-      })
-      return result;
   }
+  
+
   // 平均数
   funcAverage(...values) {
       values = [].concat(...values); // flat

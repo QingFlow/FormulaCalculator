@@ -15,12 +15,12 @@ function calculate() {
   var visitor = new MyFormulaVisitor(params);
   var result = visitor.visit(parser.formula());
   // 计算出答案超过一个，答案为undefined，答案为object都会报错
-  if(result.length !== 1 || result[0]===undefined || typeof result[0] === 'object') {
-    let err = new QfErr({
-      errCode: 3
-    });
-    throw err;
-  }
+  // if(result.length !== 1 || result[0]===undefined || typeof result[0] === 'object') {
+  //   let err = new QfErr({
+  //     errCode: 3
+  //   });
+  //   throw err;
+  // }
   return result[0];
 }
 
