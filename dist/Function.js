@@ -648,7 +648,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcIsEmpty',
         value: function funcIsEmpty(value) {
-            if (value === undefined || value === "" || (typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value)) === 'object' && value.length === 0) {
+            if (value === undefined || value === "" || (typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value)) === 'object' && value.length === 0 || value === null) {
                 return true;
             }
             return false;

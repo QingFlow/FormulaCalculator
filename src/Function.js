@@ -385,7 +385,7 @@ export class Function {
 
   // 检查传入的值是否为空
   funcIsEmpty(value) {
-      if (value === undefined || value === "" || (typeof value === 'object' && value.length === 0)) {
+      if (value === undefined || value === "" || (typeof value === 'object' && value.length === 0) || value === null) {
           return true;
       }
       return false;
