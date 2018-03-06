@@ -58,8 +58,8 @@ try {
   // console.log(calc.calculate('LEFT("hello world","sdds")'));
   // console.log(calc.calculate('IF("a"="s","ss")'))
   // console.log(calc.calculate('SEARCH("aa","haaeekjaa", 2)'))
-  console.log(calc.calculate('SUMIF(["aa","","aa","aa","bb"], ["aa","","bb"], [1,2,5,7,8])'));
-  // console.log(calc.calculate('POWER(2,1/4)'))
+  // console.log(calc.calculate('SUMIF(["aa","","aa","aa","bb"], ["aa","","bb"], [1,2,5,7,8])'));
+  console.log(calc.calculate('POWER(2,1/4)'))
 }
 catch(err) {
   console.log(err);
