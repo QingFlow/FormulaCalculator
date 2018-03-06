@@ -41,9 +41,9 @@ WS : [ \t\r\n]+ -> skip
 ;
 String :   '"' (StringCharacter+)? '"' | '“' (StringCharacter+)? '”'
 ;
-StringCharacter :  ~["“\\] | EscapeSequence
+StringCharacter :  ["“\\] | EscapeSequence
 ;
-EscapeSequence :   '\\' [btnfr"“'\\] | '"' ( '""' | ~["] )* '"' |  UnicodeEscape
+EscapeSequence :   '\\' [btnfr"“'\\] |  UnicodeEscape
 ;
 UnicodeEscape :   '\\' 'u' HexDigit HexDigit HexDigit HexDigit
 ;
