@@ -39,7 +39,7 @@ DOUBLE : ('0' | [1-9][0-9]*)('.'[0-9]*)?
 ;
 WS : [ \t\r\n]+ -> skip
 ;
-String :   '"' [\s\S]* '"' | '“' [\s\S]* '”'
+String :   '"' (StringCharacter+)? '"' | '“' (StringCharacter+)? '”'
 ;
 StringCharacter :  ~["“\\] | EscapeSequence
 ;
