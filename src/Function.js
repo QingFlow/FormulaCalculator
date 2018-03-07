@@ -152,6 +152,12 @@ export class Function {
       if (base.length === 0 || values.length === 0) {
           return 0;
       }
+      // 需要求和的值，如果有空字符串，null或者undefined，直接赋值为0
+      values.forEach((v, index) => {
+          if (isNullOrUndefined(v) || v === "") {
+              values.splice(index, 1, 0);
+          }
+        })
       // 类型检查
       checkValueType('number', 'SUMIF', 2, values);
       // compare传递的是一个数组时，对数组中每一个值求对比结果
@@ -385,7 +391,7 @@ export class Function {
 
   // 检查传入的值是否为空
   funcIsEmpty(value) {
-      if (value === undefined || value === "" || (typeof value === 'object' && value.length === 0) || value === null) {
+      if (isNullOrUndefined(value) || value === "" || (value.constructor.name === 'Array' && value === [])) {
           return true;
       }
       return false;

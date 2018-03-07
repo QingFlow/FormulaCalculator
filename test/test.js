@@ -58,8 +58,10 @@ try {
   // console.log(calc.calculate('LEFT("hello world","sdds")'));
   // console.log(calc.calculate('IF("a"="s","ss")'))
   // console.log(calc.calculate('SEARCH("aa","haaeekjaa", 2)'))
-  console.log(calc.calculate(`COUNT("sad", "a")`));
+  // console.log(calc.calculate(`COUNT("sad", "a")`));
   // console.log(calc.calculate('POWER(2,1/4)'))
+  console.log(calc.calculate('SUMIF([1,2,3],[1,2,3],[1,"", null])'))
+  // console.log(calc.calculate('ISEMPTY(null)'))
 }
 catch(err) {
   console.log(err);

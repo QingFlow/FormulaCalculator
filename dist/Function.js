@@ -5,10 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Function = undefined;
 
-var _typeof2 = require('babel-runtime/helpers/typeof');
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
 var _parseInt = require('babel-runtime/core-js/number/parse-int');
 
 var _parseInt2 = _interopRequireDefault(_parseInt);
@@ -239,6 +235,12 @@ var Function = exports.Function = function () {
             if (base.length === 0 || values.length === 0) {
                 return 0;
             }
+            // 需要求和的值，如果有空字符串，null或者undefined，直接赋值为0
+            values.forEach(function (v, index) {
+                if ((0, _util.isNullOrUndefined)(v) || v === "") {
+                    values.splice(index, 1, 0);
+                }
+            });
             // 类型检查
             checkValueType('number', 'SUMIF', 2, values);
             // compare传递的是一个数组时，对数组中每一个值求对比结果
@@ -648,7 +650,7 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcIsEmpty',
         value: function funcIsEmpty(value) {
-            if (value === undefined || value === "" || (typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value)) === 'object' && value.length === 0 || value === null) {
+            if ((0, _util.isNullOrUndefined)(value) || value === "" || value.constructor.name === 'Array' && value === []) {
                 return true;
             }
             return false;
