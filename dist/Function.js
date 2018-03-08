@@ -735,7 +735,16 @@ var Function = exports.Function = function () {
     }, {
         key: 'funJaName',
         value: function funJaName(params) {
-            return params['jaInfo']['name'] ? params['jaInfo']['name'] : "";
+            if (params['nickName']) {
+                return params['nickName'];
+            }
+            if (params['alias']) {
+                return params['alias'];
+            }
+            if (params['email']) {
+                return params['email'];
+            }
+            return "";
         }
 
         // 获取ja用户类型
