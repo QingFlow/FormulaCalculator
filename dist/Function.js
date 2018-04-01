@@ -399,11 +399,7 @@ var Function = exports.Function = function () {
         value: function funcRound(value, n) {
             checkParamCount('ROUND', 2, arguments);
             checkValueType('number', 'ROUND', 0, value, n);
-            var iterValue = 1;
-            for (var i = 0; i < n; i++) {
-                iterValue = 10 * iterValue;
-            }
-            return Math.round(value * iterValue) / iterValue;
+            return Number(value).toFixed(n);
         }
         // 取整数
 
