@@ -1,4 +1,4 @@
-import { isNullOrUndefined } from 'util';
+import { isNullOrUndefined, debug } from 'util';
 
 var checkValueType = require('./Utils').checkValueType;
 var checkParamCount = require('./Utils').checkParamCount;

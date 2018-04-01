@@ -55,10 +55,15 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
         return _this;
     }
 
-    // 一元操作符
-
-
     (0, _createClass3.default)(MyFormulaVisitor, [{
+        key: 'visitNull',
+        value: function visitNull(ctx) {
+            return null;
+        }
+
+        // 一元操作符
+
+    }, {
         key: 'visitUnaryOperator',
         value: function visitUnaryOperator(ctx) {
             var value = this.visit(ctx.expr());

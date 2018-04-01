@@ -18,12 +18,6 @@ FormulaVisitor.prototype.visitFormula = function(ctx) {
 };
 
 
-// Visit a parse tree produced by FormulaParser#str.
-FormulaVisitor.prototype.visitStr = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
 // Visit a parse tree produced by FormulaParser#parens.
 FormulaVisitor.prototype.visitParens = function(ctx) {
   return this.visitChildren(ctx);
@@ -54,12 +48,6 @@ FormulaVisitor.prototype.visitBool = function(ctx) {
 };
 
 
-// Visit a parse tree produced by FormulaParser#func.
-FormulaVisitor.prototype.visitFunc = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
 // Visit a parse tree produced by FormulaParser#double.
 FormulaVisitor.prototype.visitDouble = function(ctx) {
   return this.visitChildren(ctx);
@@ -86,6 +74,24 @@ FormulaVisitor.prototype.visitInt = function(ctx) {
 
 // Visit a parse tree produced by FormulaParser#mulDiv.
 FormulaVisitor.prototype.visitMulDiv = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FormulaParser#str.
+FormulaVisitor.prototype.visitStr = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FormulaParser#null.
+FormulaVisitor.prototype.visitNull = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FormulaParser#func.
+FormulaVisitor.prototype.visitFunc = function(ctx) {
   return this.visitChildren(ctx);
 };
 

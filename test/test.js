@@ -62,7 +62,7 @@ try {
   // console.log(calc.calculate('POWER(2,1/4)'))
   // console.log(calc.calculate('SUMIF([1,2,3],[1,2,3],[1,"", null])'))
   console.log(calc.calculate('IF(ISEMPTY(null),"aaa","bbb")'))
-  // console.log(calc.calculate('ISEMPTY(undefined)'))
+  console.log(calc.calculate('ISEMPTY(undefined)'))
 }
 catch(err) {
   console.log(err);

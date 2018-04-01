@@ -15,6 +15,10 @@ class MyFormulaVisitor extends FormulaVisitor{
         this.userInfoFunctionMap = new Function().getFuncMapWithParam();  // 获取所有需要用户信息来计算的方法
     }
 
+    visitNull(ctx) {
+        return null;
+    }
+
     // 一元操作符
     visitUnaryOperator(ctx) {
         var value = this.visit(ctx.expr());
