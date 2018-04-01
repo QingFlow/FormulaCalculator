@@ -1,20 +1,23 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _typeof2 = require("babel-runtime/helpers/typeof");
+var _typeof2 = require('babel-runtime/helpers/typeof');
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
-var _toConsumableArray2 = require("babel-runtime/helpers/toConsumableArray");
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
 exports.checkValueType = checkValueType;
 exports.checkParamCount = checkParamCount;
 exports.reverse = reverse;
+exports.removeNullParam = removeNullParam;
+
+var _util = require('util');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36,7 +39,7 @@ function checkValueType(type, funcName, startIdx) {
 
   values = (_ref = []).concat.apply(_ref, (0, _toConsumableArray3.default)(values));
   values.forEach(function (value, index) {
-    if ((typeof value === "undefined" ? "undefined" : (0, _typeof3.default)(value)) !== type) {
+    if ((typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value)) !== type) {
       var err = new FormulaError({
         errCode: 1,
         funcName: funcName,
@@ -68,4 +71,18 @@ function checkParamCount(funcName, count, params) {
 // 字符串反转
 function reverse(value) {
   return String(value).split("").reverse().join("");
+}
+
+/**
+ * 去除数组中为null或者undefined的值
+ * @param {*} values 需要剔除无用数值的数组
+ */
+function removeNullParam(values) {
+  var resultValues = [];
+  for (var i = 0; i < values.length; i++) {
+    if (!(0, _util.isNullOrUndefined)(values[i])) {
+      resultValues.push(values[i]);
+    }
+  }
+  return resultValues;
 }

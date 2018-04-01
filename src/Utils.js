@@ -1,3 +1,5 @@
+import { isNullOrUndefined } from 'util';
+
 var FormulaError = require('./FormulaError').FormulaError;
 
 /**
@@ -42,4 +44,18 @@ export function checkParamCount(funcName, count, params) {
 // 字符串反转
 export function reverse(value) {
     return String(value).split("").reverse().join("");
+}
+
+/**
+ * 去除数组中为null或者undefined的值
+ * @param {*} values 需要剔除无用数值的数组
+ */
+export function removeNullParam(values) {
+  let resultValues = [];
+  for(let i = 0; i < values.length; i++) {
+    if (!isNullOrUndefined(values[i])) {
+      resultValues.push(values[i]);
+    }
+  }
+  return resultValues;
 }

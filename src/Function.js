@@ -3,6 +3,7 @@ import { isNullOrUndefined, debug } from 'util';
 var checkValueType = require('./Utils').checkValueType;
 var checkParamCount = require('./Utils').checkParamCount;
 var reverse = require('./Utils').reverse;
+var removeNullParam = require('./Utils').removeNullParam;
 var moment = require('moment');
 /**
  * 函数的定义
@@ -140,6 +141,7 @@ export class Function {
       if (values.length === 0) {
           return 0;
       }
+      values = removeNullParam(values);
       // 类型检查
       checkValueType('number', 'SUM', 0, values);
       return values.reduce((pre, next) => {
@@ -192,6 +194,7 @@ export class Function {
       if (values.length === 0) {
           return 0;
       }
+      values = removeNullParam(values);
       // 类型检查
       checkValueType('number', 'AVERAGE', 0, values);
       var sum = values.reduce((pre, next) => {
@@ -202,11 +205,13 @@ export class Function {
   // 计数
   funcCount(...values) {
       values = [].concat(...values); // flat
+      values = removeNullParam(values);
       return values.length;
   }
   // 最小值
   funcMin(...values) {
       values = [].concat(...values); // flat
+      values = removeNullParam(values);
       // 类型检查
       checkValueType('number', 'MIN', 0, values);
       var min = Number.MAX_VALUE;
@@ -220,6 +225,7 @@ export class Function {
   // 最大值
   funcMax(...values) {
       values = [].concat(...values); // flat
+      values = removeNullParam(values);
       // 类型检查
       checkValueType('number', 'MAX', 0, values);
       var max = Number.MIN_VALUE;
@@ -251,6 +257,7 @@ export class Function {
   // 连乘（product是office里面的称呼）
   funcProduct(...values) {
       values = [].concat(...values); // flat
+      values = removeNullParam(values);
       // 类型检查
       checkValueType('number', 'PRODUCT', 0, values);
       var result = 1;

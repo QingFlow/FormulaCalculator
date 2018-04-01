@@ -36,6 +36,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var checkValueType = require('./Utils').checkValueType;
 var checkParamCount = require('./Utils').checkParamCount;
 var reverse = require('./Utils').reverse;
+var removeNullParam = require('./Utils').removeNullParam;
 var moment = require('moment');
 /**
  * 函数的定义
@@ -220,6 +221,7 @@ var Function = exports.Function = function () {
             if (values.length === 0) {
                 return 0;
             }
+            values = removeNullParam(values);
             // 类型检查
             checkValueType('number', 'SUM', 0, values);
             return values.reduce(function (pre, next) {
@@ -283,6 +285,7 @@ var Function = exports.Function = function () {
             if (values.length === 0) {
                 return 0;
             }
+            values = removeNullParam(values);
             // 类型检查
             checkValueType('number', 'AVERAGE', 0, values);
             var sum = values.reduce(function (pre, next) {
@@ -302,6 +305,7 @@ var Function = exports.Function = function () {
             }
 
             values = (_ref4 = []).concat.apply(_ref4, (0, _toConsumableArray3.default)(values)); // flat
+            values = removeNullParam(values);
             return values.length;
         }
         // 最小值
@@ -316,6 +320,7 @@ var Function = exports.Function = function () {
             }
 
             values = (_ref5 = []).concat.apply(_ref5, (0, _toConsumableArray3.default)(values)); // flat
+            values = removeNullParam(values);
             // 类型检查
             checkValueType('number', 'MIN', 0, values);
             var min = Number.MAX_VALUE;
@@ -360,6 +365,7 @@ var Function = exports.Function = function () {
             }
 
             values = (_ref6 = []).concat.apply(_ref6, (0, _toConsumableArray3.default)(values)); // flat
+            values = removeNullParam(values);
             // 类型检查
             checkValueType('number', 'MAX', 0, values);
             var max = Number.MIN_VALUE;
@@ -431,6 +437,7 @@ var Function = exports.Function = function () {
             }
 
             values = (_ref7 = []).concat.apply(_ref7, (0, _toConsumableArray3.default)(values)); // flat
+            values = removeNullParam(values);
             // 类型检查
             checkValueType('number', 'PRODUCT', 0, values);
             var result = 1;
