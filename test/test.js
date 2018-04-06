@@ -64,7 +64,8 @@ try {
   // console.log(calc.calculate('IF(ISEMPTY(null),"aaa","bbb")'))
   // console.log(calc.calculate('ISEMPTY(undefined)'));
   // console.log(calc.calculate('ROUND(12,2)'));
-  console.log(calc.calculate('COUNT([1,2,null,3])'));
+  // console.log(calc.calculate('COUNT([1,2,null,3])'));
+  console.log(calc.calculate('RMBUPPER(1000)'));
 }
 catch(err) {
   console.log(err);
