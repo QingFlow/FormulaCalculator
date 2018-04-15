@@ -518,24 +518,36 @@ export class Function {
 
   // 获取用户名，根据工作区备注>昵称>邮箱的优先级返回用户的用户名
   funcGetUserName(params) {
-      if (params['alias']) { return params['alias']; }
-      if (params['nickName']) { return params['nickName']; }
-      if (params['email']) { return params['email']; }
-      return "";
+    if (isNullOrUndefined(params)) {
+        return 0;
+    }
+    if (params['alias']) { return params['alias']; }
+    if (params['nickName']) { return params['nickName']; }
+    if (params['email']) { return params['email']; }
+    return "";
   }
 
   // 返回用户的邮箱
   funcGetUserEmail(params) {
-      return params['email'];
+    if (isNullOrUndefined(params)) {
+        return 0;
+    }
+    return params['email'];
   }
 
   // 获取ja学工号
   funJAaId(params) {
-      return params['jaInfo']['sid']?params['jaInfo']['sid']:"";
+    if (isNullOrUndefined(params)) {
+        return 0;
+    }
+    return params['jaInfo']['sid']?params['jaInfo']['sid']:"";
   }
 
   // 获取ja姓名
   funJaName(params) {
+    if (isNullOrUndefined(params)) {
+        return 0;
+    }
     if (params['nickName']) { return params['nickName']; }
     if (params['alias']) { return params['alias']; }
     if (params['email']) { return params['email']; }
@@ -544,35 +556,47 @@ export class Function {
 
   // 获取ja用户类型
   funJaType(params) {
-      let userType = params['jaInfo']['userType'];
-      switch(userType) {
-          case "student":
-              return "学生";
-          case "schoolFellow":
-              return "校友";
-          case "faculty":
-              return "教职工";
-          case "postphd":
-              return "博士后";
-          case "team":
-              return "集体账号";
-          default:
-              return "其他";
-      }
+    if (isNullOrUndefined(params)) {
+        return 0;
+    }
+    let userType = params['jaInfo']['userType'];
+    switch(userType) {
+        case "student":
+            return "学生";
+        case "schoolFellow":
+            return "校友";
+        case "faculty":
+            return "教职工";
+        case "postphd":
+            return "博士后";
+        case "team":
+            return "集体账号";
+        default:
+            return "其他";
+    }
   }
 
   // 获取ja学院ID
   funJaDeptId(params) {
-      return params['jaInfo']['organizeId'];
+    if (isNullOrUndefined(params)) {
+        return 0;
+    }
+    return params['jaInfo']['organizeId'];
   }
 
   // 获取ja学院名称
   funJaDeptName(params) {
-      return params['jaInfo']['organize'];
+    if (isNullOrUndefined(params)) {
+        return '';
+    }
+    return params['jaInfo']['organize'];
   }
 
   // 获取表单打开次数
   funcRecno(params) {
-      return params['openCount'];
+    if (isNullOrUndefined(params)) {
+        return 0;
+    }
+    return params['openCount'];
   }
 }

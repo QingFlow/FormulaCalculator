@@ -797,6 +797,9 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcGetUserName',
         value: function funcGetUserName(params) {
+            if ((0, _util.isNullOrUndefined)(params)) {
+                return 0;
+            }
             if (params['alias']) {
                 return params['alias'];
             }
@@ -814,6 +817,9 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcGetUserEmail',
         value: function funcGetUserEmail(params) {
+            if ((0, _util.isNullOrUndefined)(params)) {
+                return 0;
+            }
             return params['email'];
         }
 
@@ -822,6 +828,9 @@ var Function = exports.Function = function () {
     }, {
         key: 'funJAaId',
         value: function funJAaId(params) {
+            if ((0, _util.isNullOrUndefined)(params)) {
+                return 0;
+            }
             return params['jaInfo']['sid'] ? params['jaInfo']['sid'] : "";
         }
 
@@ -830,6 +839,9 @@ var Function = exports.Function = function () {
     }, {
         key: 'funJaName',
         value: function funJaName(params) {
+            if ((0, _util.isNullOrUndefined)(params)) {
+                return 0;
+            }
             if (params['nickName']) {
                 return params['nickName'];
             }
@@ -847,6 +859,9 @@ var Function = exports.Function = function () {
     }, {
         key: 'funJaType',
         value: function funJaType(params) {
+            if ((0, _util.isNullOrUndefined)(params)) {
+                return 0;
+            }
             var userType = params['jaInfo']['userType'];
             switch (userType) {
                 case "student":
@@ -869,6 +884,9 @@ var Function = exports.Function = function () {
     }, {
         key: 'funJaDeptId',
         value: function funJaDeptId(params) {
+            if ((0, _util.isNullOrUndefined)(params)) {
+                return 0;
+            }
             return params['jaInfo']['organizeId'];
         }
 
@@ -877,6 +895,9 @@ var Function = exports.Function = function () {
     }, {
         key: 'funJaDeptName',
         value: function funJaDeptName(params) {
+            if ((0, _util.isNullOrUndefined)(params)) {
+                return '';
+            }
             return params['jaInfo']['organize'];
         }
 
@@ -885,6 +906,9 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcRecno',
         value: function funcRecno(params) {
+            if ((0, _util.isNullOrUndefined)(params)) {
+                return 0;
+            }
             return params['openCount'];
         }
     }]);

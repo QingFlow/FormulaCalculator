@@ -23,7 +23,7 @@ try {
     }
   }
   let a = { email: "13402171010@126.com", nickName: "李婷婷", alias: "这是134的备注" };
-
+  console.log(calc.calculate('RECNO()'));
   // let a = calc.calculate('CONCAT(JAID(), "asdasd")', params);
   // console.log(a);
   // console.log(calc.calculate('JANAME()', params));
