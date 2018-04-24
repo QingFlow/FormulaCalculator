@@ -59,3 +59,47 @@ export function removeNullParam(values) {
   }
   return resultValues;
 }
+
+// 加减乘除精度运算
+Number.prototype.add = function(arg) {
+  let r1 = 0;
+  let r2 = 0;
+  let m = 0;
+  if (this.toString().indexOf('.') !== -1) {
+    try {r1 = this.toString().split('.')[1].length} catch(e) {}
+  }
+  if (arg.toString().indexOf('.') !== -1) {
+    try {r2 = arg.toString().split('.')[1].length} catch(e) {}
+  }
+  m = Math.pow(10, Math.max(r1, r2));
+  return (this * m + arg * m) / m;
+}
+
+Number.prototype.sub = function(arg) {
+  return this.add(-arg);
+}
+
+Number.prototype.mul = function(arg) {
+  let m = 0;
+  let s1 = this.toString();
+  let s2 = arg.toString();
+  if (s1.indexOf('.') !== -1) {
+    try {m += s1.split('.')[1].length} catch(e) {}
+  }
+  if (s2.indexOf('.') !== -1) {
+    try {m += s2.split('.')[1].length} catch(e) {}
+  }
+  return Number(s1.replace('.', '')) * Number(s2.replace('.', '')) / Math.pow(10, m);
+}
+
+Number.prototype.div = function(arg) {
+  let r1 = 0;
+  let r2 = 0;
+  if (this.toString().indexOf('.') !== -1) {
+    try {r1 = this.toString().split('.')[1].length} catch(e) {}
+  }
+  if (arg.toString().indexOf('.') !== -1) {
+    try {r2 = arg.toString().split('.')[1].length} catch(e) {}
+  }
+  return (Number(this.toString().replace('.', '')) / Number(arg.toString().replace('.', ''))) * Math.pow(10, r2 - r1);
+}

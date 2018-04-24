@@ -33,8 +33,10 @@ class MyFormulaVisitor extends FormulaVisitor{
         // 类型检查
         checkValueType('number', 'MINUS', 0, value1, value2);
         switch (ctx.op.type){
-            case FormulaParser.PLUS:return value1 + value2;
-            case FormulaParser.MINUS:return value1 - value2;
+            // case FormulaParser.PLUS:return value1 + value2;
+            // case FormulaParser.MINUS:return value1 - value2;
+            case FormulaParser.PLUS:return value1.add(value2);
+            case FormulaParser.MINUS:return value1.sub(value2);
         }
     };
     
@@ -94,11 +96,13 @@ class MyFormulaVisitor extends FormulaVisitor{
             case FormulaParser.MULTIPLY: 
                 // 类型解析
                 checkValueType('number', 'MULTIPLE', 0, value1, value2);
-                return value1 * value2;
+                // return value1 * value2;
+                return value1.mul(value2);
             case FormulaParser.DIVIDE:
                 // 类型解析
                 checkValueType('number', 'DIVIDE', 0, value1, value2);
-                return value1 / value2;
+                // return value1 / value2;
+                return value1.div(value2);
             default: return 0; // todo: 报错
         }
     }

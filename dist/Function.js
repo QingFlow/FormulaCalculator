@@ -317,7 +317,7 @@ var Function = exports.Function = function () {
             // 类型检查
             checkValueType('number', 'SUM', 0, values);
             return values.reduce(function (pre, next) {
-                return (0, _parseFloat2.default)(pre) + (0, _parseFloat2.default)(next);
+                return (0, _parseFloat2.default)(pre).add((0, _parseFloat2.default)(next));
             });
         }
         // 满足条件的情况下再求和
@@ -344,7 +344,8 @@ var Function = exports.Function = function () {
                     var tmpResult = 0;
                     base.forEach(function (baseVal, index) {
                         if (baseVal === compareVal && index < values.length) {
-                            tmpResult += values[index];
+                            // tmpResult += values[index];
+                            tmpResult = tmpResult.add(values[index]);
                         }
                     });
                     result.push(tmpResult);
@@ -354,7 +355,8 @@ var Function = exports.Function = function () {
                 var _result = 0;
                 base.forEach(function (baseVal, index) {
                     if (baseVal === compare && index < values.length) {
-                        _result += values[index];
+                        // result += values[index];
+                        _result = _result.add(values[index]);
                     }
                 });
                 return _result;
@@ -381,9 +383,11 @@ var Function = exports.Function = function () {
             // 类型检查
             checkValueType('number', 'AVERAGE', 0, values);
             var sum = values.reduce(function (pre, next) {
-                return (0, _parseFloat2.default)(pre) + (0, _parseFloat2.default)(next);
+                //   return Number.parseFloat(pre) + Number.parseFloat(next);
+                return (0, _parseFloat2.default)(pre).add((0, _parseFloat2.default)(next));
             });
-            return sum / values.length;
+            //   return sum / values.length;
+            return sum.div(values.length);
         }
         // 计数
 
@@ -541,7 +545,8 @@ var Function = exports.Function = function () {
                 for (var _iterator3 = (0, _getIterator3.default)(values), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
                     var v = _step3.value;
 
-                    result *= (0, _parseFloat2.default)(v);
+                    //   result *= Number.parseFloat(v);
+                    result = result.mul((0, _parseFloat2.default)(v));
                 }
             } catch (err) {
                 _didIteratorError3 = true;
@@ -569,7 +574,8 @@ var Function = exports.Function = function () {
             // 获取两个数组的最小长度
             var length = value1.length < value2.length ? value1.length : value2.length;
             for (var index = 0; index < length; index++) {
-                result += value1[index] * value2[index];
+                //   result += value1[index] * value2[index];
+                result = result.add(value1[index].mul(value2[index]));
             }
             return result;
         }

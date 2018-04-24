@@ -232,7 +232,7 @@ export class Function {
       // 类型检查
       checkValueType('number', 'SUM', 0, values);
       return values.reduce((pre, next) => {
-          return Number.parseFloat(pre) + Number.parseFloat(next);
+          return Number.parseFloat(pre).add(Number.parseFloat(next));
       })
   }
   // 满足条件的情况下再求和
@@ -256,7 +256,8 @@ export class Function {
             let tmpResult = 0;
             base.forEach((baseVal, index) => {
                 if (baseVal === compareVal && index < values.length) {
-                    tmpResult += values[index];
+                    // tmpResult += values[index];
+                    tmpResult = tmpResult.add(values[index])
                 }
             })
             result.push(tmpResult);
@@ -266,7 +267,8 @@ export class Function {
         let result = 0;
         base.forEach((baseVal, index) => {
             if (baseVal === compare && index < values.length) {
-                result += values[index];
+                // result += values[index];
+                result = result.add(values[index]);
             }
         })
         return result;
@@ -285,9 +287,11 @@ export class Function {
       // 类型检查
       checkValueType('number', 'AVERAGE', 0, values);
       var sum = values.reduce((pre, next) => {
-          return Number.parseFloat(pre) + Number.parseFloat(next);
+        //   return Number.parseFloat(pre) + Number.parseFloat(next);
+        return Number.parseFloat(pre).add(Number.parseFloat(next));
       })
-      return sum / values.length;
+    //   return sum / values.length;
+    return sum.div(values.length);
   }
   // 计数
   funcCount(...values) {
@@ -349,7 +353,8 @@ export class Function {
       checkValueType('number', 'PRODUCT', 0, values);
       var result = 1;
       for (var v of values) {
-          result *= Number.parseFloat(v);
+        //   result *= Number.parseFloat(v);
+        result = result.mul(Number.parseFloat(v));
       }
       return result;
   }
@@ -359,7 +364,8 @@ export class Function {
       // 获取两个数组的最小长度
       var length = value1.length < value2.length?value1.length:value2.length;
       for (let index = 0; index < length; index++) {
-          result += value1[index] * value2[index];
+        //   result += value1[index] * value2[index];
+          result = result.add(value1[index].mul(value2[index]));
       }
       return result;
   }

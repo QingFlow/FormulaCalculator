@@ -23,7 +23,8 @@ try {
     }
   }
   let a = { email: "13402171010@126.com", nickName: "李婷婷", alias: "这是134的备注" };
-  console.log(calc.calculate('RECNO()'));
+  console.log(calc.calculate('3*0.2'));
+  // console.log(b.mul(0.3))
   // let a = calc.calculate('CONCAT(JAID(), "asdasd")', params);
   // console.log(a);
   // console.log(calc.calculate('JANAME()', params));
@@ -65,7 +66,7 @@ try {
   // console.log(calc.calculate('ISEMPTY(undefined)'));
   // console.log(calc.calculate('ROUND(12,2)'));
   // console.log(calc.calculate('COUNT([1,2,null,3])'));
-  console.log(calc.calculate('RMBUPPER(1000)'));
+  // console.log(calc.calculate('RMBUPPER(1000)'));
 }
 catch(err) {
   console.log(err);
