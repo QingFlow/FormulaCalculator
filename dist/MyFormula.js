@@ -8,6 +8,10 @@ var _parseInt = require('babel-runtime/core-js/number/parse-int');
 
 var _parseInt2 = _interopRequireDefault(_parseInt);
 
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
 var _parseFloat = require('babel-runtime/core-js/number/parse-float');
 
 var _parseFloat2 = _interopRequireDefault(_parseFloat);
@@ -76,17 +80,22 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
     }, {
         key: 'visitPlusMinus',
         value: function visitPlusMinus(ctx) {
-            var value1 = this.visit(ctx.expr(0));
-            var value2 = this.visit(ctx.expr(1));
+            var _ref, _ref2;
+
+            var value1 = (_ref = []).concat.apply(_ref, (0, _toConsumableArray3.default)(this.visit(ctx.expr(0))));
+            var value2 = (_ref2 = []).concat.apply(_ref2, (0, _toConsumableArray3.default)(this.visit(ctx.expr(1))));
+            var values = value1.concat.apply(value1, (0, _toConsumableArray3.default)(value2));
             // 类型检查
-            checkValueType('number', 'MINUS', 0, value1, value2);
+            checkValueType('number', 'MINUS', 0, values);
             switch (ctx.op.type) {
-                // case FormulaParser.PLUS:return value1 + value2;
-                // case FormulaParser.MINUS:return value1 - value2;
                 case FormulaParser.PLUS:
-                    return value1.add(value2);
+                    return values.reduce(function (pre, next) {
+                        return (0, _parseFloat2.default)(pre).add((0, _parseFloat2.default)(next));
+                    });
                 case FormulaParser.MINUS:
-                    return value1.sub(value2);
+                    return values.reduce(function (pre, next) {
+                        return (0, _parseFloat2.default)(pre).sub((0, _parseFloat2.default)(next));
+                    });
             }
         }
     }, {

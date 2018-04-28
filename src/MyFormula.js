@@ -28,15 +28,20 @@ class MyFormulaVisitor extends FormulaVisitor{
     
     // 解析加减法
     visitPlusMinus(ctx) {
-        var value1 = this.visit(ctx.expr(0));
-        var value2 = this.visit(ctx.expr(1));
+        var value1 = [].concat(...this.visit(ctx.expr(0)));
+        var value2 = [].concat(...this.visit(ctx.expr(1)));
+        var values = value1.concat(...value2);
         // 类型检查
-        checkValueType('number', 'MINUS', 0, value1, value2);
+        checkValueType('number', 'MINUS', 0, values);
         switch (ctx.op.type){
-            // case FormulaParser.PLUS:return value1 + value2;
-            // case FormulaParser.MINUS:return value1 - value2;
-            case FormulaParser.PLUS:return value1.add(value2);
-            case FormulaParser.MINUS:return value1.sub(value2);
+            case FormulaParser.PLUS:
+                return values.reduce((pre, next) => {
+                    return Number.parseFloat(pre).add(Number.parseFloat(next));
+                })
+            case FormulaParser.MINUS:
+                return values.reduce((pre, next) => {
+                    return Number.parseFloat(pre).sub(Number.parseFloat(next));
+                })
         }
     };
     
