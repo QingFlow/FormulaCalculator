@@ -84,7 +84,6 @@ function removeNullParam(values) {
       resultValues.push(values[i]);
     }
   }
-  console.log(resultValues);
   return resultValues;
 }
 
