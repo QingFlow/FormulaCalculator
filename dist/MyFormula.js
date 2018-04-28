@@ -44,6 +44,7 @@ var moment = require('moment');
 var FormulaError = require('./FormulaError').FormulaError;
 var Function = require('./Function').Function;
 var checkValueType = require('./Utils').checkValueType;
+var removeNullParam = require('./Utils').removeNullParam;
 
 var MyFormulaVisitor = function (_FormulaVisitor) {
     (0, _inherits3.default)(MyFormulaVisitor, _FormulaVisitor);
@@ -85,6 +86,7 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
             var value1 = (_ref = []).concat.apply(_ref, (0, _toConsumableArray3.default)(this.visit(ctx.expr(0))));
             var value2 = (_ref2 = []).concat.apply(_ref2, (0, _toConsumableArray3.default)(this.visit(ctx.expr(1))));
             var values = value1.concat.apply(value1, (0, _toConsumableArray3.default)(value2));
+            values = removeNullParam(values);
             // 类型检查
             checkValueType('number', 'MINUS', 0, values);
             switch (ctx.op.type) {
@@ -202,17 +204,75 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
         value: function visitMulDiv(ctx) {
             var value1 = (0, _parseFloat2.default)(this.visit(ctx.expr(0)));
             var value2 = (0, _parseFloat2.default)(this.visit(ctx.expr(1)));
+            var values = [value1, value2];
+            values = removeNullParam(values);
             switch (ctx.op.type) {
                 case FormulaParser.MULTIPLY:
                     // 类型解析
-                    checkValueType('number', 'MULTIPLE', 0, value1, value2);
+                    checkValueType('number', 'MULTIPLE', 0, values);
                     // return value1 * value2;
-                    return value1.mul(value2);
+                    var result = 1;
+                    var _iteratorNormalCompletion2 = true;
+                    var _didIteratorError2 = false;
+                    var _iteratorError2 = undefined;
+
+                    try {
+                        for (var _iterator2 = (0, _getIterator3.default)(values), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                            var v = _step2.value;
+
+                            //   result *= Number.parseFloat(v);
+                            result = result.mul((0, _parseFloat2.default)(v));
+                        }
+                    } catch (err) {
+                        _didIteratorError2 = true;
+                        _iteratorError2 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                _iterator2.return();
+                            }
+                        } finally {
+                            if (_didIteratorError2) {
+                                throw _iteratorError2;
+                            }
+                        }
+                    }
+
+                    return result;
+                // return value1.mul(value2);
                 case FormulaParser.DIVIDE:
                     // 类型解析
-                    checkValueType('number', 'DIVIDE', 0, value1, value2);
+                    checkValueType('number', 'DIVIDE', 0, value2);
                     // return value1 / value2;
-                    return value1.div(value2);
+                    // return value1.div(value2);
+                    var result = 1;
+                    var _iteratorNormalCompletion3 = true;
+                    var _didIteratorError3 = false;
+                    var _iteratorError3 = undefined;
+
+                    try {
+                        for (var _iterator3 = (0, _getIterator3.default)(values), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                            var v = _step3.value;
+
+                            //   result *= Number.parseFloat(v);
+                            result = result.div((0, _parseFloat2.default)(v));
+                        }
+                    } catch (err) {
+                        _didIteratorError3 = true;
+                        _iteratorError3 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                                _iterator3.return();
+                            }
+                        } finally {
+                            if (_didIteratorError3) {
+                                throw _iteratorError3;
+                            }
+                        }
+                    }
+
+                    return result;
                 default:
                     return 0; // todo: 报错
             }
@@ -237,27 +297,27 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
 
                 var paramList = [];
                 // 先拿到参数
-                var _iteratorNormalCompletion2 = true;
-                var _didIteratorError2 = false;
-                var _iteratorError2 = undefined;
+                var _iteratorNormalCompletion4 = true;
+                var _didIteratorError4 = false;
+                var _iteratorError4 = undefined;
 
                 try {
-                    for (var _iterator2 = (0, _getIterator3.default)(ctx.expr()), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                        var val = _step2.value;
+                    for (var _iterator4 = (0, _getIterator3.default)(ctx.expr()), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                        var val = _step4.value;
 
                         paramList.push(this.visit(val));
                     }
                 } catch (err) {
-                    _didIteratorError2 = true;
-                    _iteratorError2 = err;
+                    _didIteratorError4 = true;
+                    _iteratorError4 = err;
                 } finally {
                     try {
-                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                            _iterator2.return();
+                        if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                            _iterator4.return();
                         }
                     } finally {
-                        if (_didIteratorError2) {
-                            throw _iteratorError2;
+                        if (_didIteratorError4) {
+                            throw _iteratorError4;
                         }
                     }
                 }

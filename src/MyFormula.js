@@ -5,6 +5,7 @@ var moment = require('moment');
 var FormulaError = require('./FormulaError').FormulaError;
 var Function = require('./Function').Function;
 var checkValueType = require('./Utils').checkValueType;
+var removeNullParam = require('./Utils').removeNullParam;
 
 class MyFormulaVisitor extends FormulaVisitor{
 
@@ -31,6 +32,7 @@ class MyFormulaVisitor extends FormulaVisitor{
         var value1 = [].concat(...this.visit(ctx.expr(0)));
         var value2 = [].concat(...this.visit(ctx.expr(1)));
         var values = value1.concat(...value2);
+        values = removeNullParam(values);
         // 类型检查
         checkValueType('number', 'MINUS', 0, values);
         switch (ctx.op.type){
@@ -97,17 +99,31 @@ class MyFormulaVisitor extends FormulaVisitor{
     visitMulDiv(ctx) {
         var value1 = Number.parseFloat(this.visit(ctx.expr(0)));
         var value2 = Number.parseFloat(this.visit(ctx.expr(1)));
+        var values = [ value1, value2 ];
+        values = removeNullParam(values);
         switch(ctx.op.type) {
             case FormulaParser.MULTIPLY: 
                 // 类型解析
-                checkValueType('number', 'MULTIPLE', 0, value1, value2);
+                checkValueType('number', 'MULTIPLE', 0, values);
                 // return value1 * value2;
-                return value1.mul(value2);
+                var result = 1;
+                for (var v of values) {
+                    //   result *= Number.parseFloat(v);
+                    result = result.mul(Number.parseFloat(v));
+                }
+                return result;
+                // return value1.mul(value2);
             case FormulaParser.DIVIDE:
                 // 类型解析
-                checkValueType('number', 'DIVIDE', 0, value1, value2);
+                checkValueType('number', 'DIVIDE', 0, value2);
                 // return value1 / value2;
-                return value1.div(value2);
+                // return value1.div(value2);
+                var result = 1;
+                for (var v of values) {
+                    //   result *= Number.parseFloat(v);
+                    result = result.div(Number.parseFloat(v));
+                }
+                return result;
             default: return 0; // todo: 报错
         }
     }

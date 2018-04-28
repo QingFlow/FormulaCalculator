@@ -53,10 +53,11 @@ export function reverse(value) {
 export function removeNullParam(values) {
   let resultValues = [];
   for(let i = 0; i < values.length; i++) {
-    if (!isNullOrUndefined(values[i])) {
+    if (!isNullOrUndefined(values[i]) && !isNaN(values[i])) {
       resultValues.push(values[i]);
     }
   }
+  console.log(resultValues);
   return resultValues;
 }
 

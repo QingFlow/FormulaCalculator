@@ -80,10 +80,11 @@ function reverse(value) {
 function removeNullParam(values) {
   var resultValues = [];
   for (var i = 0; i < values.length; i++) {
-    if (!(0, _util.isNullOrUndefined)(values[i])) {
+    if (!(0, _util.isNullOrUndefined)(values[i]) && !isNaN(values[i])) {
       resultValues.push(values[i]);
     }
   }
+  console.log(resultValues);
   return resultValues;
 }
 
