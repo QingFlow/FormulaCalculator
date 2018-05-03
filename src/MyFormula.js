@@ -29,9 +29,9 @@ class MyFormulaVisitor extends FormulaVisitor{
     
     // 解析加减法
     visitPlusMinus(ctx) {
-        var value1 = [].concat(...this.visit(ctx.expr(0)));
-        var value2 = [].concat(...this.visit(ctx.expr(1)));
-        var values = value1.concat(...value2);
+        var value1 = this.visit(ctx.expr(0));
+        var value2 = this.visit(ctx.expr(1));
+        var values = [ value1, value2 ];
         values = removeNullParam(values);
         // 类型检查
         checkValueType('number', 'MINUS', 0, values);
