@@ -23,7 +23,7 @@ try {
     }
   }
   let a = { email: "13402171010@126.com", nickName: "李婷婷", alias: "这是134的备注" };
-  console.log(calc.calculate('4+null'));
+  console.log(calc.calculate('4/10'));
   // console.log(b.mul(0.3))
   // let a = calc.calculate('CONCAT(JAID(), "asdasd")', params);
   // console.log(a);

@@ -118,11 +118,18 @@ class MyFormulaVisitor extends FormulaVisitor{
                 checkValueType('number', 'DIVIDE', 0, value2);
                 // return value1 / value2;
                 // return value1.div(value2);
-                var result = 1;
-                for (var v of values) {
-                    //   result *= Number.parseFloat(v);
-                    result = result.div(Number.parseFloat(v));
+                var result;
+                for( var i = 0; i< values.length; i++) {
+                    if (i === 0) {
+                        result = values[i];
+                    } else {
+                        result = result.div(Number.parseFloat(values[i]));
+                    }
                 }
+                // for (var v of values) {
+                //     //   result *= Number.parseFloat(v);
+                //     result = result.div(Number.parseFloat(v));
+                // }
                 return result;
             default: return 0; // todo: 报错
         }

@@ -239,33 +239,18 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
                     checkValueType('number', 'DIVIDE', 0, value2);
                     // return value1 / value2;
                     // return value1.div(value2);
-                    var result = 1;
-                    var _iteratorNormalCompletion3 = true;
-                    var _didIteratorError3 = false;
-                    var _iteratorError3 = undefined;
-
-                    try {
-                        for (var _iterator3 = (0, _getIterator3.default)(values), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                            var v = _step3.value;
-
-                            //   result *= Number.parseFloat(v);
-                            result = result.div((0, _parseFloat2.default)(v));
-                        }
-                    } catch (err) {
-                        _didIteratorError3 = true;
-                        _iteratorError3 = err;
-                    } finally {
-                        try {
-                            if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                                _iterator3.return();
-                            }
-                        } finally {
-                            if (_didIteratorError3) {
-                                throw _iteratorError3;
-                            }
+                    var result;
+                    for (var i = 0; i < values.length; i++) {
+                        if (i === 0) {
+                            result = values[i];
+                        } else {
+                            result = result.div((0, _parseFloat2.default)(values[i]));
                         }
                     }
-
+                    // for (var v of values) {
+                    //     //   result *= Number.parseFloat(v);
+                    //     result = result.div(Number.parseFloat(v));
+                    // }
                     return result;
                 default:
                     return 0; // todo: 报错
@@ -291,27 +276,27 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
 
                 var paramList = [];
                 // 先拿到参数
-                var _iteratorNormalCompletion4 = true;
-                var _didIteratorError4 = false;
-                var _iteratorError4 = undefined;
+                var _iteratorNormalCompletion3 = true;
+                var _didIteratorError3 = false;
+                var _iteratorError3 = undefined;
 
                 try {
-                    for (var _iterator4 = (0, _getIterator3.default)(ctx.expr()), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-                        var val = _step4.value;
+                    for (var _iterator3 = (0, _getIterator3.default)(ctx.expr()), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                        var val = _step3.value;
 
                         paramList.push(this.visit(val));
                     }
                 } catch (err) {
-                    _didIteratorError4 = true;
-                    _iteratorError4 = err;
+                    _didIteratorError3 = true;
+                    _iteratorError3 = err;
                 } finally {
                     try {
-                        if (!_iteratorNormalCompletion4 && _iterator4.return) {
-                            _iterator4.return();
+                        if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                            _iterator3.return();
                         }
                     } finally {
-                        if (_didIteratorError4) {
-                            throw _iteratorError4;
+                        if (_didIteratorError3) {
+                            throw _iteratorError3;
                         }
                     }
                 }
