@@ -1,3 +1,4 @@
+import { isNullOrUndefined } from 'util';
 
 var FormulaVisitor = require('../token_parse/FormulaVisitor').FormulaVisitor;
 var FormulaParser = require('../token_parse/FormulaParser').FormulaParser;
@@ -31,7 +32,11 @@ class MyFormulaVisitor extends FormulaVisitor{
     visitPlusMinus(ctx) {
         var value1 = this.visit(ctx.expr(0));
         var value2 = this.visit(ctx.expr(1));
-        var values = [ value1, value2 ];
+        // var values = [ value1, value2 ];
+        if (isNullOrUndefined(value1) || value1.constructor.name !== 'Array') {
+            value1 = [ value1 ];
+        }
+        var values = value1.concat(value2);
         values = removeNullParam(values);
         // 类型检查
         checkValueType('number', 'MINUS', 0, values);
