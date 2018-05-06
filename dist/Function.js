@@ -37,6 +37,7 @@ var checkValueType = require('./Utils').checkValueType;
 var checkParamCount = require('./Utils').checkParamCount;
 var reverse = require('./Utils').reverse;
 var removeNullParam = require('./Utils').removeNullParam;
+var replaceNullParam = require('./Utils').replaceNullParam;
 var moment = require('moment');
 /**
  * 函数的定义
@@ -313,7 +314,7 @@ var Function = exports.Function = function () {
             if (values.length === 0) {
                 return 0;
             }
-            values = removeNullParam(values);
+            values = replaceNullParam(values);
             // 类型检查
             checkValueType('number', 'SUM', 0, values);
             return values.reduce(function (pre, next) {
@@ -533,7 +534,7 @@ var Function = exports.Function = function () {
             }
 
             values = (_ref7 = []).concat.apply(_ref7, (0, _toConsumableArray3.default)(values)); // flat
-            values = removeNullParam(values);
+            values = replaceNullParam(values);
             // 类型检查
             checkValueType('number', 'PRODUCT', 0, values);
             var result = 1;

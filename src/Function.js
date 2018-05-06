@@ -4,6 +4,7 @@ var checkValueType = require('./Utils').checkValueType;
 var checkParamCount = require('./Utils').checkParamCount;
 var reverse = require('./Utils').reverse;
 var removeNullParam = require('./Utils').removeNullParam;
+var replaceNullParam = require('./Utils').replaceNullParam;
 var moment = require('moment');
 /**
  * 函数的定义
@@ -228,7 +229,7 @@ export class Function {
       if (values.length === 0) {
           return 0;
       }
-      values = removeNullParam(values);
+      values = replaceNullParam(values);
       // 类型检查
       checkValueType('number', 'SUM', 0, values);
       return values.reduce((pre, next) => {
@@ -348,7 +349,7 @@ export class Function {
   // 连乘（product是office里面的称呼）
   funcProduct(...values) {
       values = [].concat(...values); // flat
-      values = removeNullParam(values);
+      values = replaceNullParam(values);
       // 类型检查
       checkValueType('number', 'PRODUCT', 0, values);
       var result = 1;

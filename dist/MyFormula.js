@@ -42,7 +42,7 @@ var moment = require('moment');
 var FormulaError = require('./FormulaError').FormulaError;
 var Function = require('./Function').Function;
 var checkValueType = require('./Utils').checkValueType;
-var removeNullParam = require('./Utils').removeNullParam;
+var replaceNullParam = require('./Utils').replaceNullParam;
 
 var MyFormulaVisitor = function (_FormulaVisitor) {
     (0, _inherits3.default)(MyFormulaVisitor, _FormulaVisitor);
@@ -86,7 +86,7 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
                 value1 = [value1];
             }
             var values = value1.concat(value2);
-            values = removeNullParam(values);
+            values = replaceNullParam(values);
             // 类型检查
             checkValueType('number', 'MINUS', 0, values);
             switch (ctx.op.type) {
@@ -205,12 +205,11 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
             var value1 = (0, _parseFloat2.default)(this.visit(ctx.expr(0)));
             var value2 = (0, _parseFloat2.default)(this.visit(ctx.expr(1)));
             var values = [value1, value2];
-            values = removeNullParam(values);
+            values = replaceNullParam(values);
             switch (ctx.op.type) {
                 case FormulaParser.MULTIPLY:
                     // 类型解析
                     checkValueType('number', 'MULTIPLE', 0, values);
-                    // return value1 * value2;
                     var result = 1;
                     var _iteratorNormalCompletion2 = true;
                     var _didIteratorError2 = false;
@@ -220,7 +219,6 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
                         for (var _iterator2 = (0, _getIterator3.default)(values), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
                             var v = _step2.value;
 
-                            //   result *= Number.parseFloat(v);
                             result = result.mul((0, _parseFloat2.default)(v));
                         }
                     } catch (err) {
@@ -239,24 +237,19 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
                     }
 
                     return result;
-                // return value1.mul(value2);
                 case FormulaParser.DIVIDE:
                     // 类型解析
                     checkValueType('number', 'DIVIDE', 0, value2);
-                    // return value1 / value2;
-                    // return value1.div(value2);
                     var result;
                     for (var i = 0; i < values.length; i++) {
                         if (i === 0) {
                             result = values[i];
+                        } else if (values[i] === 0) {
+                            result = 0;
                         } else {
                             result = result.div((0, _parseFloat2.default)(values[i]));
                         }
                     }
-                    // for (var v of values) {
-                    //     //   result *= Number.parseFloat(v);
-                    //     result = result.div(Number.parseFloat(v));
-                    // }
                     return result;
                 default:
                     return 0; // todo: 报错

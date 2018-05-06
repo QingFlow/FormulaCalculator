@@ -16,6 +16,7 @@ exports.checkValueType = checkValueType;
 exports.checkParamCount = checkParamCount;
 exports.reverse = reverse;
 exports.removeNullParam = removeNullParam;
+exports.replaceNullParam = replaceNullParam;
 
 var _util = require('util');
 
@@ -83,6 +84,22 @@ function removeNullParam(values) {
     if (!(0, _util.isNullOrUndefined)(values[i]) && !isNaN(values[i])) {
       resultValues.push(values[i]);
     }
+  }
+  return resultValues;
+}
+
+/**
+ * 数组中null或者undefined的值替换为0
+ * @param {*} values 
+ */
+function replaceNullParam(values) {
+  var resultValues = [];
+  for (var i = 0; i < values.length; i++) {
+    var tempVal = values[i];
+    if ((0, _util.isNullOrUndefined)(tempVal) || isNaN(tempVal)) {
+      tempVal = 0;
+    }
+    resultValues.push(tempVal);
   }
   return resultValues;
 }

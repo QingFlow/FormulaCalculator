@@ -60,6 +60,22 @@ export function removeNullParam(values) {
   return resultValues;
 }
 
+/**
+ * 数组中null或者undefined的值替换为0
+ * @param {*} values 
+ */
+export function replaceNullParam(values) {
+  let resultValues = [];
+  for(let i = 0; i < values.length; i++) {
+    let tempVal = values[i];
+    if (isNullOrUndefined(tempVal) || isNaN(tempVal)) {
+      tempVal = 0;
+    }
+    resultValues.push(tempVal);
+  }
+  return resultValues;
+}
+
 // 加减乘除精度运算
 Number.prototype.add = function(arg) {
   let r1 = 0;
