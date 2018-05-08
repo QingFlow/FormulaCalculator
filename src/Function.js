@@ -284,7 +284,7 @@ export class Function {
       if (values.length === 0) {
           return 0;
       }
-      values = removeNullParam(values);
+      values = replaceNullParam(values);
       // 类型检查
       checkValueType('number', 'AVERAGE', 0, values);
       var sum = values.reduce((pre, next) => {
