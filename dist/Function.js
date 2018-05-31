@@ -203,9 +203,23 @@ var Function = exports.Function = function () {
 
     }, {
         key: 'funNum',
-        value: function funNum(value) {
-            checkParamCount('NUM', 1, arguments);
-            return (0, _parseFloat2.default)(value);
+        value: function funNum() {
+            var _ref2;
+
+            for (var _len2 = arguments.length, values = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+                values[_key2] = arguments[_key2];
+            }
+
+            values = (_ref2 = []).concat.apply(_ref2, (0, _toConsumableArray3.default)(values));
+            //   checkParamCount('NUM', 1, values);
+            if (values.length < 2) {
+                return (0, _parseFloat2.default)(values[0]);
+            } else {
+                return values.map(function (val) {
+                    return (0, _parseFloat2.default)(val);
+                });
+            }
+            //   return Number.parseFloat(value);
         }
         // 数字转化为人民币大写形式
 
@@ -303,13 +317,13 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcSum',
         value: function funcSum() {
-            var _ref2;
+            var _ref3;
 
-            for (var _len2 = arguments.length, values = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-                values[_key2] = arguments[_key2];
+            for (var _len3 = arguments.length, values = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+                values[_key3] = arguments[_key3];
             }
 
-            values = (_ref2 = []).concat.apply(_ref2, (0, _toConsumableArray3.default)(values)); // flat
+            values = (_ref3 = []).concat.apply(_ref3, (0, _toConsumableArray3.default)(values)); // flat
             // 如果没有值的话，返回0
             if (values.length === 0) {
                 return 0;
@@ -369,13 +383,13 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcAverage',
         value: function funcAverage() {
-            var _ref3;
+            var _ref4;
 
-            for (var _len3 = arguments.length, values = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-                values[_key3] = arguments[_key3];
+            for (var _len4 = arguments.length, values = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+                values[_key4] = arguments[_key4];
             }
 
-            values = (_ref3 = []).concat.apply(_ref3, (0, _toConsumableArray3.default)(values)); // flat
+            values = (_ref4 = []).concat.apply(_ref4, (0, _toConsumableArray3.default)(values)); // flat
             // 如果没有值的话，返回0
             if (values.length === 0) {
                 return 0;
@@ -395,13 +409,13 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcCount',
         value: function funcCount() {
-            var _ref4;
+            var _ref5;
 
-            for (var _len4 = arguments.length, values = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-                values[_key4] = arguments[_key4];
+            for (var _len5 = arguments.length, values = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+                values[_key5] = arguments[_key5];
             }
 
-            values = (_ref4 = []).concat.apply(_ref4, (0, _toConsumableArray3.default)(values)); // flat
+            values = (_ref5 = []).concat.apply(_ref5, (0, _toConsumableArray3.default)(values)); // flat
             values = removeNullParam(values);
             return values.length;
         }
@@ -410,13 +424,13 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcMin',
         value: function funcMin() {
-            var _ref5;
+            var _ref6;
 
-            for (var _len5 = arguments.length, values = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-                values[_key5] = arguments[_key5];
+            for (var _len6 = arguments.length, values = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+                values[_key6] = arguments[_key6];
             }
 
-            values = (_ref5 = []).concat.apply(_ref5, (0, _toConsumableArray3.default)(values)); // flat
+            values = (_ref6 = []).concat.apply(_ref6, (0, _toConsumableArray3.default)(values)); // flat
             values = removeNullParam(values);
             // 类型检查
             checkValueType('number', 'MIN', 0, values);
@@ -455,13 +469,13 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcMax',
         value: function funcMax() {
-            var _ref6;
+            var _ref7;
 
-            for (var _len6 = arguments.length, values = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-                values[_key6] = arguments[_key6];
+            for (var _len7 = arguments.length, values = Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+                values[_key7] = arguments[_key7];
             }
 
-            values = (_ref6 = []).concat.apply(_ref6, (0, _toConsumableArray3.default)(values)); // flat
+            values = (_ref7 = []).concat.apply(_ref7, (0, _toConsumableArray3.default)(values)); // flat
             values = removeNullParam(values);
             // 类型检查
             checkValueType('number', 'MAX', 0, values);
@@ -527,13 +541,13 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcProduct',
         value: function funcProduct() {
-            var _ref7;
+            var _ref8;
 
-            for (var _len7 = arguments.length, values = Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-                values[_key7] = arguments[_key7];
+            for (var _len8 = arguments.length, values = Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+                values[_key8] = arguments[_key8];
             }
 
-            values = (_ref7 = []).concat.apply(_ref7, (0, _toConsumableArray3.default)(values)); // flat
+            values = (_ref8 = []).concat.apply(_ref8, (0, _toConsumableArray3.default)(values)); // flat
             values = replaceNullParam(values);
             // 类型检查
             checkValueType('number', 'PRODUCT', 0, values);

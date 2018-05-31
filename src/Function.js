@@ -132,9 +132,15 @@ export class Function {
       }
   }
   // 把其他类型的字段转换成数字类型，可以识别浮点类型
-  funNum(value) {
-      checkParamCount('NUM', 1, arguments);
-      return Number.parseFloat(value);
+  funNum(...values) {
+      values = [].concat(...values);
+    //   checkParamCount('NUM', 1, values);
+      if (values.length < 2) {
+          return Number.parseFloat(values[0]);
+      } else {
+          return values.map(val => Number.parseFloat(val));
+      }
+    //   return Number.parseFloat(value);
   }
   // 数字转化为人民币大写形式
   funRmbUpper(value) {
