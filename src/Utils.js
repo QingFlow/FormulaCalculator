@@ -76,6 +76,21 @@ export function replaceNullParam(values) {
   return resultValues;
 }
 
+/**
+ * 获取字符串中第一个数字，小数也可以获取
+ */
+export function getFirstNum(val) {
+  if (isNullOrUndefined(val)) { return null; }
+  val = val.toString();
+  let matches = val.match(/[1-9]\d*(\.\d+)?/g);
+  if (isNullOrUndefined(matches) || matches.length < 1) {
+    return null;
+  }
+  else {
+    return Number.parseFloat(matches[0]);
+  }
+}
+
 // 加减乘除精度运算
 Number.prototype.add = function(arg) {
   let r1 = 0;

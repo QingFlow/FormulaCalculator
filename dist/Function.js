@@ -38,6 +38,7 @@ var checkParamCount = require('./Utils').checkParamCount;
 var reverse = require('./Utils').reverse;
 var removeNullParam = require('./Utils').removeNullParam;
 var replaceNullParam = require('./Utils').replaceNullParam;
+var getFirstNum = require('./Utils').getFirstNum;
 var moment = require('moment');
 /**
  * 函数的定义
@@ -213,10 +214,12 @@ var Function = exports.Function = function () {
             values = (_ref2 = []).concat.apply(_ref2, (0, _toConsumableArray3.default)(values));
             //   checkParamCount('NUM', 1, values);
             if (values.length < 2) {
-                return (0, _parseFloat2.default)(values[0]);
+                //   return Number.parseFloat(values[0]);
+                return getFirstNum(values[0]);
             } else {
+                //   return values.map(val => Number.parseFloat(val));
                 return values.map(function (val) {
-                    return (0, _parseFloat2.default)(val);
+                    return getFirstNum(val);
                 });
             }
             //   return Number.parseFloat(value);

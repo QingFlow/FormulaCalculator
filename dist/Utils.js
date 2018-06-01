@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _parseFloat = require('babel-runtime/core-js/number/parse-float');
+
+var _parseFloat2 = _interopRequireDefault(_parseFloat);
+
 var _typeof2 = require('babel-runtime/helpers/typeof');
 
 var _typeof3 = _interopRequireDefault(_typeof2);
@@ -17,6 +21,7 @@ exports.checkParamCount = checkParamCount;
 exports.reverse = reverse;
 exports.removeNullParam = removeNullParam;
 exports.replaceNullParam = replaceNullParam;
+exports.getFirstNum = getFirstNum;
 
 var _util = require('util');
 
@@ -102,6 +107,22 @@ function replaceNullParam(values) {
     resultValues.push(tempVal);
   }
   return resultValues;
+}
+
+/**
+ * 获取字符串中第一个数字，小数也可以获取
+ */
+function getFirstNum(val) {
+  if ((0, _util.isNullOrUndefined)(val)) {
+    return null;
+  }
+  val = val.toString();
+  var matches = val.match(/[1-9]\d*(\.\d+)?/g);
+  if ((0, _util.isNullOrUndefined)(matches) || matches.length < 1) {
+    return null;
+  } else {
+    return (0, _parseFloat2.default)(matches[0]);
+  }
 }
 
 // 加减乘除精度运算

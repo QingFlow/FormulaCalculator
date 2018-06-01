@@ -5,6 +5,7 @@ var checkParamCount = require('./Utils').checkParamCount;
 var reverse = require('./Utils').reverse;
 var removeNullParam = require('./Utils').removeNullParam;
 var replaceNullParam = require('./Utils').replaceNullParam;
+var getFirstNum = require('./Utils').getFirstNum;
 var moment = require('moment');
 /**
  * 函数的定义
@@ -136,9 +137,11 @@ export class Function {
       values = [].concat(...values);
     //   checkParamCount('NUM', 1, values);
       if (values.length < 2) {
-          return Number.parseFloat(values[0]);
+        //   return Number.parseFloat(values[0]);
+        return getFirstNum(values[0]);
       } else {
-          return values.map(val => Number.parseFloat(val));
+        //   return values.map(val => Number.parseFloat(val));
+        return values.map(val => getFirstNum(val));
       }
     //   return Number.parseFloat(value);
   }
