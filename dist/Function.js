@@ -356,7 +356,7 @@ var Function = exports.Function = function () {
             // 类型检查
             checkValueType('number', 'SUMIF', 2, values);
             // compare传递的是一个数组时，对数组中每一个值求对比结果
-            if (compare.constructor.name === 'Array') {
+            if (!(0, _util.isNullOrUndefined)(compare) && compare.constructor.name === 'Array') {
                 var result = [];
                 compare.forEach(function (compareVal) {
                     var tmpResult = 0;
