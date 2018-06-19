@@ -25,7 +25,7 @@ try {
   let a = { email: "13402171010@126.com", nickName: "李婷婷", alias: "这是134的备注" };
   // console.log(calc.calculate('SUM(NUM("3","4","3","4"))'));
   // console.log(calc.calculate('SUM(NUM("3"))'));
-  console.log(calc.calculate('NUM("33")'));
+  console.log(calc.calculate('SUMIF(["pingguo"],null,null)'));
   console.log(calc.calculate('NUM("2")'));
   // console.log(calc.calculate('null-2'));
   // console.log(calc.calculate('null+2'));

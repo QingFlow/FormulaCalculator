@@ -344,7 +344,7 @@ var Function = exports.Function = function () {
         key: 'funcSumIf',
         value: function funcSumIf(base, compare, values) {
             // 如果values为空或者判定条件为空
-            if (base.length === 0 || values.length === 0) {
+            if ((0, _util.isNullOrUndefined)(base) || (0, _util.isNullOrUndefined)(values) || base.length === 0 || values.length === 0) {
                 return 0;
             }
             // 需要求和的值，如果有空字符串，null或者undefined，直接赋值为0
