@@ -73,8 +73,8 @@ class MyFormulaVisitor extends FormulaVisitor{
     }
     // 解析一些比较符号
     visitCompare(ctx) {
-        var value1 = this.visit(ctx.expr(0));
-        var value2 = this.visit(ctx.expr(1));
+        var value1 = replaceNullParam([].concat(this.visit(ctx.expr(0))));
+        var value2 = replaceNullParam([].concat(this.visit(ctx.expr(1))));
         // 类型检查
         switch (ctx.op.type) {
             case FormulaParser.LT:
@@ -83,14 +83,32 @@ class MyFormulaVisitor extends FormulaVisitor{
             case FormulaParser.GE:
                 checkValueType('number', 'COMPARE', 0, value1, value2);
         }
-        switch (ctx.op.type) {
-            case FormulaParser.EQ: return value1 === value2;
-            case FormulaParser.NEQ: return value1 !== value2;
-            case FormulaParser.LT: return value1 < value2;
-            case FormulaParser.LE: return value1 <= value2;
-            case FormulaParser.GT: return value1 > value2;
-            case FormulaParser.GE: return value1 >= value2;
-        }
+        let result = true;
+        value1.forEach((val1, index) => {
+            let val2 = value2[index];
+            if (isNullOrUndefined(val2)) { val2 = 0; }
+            switch (ctx.op.type) {
+                case FormulaParser.EQ: 
+                    if (val1 !== val2) {result = false};
+                    break;
+                case FormulaParser.NEQ: 
+                    if (val1 === val2) {result = false};
+                    break;
+                case FormulaParser.LT: 
+                    if (val1 >= val2) {result = false};
+                    break;
+                case FormulaParser.LE: 
+                    if (val1 > val2) {result = false};
+                    break;
+                case FormulaParser.GT: 
+                    if (val1 <= val2) {result = false;};
+                    break;
+                case FormulaParser.GE: 
+                    if (val1 < val2) {result = false};
+                    break;
+            }
+        })
+        return result;
     }
     // 解析数组
     visitList(ctx) {
