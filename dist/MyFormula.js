@@ -139,8 +139,8 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
     }, {
         key: 'visitCompare',
         value: function visitCompare(ctx) {
-            var value1 = replaceNullParam([].concat(this.visit(ctx.expr(0))));
-            var value2 = replaceNullParam([].concat(this.visit(ctx.expr(1))));
+            var value1 = [].concat(this.visit(ctx.expr(0)));
+            var value2 = [].concat(this.visit(ctx.expr(1)));
             // 类型检查
             switch (ctx.op.type) {
                 case FormulaParser.LT:
