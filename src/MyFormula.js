@@ -81,6 +81,8 @@ class MyFormulaVisitor extends FormulaVisitor{
             case FormulaParser.LE:
             case FormulaParser.GT:
             case FormulaParser.GE:
+                value1 = replaceNullParam(value1);
+                value2 = replaceNullParam(value2);
                 checkValueType('number', 'COMPARE', 0, value1, value2);
         }
         let result = true;
