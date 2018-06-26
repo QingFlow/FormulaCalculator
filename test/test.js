@@ -26,7 +26,7 @@ try {
   // console.log(calc.calculate('SUM(NUM("3","4","3","4"))'));
   // console.log(calc.calculate('SUM(NUM("3"))'));
   // console.log(calc.calculate('[2,6,0]<[3,7,3]'));
-  console.log(calc.calculate('IF("请假半天"=="请假一天",0,1)'));
+  console.log(calc.calculate('NUM("无")+NUM("400")'));
   // console.log(calc.calculate('null-2'));
   // console.log(calc.calculate('null+2'));
   // console.log(calc.calculate('[199, 199]-[251, 251]'));

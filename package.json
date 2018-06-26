@@ -30,7 +30,7 @@
     "mocha": "^4.0.1"
   },
   "dependencies": {
-    "antlr4": "^4.7.0",
+    "antlr4": "^4.7.1",
     "babel-runtime": "^6.26.0",
     "moment": "^2.19.2"
   },
