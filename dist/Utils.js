@@ -140,7 +140,7 @@ Number.prototype.add = function (arg) {
       r2 = arg.toString().split('.')[1].length;
     } catch (e) {}
   }
-  m = Math.pow(10, Math.max(r1, r2));
+  m = Math.pow(10, Math.max(r1, r2) + 1);
   return (this * m + arg * m) / m;
 };
 
