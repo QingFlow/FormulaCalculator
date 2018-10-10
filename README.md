@@ -64,6 +64,8 @@
 - DAYS
 - DATEDELTA
 - RECNO
+- ROUNDUP
+- ROUNDDOWN
 
 #### Ja相关的方法
 

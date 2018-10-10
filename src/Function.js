@@ -30,6 +30,8 @@ export class Function {
           'MIN': this.funcMin,
           'MAX': this.funcMax,
           'ROUND': this.funcRound,
+          'ROUNDUP': this.funcRoundUp,
+          'ROUNDDOWN': this.funcRoundDown,
           'INT': this.funcInt,
           'MOD': this.funcMod,
           'PRODUCT': this.funcProduct,
@@ -340,6 +342,23 @@ export class Function {
       checkValueType('number', 'ROUND', 0, value, n);
       return Number(value).toFixed(n);
   }
+
+  // 向上取，保留n位小数
+  funcRoundUp(value, n) {
+      checkParamCount('ROUNDUP', 2, arguments);
+      checkValueType('number', 'ROUNDUP', 0, value, n);
+      var pow = Math.pow(10, n > value.decimalCnt() ? value.decimalCnt() : n);
+      return Math.ceil(value * pow) / pow;
+  }
+
+  // 向下取，保留n位小数
+  funcRoundDown(value, n) {
+      checkParamCount('ROUNDDOWN', 2, arguments);
+      checkValueType('number', 'ROUNDDOWN', 0, value, n);
+      var pow = Math.pow(10, n > value.decimalCnt() ? value.decimalCnt() : n);
+      return Math.floor(value * pow) / pow;
+  }
+
   // 取整数
   funcInt(value) {
       checkValueType('number', 'INT', 0, value);
