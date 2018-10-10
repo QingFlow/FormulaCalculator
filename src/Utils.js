@@ -134,3 +134,8 @@ Number.prototype.div = function(arg) {
   }
   return (Number(this.toString().replace('.', '')) / Number(arg.toString().replace('.', ''))) * Math.pow(10, r2 - r1);
 }
+
+Number.prototype.decimalCnt = function() {
+  if (this.toString().indexOf('.') === -1) { return 0; }
+  return this.toString().split('.')[1].length;
+}
