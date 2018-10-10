@@ -82,7 +82,7 @@ export function replaceNullParam(values) {
 export function getFirstNum(val) {
   if (isNullOrUndefined(val)) { return null; }
   val = val.toString();
-  let matches = val.match(/[1-9]\d*(\.\d+)?/g);
+  let matches = val.match(/(-)*[0-9]\d*(\.\d+)?/g);
   if (isNullOrUndefined(matches) || matches.length < 1) {
     return null;
   }

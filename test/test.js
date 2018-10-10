@@ -26,8 +26,13 @@ try {
   // console.log(calc.calculate('SUM(NUM("3","4","3","4"))'));
   // console.log(calc.calculate('SUM(NUM("3"))'));
   // console.log(calc.calculate('[2,6,0]<[3,7,3]'));
-  console.log(calc.calculate('SUM(4606.39, 8926.12)'));
-  console.log(calc.calculate('SUM(0.1, 0.2)'));
+  console.log(calc.calculate('NUM("-0.22")'));
+  console.log(calc.calculate('NUM("-55500.22")'));
+  console.log(calc.calculate('NUM("-056")'));
+  console.log(calc.calculate('NUM("0.22")'));
+  console.log(calc.calculate('NUM("55500.22")'));
+  console.log(calc.calculate('NUM("056")'));
+  // console.log(calc.calculate('SUM(0.1, 0.2)'));
   // console.log(calc.calculate('null-2'));
   // console.log(calc.calculate('null+2'));
   // console.log(calc.calculate('[199, 199]-[251, 251]'));

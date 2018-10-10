@@ -212,18 +212,15 @@ var Function = exports.Function = function () {
             }
 
             values = (_ref2 = []).concat.apply(_ref2, (0, _toConsumableArray3.default)(values));
-            //   checkParamCount('NUM', 1, values);
             if (values.length < 2) {
-                //   return Number.parseFloat(values[0]);
                 return getFirstNum(values[0]);
             } else {
-                //   return values.map(val => Number.parseFloat(val));
                 return values.map(function (val) {
                     return getFirstNum(val);
                 });
             }
-            //   return Number.parseFloat(value);
         }
+
         // 数字转化为人民币大写形式
 
     }, {
