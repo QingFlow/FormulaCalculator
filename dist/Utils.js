@@ -117,7 +117,7 @@ function getFirstNum(val) {
     return null;
   }
   val = val.toString();
-  var matches = val.match(/[1-9]\d*(\.\d+)?/g);
+  var matches = val.match(/(-)*[0-9]\d*(\.\d+)?/g);
   if ((0, _util.isNullOrUndefined)(matches) || matches.length < 1) {
     return null;
   } else {
