@@ -140,8 +140,8 @@ Number.prototype.add = function (arg) {
       r2 = arg.toString().split('.')[1].length;
     } catch (e) {}
   }
-  m = Math.pow(10, Math.max(r1, r2) + 1);
-  return (this * m + arg * m) / m;
+  m = Math.pow(10, Math.max(r1, r2));
+  return (this.mul(m) + arg.mul(m)).div(m);
 };
 
 Number.prototype.sub = function (arg) {
