@@ -482,19 +482,27 @@ export class Function {
   }
   
   // 与操作
-  funcAnd(value1, value2) {
-      // 类型检查
-      checkValueType('boolean', 'AND', 0, value1, value2);
-      checkParamCount('AND', 2, arguments);
-      return value1 && value2;
+  funcAnd(...values) {
+    values = [].concat(...values); // flat
+    // 如果没有值的话，返回0
+    if (values.length === 0) {
+        return true;
+    }
+    // 类型检查
+    checkValueType('boolean', 'AND', 0, values);
+    return values.filter(val => val === true).length === values.length;
   }
 
   // 或操作
-  funcOr(value1, value2) {
+  funcOr(...values) {
+      values = [].concat(...values); // flat
+      // 如果没有值的话，返回0
+      if (values.length === 0) {
+          return true;
+      }
       // 类型检查
-      checkValueType('boolean', 'OR', 0, value1, value2);
-      checkParamCount('OR', 2, arguments);
-      return value1 || value2;
+      checkValueType('boolean', 'OR', 0, values);
+      return !!values.find(val => val === true);
   }
   // 非操作
   funcNot(value) {

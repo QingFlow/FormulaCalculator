@@ -23,14 +23,14 @@ try {
     }
   }
   let a = { email: "13402171010@126.com", nickName: "李婷婷", alias: "这是134的备注" };
-  console.log(calc.calculate('3.1*3.23324234243243223423423423423423423423432442342343'));
-  console.log(calc.calculate('2.3-1'));
-  console.log(calc.calculate('5.1+5.9'));
-  console.log(calc.calculate('SUM(NUM("3"))'));
+  // console.log(calc.calculate('3.1*3.23324234243243223423423423423423423423432442342343'));
+  console.log(calc.calculate('AND(2==2, 4>2, 4>3)'));
+  // console.log(calc.calculate('5.1+5.9'));
+  // console.log(calc.calculate('SUM(NUM("3"))'));
   // console.log(calc.calculate('[2,6,0]<[3,7,3]'));
-  console.log(calc.calculate('SUM(4606.39, 8926.12)'));
-  console.log(calc.calculate('SUM(2.39, 2.12)'));
-  console.log(calc.calculate('SUM(0.1, 0.2)'));
+  // console.log(calc.calculate('SUM(4606.39, 8926.12)'));
+  // console.log(calc.calculate('SUM(2.39, 2.12)'));
+  // console.log(calc.calculate('SUM(0.1, 0.2)'));
   // console.log(calc.calculate('null-2'));
   // console.log(calc.calculate('null+2'));
   // console.log(calc.calculate('[199, 199]-[251, 251]'));

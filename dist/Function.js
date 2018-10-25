@@ -748,22 +748,46 @@ var Function = exports.Function = function () {
 
     }, {
         key: 'funcAnd',
-        value: function funcAnd(value1, value2) {
+        value: function funcAnd() {
+            var _ref9;
+
+            for (var _len9 = arguments.length, values = Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+                values[_key9] = arguments[_key9];
+            }
+
+            values = (_ref9 = []).concat.apply(_ref9, (0, _toConsumableArray3.default)(values)); // flat
+            // 如果没有值的话，返回0
+            if (values.length === 0) {
+                return true;
+            }
             // 类型检查
-            checkValueType('boolean', 'AND', 0, value1, value2);
-            checkParamCount('AND', 2, arguments);
-            return value1 && value2;
+            checkValueType('boolean', 'AND', 0, values);
+            return values.filter(function (val) {
+                return val === true;
+            }).length === values.length;
         }
 
         // 或操作
 
     }, {
         key: 'funcOr',
-        value: function funcOr(value1, value2) {
+        value: function funcOr() {
+            var _ref10;
+
+            for (var _len10 = arguments.length, values = Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+                values[_key10] = arguments[_key10];
+            }
+
+            values = (_ref10 = []).concat.apply(_ref10, (0, _toConsumableArray3.default)(values)); // flat
+            // 如果没有值的话，返回0
+            if (values.length === 0) {
+                return true;
+            }
             // 类型检查
-            checkValueType('boolean', 'OR', 0, value1, value2);
-            checkParamCount('OR', 2, arguments);
-            return value1 || value2;
+            checkValueType('boolean', 'OR', 0, values);
+            return !!values.find(function (val) {
+                return val === true;
+            });
         }
         // 非操作
 
