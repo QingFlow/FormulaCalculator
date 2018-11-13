@@ -24,7 +24,9 @@ try {
   }
   let a = { email: "13402171010@126.com", nickName: "李婷婷", alias: "这是134的备注" };
   // console.log(calc.calculate('3.1*3.23324234243243223423423423423423423423432442342343'));
-  console.log(calc.calculate('AND(2==2, 4>2, 4>3)'));
+  // console.log(calc.calculate('SEARCH("哈哈","哇哈哈哈就",1)'));
+  // console.log(calc.calculate('IF(SEARCH("年2假","年假事假换休",1)==0,"1","2")'));
+  console.log(calc.calculate('COUNTIF([“合格”，“合格”，“合格”,""], "")'));
   // console.log(calc.calculate('5.1+5.9'));
   // console.log(calc.calculate('SUM(NUM("3"))'));
   // console.log(calc.calculate('[2,6,0]<[3,7,3]'));

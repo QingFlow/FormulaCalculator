@@ -27,6 +27,7 @@ export class Function {
           'SUMIF': this.funcSumIf,
           'AVERAGE': this.funcAverage,
           'COUNT': this.funcCount,
+          'COUNTIF': this.funcCountIf,
           'MIN': this.funcMin,
           'MAX': this.funcMax,
           'ROUND': this.funcRound,
@@ -308,6 +309,23 @@ export class Function {
       values = removeNullParam(values);
       return values.length;
   }
+  // 根据条件计数
+  funcCountIf(values, compareVal) {
+      if (isNullOrUndefined(values) || values.length === 0) {
+          return 0;
+      }
+      if (values.constructor.name !== 'Array') {
+          values = [ values ];
+      }
+      var count = 0;
+      values.forEach(val => {
+          if (val === compareVal) {
+              count ++;
+          }
+      })
+      return count;
+  }
+
   // 最小值
   funcMin(...values) {
       values = [].concat(...values); // flat
@@ -533,7 +551,6 @@ export class Function {
           beginPos = 1;
       }
       checkValueType('number', 'SEARCH', 2, beginPos);
-      checkParamCount('SEARCH', 3, arguments);
       return String(targetText).indexOf(String(searchText), beginPos-1) + 1;
   }
 

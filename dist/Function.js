@@ -68,6 +68,7 @@ var Function = exports.Function = function () {
                 'SUMIF': this.funcSumIf,
                 'AVERAGE': this.funcAverage,
                 'COUNT': this.funcCount,
+                'COUNTIF': this.funcCountIf,
                 'MIN': this.funcMin,
                 'MAX': this.funcMax,
                 'ROUND': this.funcRound,
@@ -421,6 +422,26 @@ var Function = exports.Function = function () {
             values = removeNullParam(values);
             return values.length;
         }
+        // 根据条件计数
+
+    }, {
+        key: 'funcCountIf',
+        value: function funcCountIf(values, compareVal) {
+            if ((0, _util.isNullOrUndefined)(values) || values.length === 0) {
+                return 0;
+            }
+            if (values.constructor.name !== 'Array') {
+                values = [values];
+            }
+            var count = 0;
+            values.forEach(function (val) {
+                if (val === compareVal) {
+                    count++;
+                }
+            });
+            return count;
+        }
+
         // 最小值
 
     }, {
@@ -830,7 +851,6 @@ var Function = exports.Function = function () {
                 beginPos = 1;
             }
             checkValueType('number', 'SEARCH', 2, beginPos);
-            checkParamCount('SEARCH', 3, arguments);
             return String(targetText).indexOf(String(searchText), beginPos - 1) + 1;
         }
 
