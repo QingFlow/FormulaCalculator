@@ -1008,9 +1008,6 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcRegTest',
         value: function funcRegTest(text, reg, decorator) {
-            console.log(reg);
-            console.log(new RegExp(reg, decorator));
-            console.log(text);
             return new RegExp(reg, decorator).test(text);
         }
     }]);

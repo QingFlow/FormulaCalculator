@@ -660,9 +660,6 @@ export class Function {
 
   // 正则校验
   funcRegTest(text, reg, decorator) {
-      console.log(reg);
-      console.log(new RegExp(reg, decorator));
-      console.log(text);
       return new RegExp(reg, decorator).test(text);
   }
 }
