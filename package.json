@@ -1,6 +1,6 @@
 {
   "name": "formula-calculator",
-  "version": "0.1.37",
+  "version": "0.1.38",
   "description": "A formula calculator",
   "main": "index.js",
   "scripts": {
