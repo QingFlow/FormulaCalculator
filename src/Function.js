@@ -58,7 +58,8 @@ export class Function {
           'SEARCH': this.funcSearch,
           'LEN': this.funcLen,
           'DAYS': this.funcDays,
-          'DATEDELTA': this.funcDateDelta
+          'DATEDELTA': this.funcDateDelta,
+          'REGTEST': this.funcRegTest
       }
   }
 
@@ -655,5 +656,13 @@ export class Function {
         return 0;
     }
     return params['openCount'];
+  }
+
+  // 正则校验
+  funcRegTest(text, reg, decorator) {
+      console.log(reg);
+      console.log(new RegExp(reg, decorator));
+      console.log(text);
+      return new RegExp(reg, decorator).test(text);
   }
 }

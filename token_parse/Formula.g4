@@ -43,7 +43,7 @@ WS : [ \t\r\n]+ -> skip
 ;
 String :   '"' (StringCharacter+)? '"' | '“' (StringCharacter+)? '”'
 ;
-StringCharacter :  ~["“\\] | EscapeSequence
+StringCharacter :  ~["“]
 ;
 EscapeSequence :   '\\' [btnfr"“'\\] |  UnicodeEscape
 ;

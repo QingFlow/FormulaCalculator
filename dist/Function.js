@@ -99,7 +99,8 @@ var Function = exports.Function = function () {
                 'SEARCH': this.funcSearch,
                 'LEN': this.funcLen,
                 'DAYS': this.funcDays,
-                'DATEDELTA': this.funcDateDelta
+                'DATEDELTA': this.funcDateDelta,
+                'REGTEST': this.funcRegTest
             };
         }
 
@@ -1000,6 +1001,17 @@ var Function = exports.Function = function () {
                 return 0;
             }
             return params['openCount'];
+        }
+
+        // 正则校验
+
+    }, {
+        key: 'funcRegTest',
+        value: function funcRegTest(text, reg, decorator) {
+            console.log(reg);
+            console.log(new RegExp(reg, decorator));
+            console.log(text);
+            return new RegExp(reg, decorator).test(text);
         }
     }]);
     return Function;
