@@ -557,8 +557,11 @@ export class Function {
 
   // 获取字符串的长度
   funcLen(value) {
-      checkParamCount('LEN', 1, arguments);
-      return String(value).length;
+      if (!isNullOrUndefined(value) && value.constructor.name === 'Array') {
+          return value.length;
+      } else {
+        return String(value).length;
+      }
   }
 
   // 计算end和start之间相差的天数
