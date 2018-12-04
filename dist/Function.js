@@ -860,7 +860,9 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcLen',
         value: function funcLen(value) {
-            if (!(0, _util.isNullOrUndefined)(value) && value.constructor.name === 'Array') {
+            if ((0, _util.isNullOrUndefined)(value)) {
+                return 0;
+            } else if (value.constructor.name === 'Array') {
                 return value.length;
             } else {
                 return String(value).length;

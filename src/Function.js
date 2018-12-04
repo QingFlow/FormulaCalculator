@@ -557,7 +557,9 @@ export class Function {
 
   // 获取字符串的长度
   funcLen(value) {
-      if (!isNullOrUndefined(value) && value.constructor.name === 'Array') {
+      if (isNullOrUndefined(value)) {
+          return 0;
+      } else if (value.constructor.name === 'Array') {
           return value.length;
       } else {
         return String(value).length;
