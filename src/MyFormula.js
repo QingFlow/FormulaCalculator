@@ -87,7 +87,7 @@ class MyFormulaVisitor extends FormulaVisitor{
         }
         let result = true;
         value1.forEach((val1, index) => {
-            let val2 = value2[index];
+            let val2 = index > value2.length-1 ? value2[0] : value2[index];
             if (isNullOrUndefined(val2)) { val2 = 0; }
             switch (ctx.op.type) {
                 case FormulaParser.EQ: 

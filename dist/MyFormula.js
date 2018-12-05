@@ -153,7 +153,8 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
             }
             var result = true;
             value1.forEach(function (val1, index) {
-                var val2 = value2[index];
+                var val2 = index > value2.length - 1 ? value2[0] : value2[index];
+                console.log(val2);
                 if ((0, _util.isNullOrUndefined)(val2)) {
                     val2 = 0;
                 }
