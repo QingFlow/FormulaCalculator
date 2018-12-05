@@ -406,11 +406,20 @@ export class Function {
   // 对应相乘后相加
   funcSumProduct(value1, value2) {
       var result = 0;
+      if (isNullOrUndefined(value1) || isNullOrUndefined(value2)) {
+          return result;
+      }
+      if (value1.constructor.name !== 'Array') {
+          value1 = [ value1 ];
+      }
+      if (value2.constructor.name !== 'Array') {
+          value2 = [ value2 ];
+      }
       // 获取两个数组的最小长度
       var length = value1.length < value2.length?value1.length:value2.length;
       for (let index = 0; index < length; index++) {
         //   result += value1[index] * value2[index];
-          result = result.add(value1[index].mul(value2[index]));
+          result = result.add(Number.parseFloat(value1[index]).mul(Number.parseFloat(value2[index])));
       }
       return result;
   }
