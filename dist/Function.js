@@ -1022,7 +1022,12 @@ var Function = exports.Function = function () {
     }, {
         key: 'funcRegTest',
         value: function funcRegTest(text, reg, decorator) {
-            return new RegExp(reg, decorator).test(text);
+            var textList = [].concat(text);
+            var result = true;
+            textList.forEach(function (textTmp) {
+                result = new RegExp(reg, decorator).test(textTmp);
+            });
+            return result;
         }
     }]);
     return Function;

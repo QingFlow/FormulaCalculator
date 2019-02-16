@@ -674,6 +674,11 @@ export class Function {
 
   // 正则校验
   funcRegTest(text, reg, decorator) {
-      return new RegExp(reg, decorator).test(text);
+      var textList = [].concat(text);
+      var result = true;
+      textList.forEach(textTmp => {
+          result = new RegExp(reg, decorator).test(textTmp);
+      })
+      return result;
   }
 }
