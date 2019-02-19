@@ -27,7 +27,7 @@ try {
   // console.log(calc.calculate('SEARCH("哈哈","哇哈哈哈就",1)'));
   // console.log(calc.calculate('IF(SEARCH("年2假","年假事假换休",1)==0,"1","2")'));
   // console.log(calc.calculate('OR(["至今","2019-12/12"]=="至今",REGTEST(["至今"],"^[0-9]{4}\/[0-9]{2}\/[0-9]{2}$","g"))'));
-  console.log(calc.calculate('CONCAT("we","as\\\\s")'));
+  // console.log(calc.calculate('CONCAT("\\“\\”","\"\"\\\\")'));
   // console.log(calc.calculate('SUMPRODUCT(NUM(["1"]),NUM(["2"]))'));
   // console.log(calc.calculate('5.1+5.9'));
   // console.log(calc.calculate('SUM(NUM("3"))'));
@@ -39,7 +39,7 @@ try {
   // console.log(calc.calculate('null+2'));
   // console.log(calc.calculate('[199, 199]-[251, 251]'));
   // console.log(calc.calculate('[2,2]-3'));
-  // console.log(calc.calculate('2-[3,4]'));
+  console.log(calc.calculate('CONCAT("\\“","\\”")'));
   // console.log(calc.calculate('2-3'));
   // console.log(calc.calculate('2-null'));
   // console.log(calc.calculate('null-3'));

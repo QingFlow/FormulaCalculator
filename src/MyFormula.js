@@ -156,8 +156,10 @@ class MyFormulaVisitor extends FormulaVisitor{
     visitStr(ctx) {
         var value = ctx.String().getText();
         return value.substring(1, value.length - 1)
-            .replace('\\"', '"')
-            .replace('\\\\', '\\');
+          .replace(/\\"/g, '"')
+          .replace(/\\”/g, '”')
+          .replace(/\\“/g, '“')
+          .replace(/\\\\/g, '\\');
     }
     // 解析函数
     visitFunc(ctx) {
