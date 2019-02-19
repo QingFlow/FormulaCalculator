@@ -289,7 +289,7 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
         key: 'visitStr',
         value: function visitStr(ctx) {
             var value = ctx.String().getText();
-            return value.substring(1, value.length - 1).replace('\\"', '"').replace('\\\\', '\\');
+            return value.substring(1, value.length - 1).replace(/\"/g, '"').replace(/\“/g, '“').replace(/\”/g, '”').replace(/\\/g, '\\');
         }
         // 解析函数
 
