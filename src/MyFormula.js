@@ -155,7 +155,9 @@ class MyFormulaVisitor extends FormulaVisitor{
     // 解析字符串
     visitStr(ctx) {
         var value = ctx.String().getText();
-        return value.substring(1, value.length - 1);
+        return value.substring(1, value.length - 1)
+            .replace('\\"', '"')
+            .replace('\\\\', '\\');
     }
     // 解析函数
     visitFunc(ctx) {
