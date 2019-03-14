@@ -673,8 +673,8 @@ var Function = exports.Function = function () {
         key: 'funcMonth',
         value: function funcMonth(value) {
             checkParamCount('MONTH', 1, arguments);
-            var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
-            return t.month() + 1;
+            var result = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']).month() + 1;
+            return result < 10 ? '0' + result : result;
         }
         // 拿到月份中的day
 
@@ -682,8 +682,8 @@ var Function = exports.Function = function () {
         key: 'funcDay',
         value: function funcDay(value) {
             checkParamCount('DAY', 1, arguments);
-            var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
-            return t.date();
+            var result = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']).date();
+            return result < 10 ? '0' + result : result;
         }
         // 时
 

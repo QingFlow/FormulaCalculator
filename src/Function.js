@@ -437,14 +437,14 @@ export class Function {
   // 拿到月份：注意，用moment拿月份时，是从0~11来计算的
   funcMonth(value) {
       checkParamCount('MONTH', 1, arguments);
-      var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
-      return t.month() + 1;
+      var result = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']).month() + 1;
+      return result < 10 ? '0' + result : result;
   }
   // 拿到月份中的day
   funcDay(value) {
       checkParamCount('DAY', 1, arguments);
-      var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
-      return t.date();
+      var result = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']).date();
+      return result < 10 ? '0' + result : result;
   }
   // 时
   funcHour(value) {

@@ -39,7 +39,8 @@ try {
   // console.log(calc.calculate('null+2'));
   // console.log(calc.calculate('[199, 199]-[251, 251]'));
   // console.log(calc.calculate('[2,2]-3'));
-  console.log(calc.calculate('CONCAT("\\“","\\”")'));
+  console.log(calc.calculate('MONTH("2019-12-01")+DAY("2019-02-11")'));
+  console.log(calc.calculate('DAY("2019-02-01")'));
   // console.log(calc.calculate('2-3'));
   // console.log(calc.calculate('2-null'));
   // console.log(calc.calculate('null-3'));
