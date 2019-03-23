@@ -331,6 +331,7 @@ export class Function {
   funcMin(...values) {
       values = [].concat(...values); // flat
       values = removeNullParam(values);
+      if (values.length === 0) { return null; }
       // 类型检查
       checkValueType('number', 'MIN', 0, values);
       var min = Number.MAX_VALUE;
@@ -345,6 +346,7 @@ export class Function {
   funcMax(...values) {
       values = [].concat(...values); // flat
       values = removeNullParam(values);
+      if (values.length === 0) { return null; }
       // 类型检查
       checkValueType('number', 'MAX', 0, values);
       var max = Number.MIN_VALUE;
