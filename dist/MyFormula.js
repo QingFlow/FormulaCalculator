@@ -151,6 +151,14 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
                     value2 = replaceNullParam(value2);
                     checkValueType('number', 'COMPARE', 0, value1, value2);
             }
+            /** 如果参数有一个为空数组，只有等于或不等于时可以出现为真的情况 */
+            if (value1.length === 0 || value2.length === 0) {
+                if (ctx.op.type === FormulaParser.EQ && value1.length === value2.length || ctx.op.type === FormulaParser.NEQ && value1.length !== value2.length) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
             var result = true;
             value1.forEach(function (val1, index) {
                 var val2 = index > value2.length - 1 ? value2[0] : value2[index];
