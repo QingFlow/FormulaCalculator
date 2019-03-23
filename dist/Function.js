@@ -456,6 +456,9 @@ var Function = exports.Function = function () {
 
             values = (_ref6 = []).concat.apply(_ref6, (0, _toConsumableArray3.default)(values)); // flat
             values = removeNullParam(values);
+            if (values.length === 0) {
+                return null;
+            }
             // 类型检查
             checkValueType('number', 'MIN', 0, values);
             var min = Number.MAX_VALUE;
@@ -501,6 +504,9 @@ var Function = exports.Function = function () {
 
             values = (_ref7 = []).concat.apply(_ref7, (0, _toConsumableArray3.default)(values)); // flat
             values = removeNullParam(values);
+            if (values.length === 0) {
+                return null;
+            }
             // 类型检查
             checkValueType('number', 'MAX', 0, values);
             var max = Number.MIN_VALUE;
