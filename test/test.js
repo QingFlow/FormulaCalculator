@@ -38,12 +38,18 @@ try {
   // console.log(calc.calculate('null-2'));
   // console.log(calc.calculate('null+2'));
   // console.log(calc.calculate('[199, 199]-[251, 251]'));
-  // console.log(calc.calculate('[2,2]-3'));
-  console.log(calc.calculate('MAX(null,null)'));
+  // console.log(calc.calculate('NUM(MID("114",17,1))'));
+  console.log(calc.calculate('INT(null)'));
+  console.log(calc.calculate('MOD(NUM(MID("114",17,1)),2)'));
+  // console.log(calc.calculate('MOD(NUM(MID("114",17,1)),2)'));
+  // console.log(calc.calculate('OR(SEARCH("合同章",CONCAT("法人章"))=="0",AND(null>0,NOT(ISEMPTY(null))))'));
+  // console.log(calc.calculate('OR(SEARCH("法人章",CONCAT("法人章"))=="0",AND(4>0,NOT(ISEMPTY(4))))'));
+  // console.log(calc.calculate('AND(OR(SEARCH("公章",CONCAT("法人章"))=="0",AND(null>0,NOT(ISEMPTY(null)))),OR(SEARCH("合同章",CONCAT("法人章"))=="0",AND(null>0,NOT(ISEMPTY(null)))),OR(SEARCH("法人章",CONCAT("法人章"))=="0",AND(4>0,NOT(ISEMPTY(4)))))'));
+  // console.log(calc.calculate('OR(ISEMPTY("法人章"),AND(OR(SEARCH("公章",CONCAT("法人章"))=="0",AND(null>0,NOT(ISEMPTY(null)))),OR(SEARCH("合同章",CONCAT("法人章"))=="0",AND(null>0,NOT(ISEMPTY(null)))),OR(SEARCH("法人章",CONCAT("法人章"))=="0",AND(4>0,NOT(ISEMPTY(4))))))'));
   // console.log(calc.calculate('2-3'));
   // console.log(calc.calculate('2-null'));
   // console.log(calc.calculate('null-3'));
-  // console.log(b.mul(0.3))
+  // console.log(b.mul(0.3));
   // let a = calc.calculate('CONCAT(JAID(), "asdasd")', params);
   // console.log(a);
   // console.log(calc.calculate('JANAME()', params));
