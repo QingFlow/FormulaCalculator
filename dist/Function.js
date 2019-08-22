@@ -100,7 +100,8 @@ var Function = exports.Function = function () {
                 'LEN': this.funcLen,
                 'DAYS': this.funcDays,
                 'DATEDELTA': this.funcDateDelta,
-                'REGTEST': this.funcRegTest
+                'REGTEST': this.funcRegTest,
+                'LN': this.funcLn
             };
         }
 
@@ -1034,6 +1035,18 @@ var Function = exports.Function = function () {
                 result = new RegExp(reg, decorator).test(textTmp);
             });
             return result;
+        }
+
+        // 求取Ln函数值
+
+    }, {
+        key: 'funcLn',
+        value: function funcLn(value) {
+            if ((0, _util.isNullOrUndefined)(value)) {
+                return null;
+            }
+            checkValueType('number', 'LN', 0, value);
+            return Math.log(value);
         }
     }]);
     return Function;

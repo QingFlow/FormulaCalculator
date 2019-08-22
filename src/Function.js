@@ -59,7 +59,8 @@ export class Function {
           'LEN': this.funcLen,
           'DAYS': this.funcDays,
           'DATEDELTA': this.funcDateDelta,
-          'REGTEST': this.funcRegTest
+          'REGTEST': this.funcRegTest,
+          'LN': this.funcLn
       }
   }
 
@@ -682,5 +683,14 @@ export class Function {
           result = new RegExp(reg, decorator).test(textTmp);
       })
       return result;
+  }
+
+  // 求取Ln函数值
+  funcLn(value) {
+    if (isNullOrUndefined(value)) {
+        return null;
+    }
+    checkValueType('number', 'LN', 0, value);
+    return Math.log(value);
   }
 }
