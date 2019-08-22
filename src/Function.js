@@ -687,10 +687,8 @@ export class Function {
 
   // 求取Ln函数值
   funcLn(value) {
-    if (isNullOrUndefined(value)) {
-        return null;
-    }
     checkValueType('number', 'LN', 0, value);
+    checkParamCount('LN', 1, arguments);
     return Math.log(value);
   }
 }
