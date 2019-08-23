@@ -39,7 +39,7 @@ try {
   // console.log(calc.calculate('null+2'));
   // console.log(calc.calculate('[199, 199]-[251, 251]'));
   // console.log(calc.calculate('NUM(MID("114",17,1))'));
-  console.log(calc.calculate('LN()'));
+  console.log(calc.calculate('LN(null)'));
   // console.log(calc.calculate('MOD(NUM(MID("114",17,1)),2)'));
   // console.log(calc.calculate('MOD(NUM(MID("114",17,1)),2)'));
   // console.log(calc.calculate('OR(SEARCH("合同章",CONCAT("法人章"))=="0",AND(null>0,NOT(ISEMPTY(null))))'));

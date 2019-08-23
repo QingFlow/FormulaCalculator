@@ -689,6 +689,9 @@ export class Function {
   funcLn(value) {
     checkValueType('number', 'LN', 0, value);
     checkParamCount('LN', 1, arguments);
+    if (isNullOrUndefined(value)) {
+        return null;
+    }
     return Math.log(value);
   }
 }

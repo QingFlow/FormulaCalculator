@@ -1044,6 +1044,9 @@ var Function = exports.Function = function () {
         value: function funcLn(value) {
             checkValueType('number', 'LN', 0, value);
             checkParamCount('LN', 1, arguments);
+            if ((0, _util.isNullOrUndefined)(value)) {
+                return null;
+            }
             return Math.log(value);
         }
     }]);
