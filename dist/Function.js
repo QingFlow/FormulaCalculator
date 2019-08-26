@@ -101,7 +101,8 @@ var Function = exports.Function = function () {
                 'DAYS': this.funcDays,
                 'DATEDELTA': this.funcDateDelta,
                 'REGTEST': this.funcRegTest,
-                'LN': this.funcLn
+                'LN': this.funcLn,
+                'IFS': this.funcIfs
             };
         }
 
@@ -1048,6 +1049,21 @@ var Function = exports.Function = function () {
                 return null;
             }
             return Math.log(value);
+        }
+
+        // IF方法的升级版本
+
+    }, {
+        key: 'funcIfs',
+        value: function funcIfs() {
+            var i = 0;
+            while (!(0, _util.isNullOrUndefined)(arguments[i])) {
+                if (arguments[i]) {
+                    return arguments[i + 1];
+                }
+                i += 2;
+            }
+            return null;
         }
     }]);
     return Function;
