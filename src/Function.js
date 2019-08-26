@@ -60,7 +60,8 @@ export class Function {
           'DAYS': this.funcDays,
           'DATEDELTA': this.funcDateDelta,
           'REGTEST': this.funcRegTest,
-          'LN': this.funcLn
+          'LN': this.funcLn,
+          'IFS': this.funcIfs
       }
   }
 
@@ -693,5 +694,17 @@ export class Function {
         return null;
     }
     return Math.log(value);
+  }
+
+  // IF方法的升级版本
+  funcIfs() {
+      var i = 0;
+      while(!isNullOrUndefined(arguments[i])) {
+          if (arguments[i]) {
+              return arguments[ i + 1 ];
+          }
+          i += 2;
+      }
+      return null;
   }
 }
