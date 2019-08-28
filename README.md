@@ -16,6 +16,10 @@
 
   `console.log(formula.calculate('SUM(1,2,3)'));`
 
+4. 本地调试
+
+  `npm run calc "sum(1, 2)"`
+
 ### 支持的公式类型
 
 - IF
