@@ -322,7 +322,7 @@ export class Function {
     }
     var count = 0;
     values.forEach(val => {
-      if (eval(`${val} ${compareVal}`)) {
+      if (eval(`"${val}" ${compareVal}`)) {
         count++;
       }
     });
