@@ -438,7 +438,7 @@ var Function = exports.Function = function () {
       }
       var count = 0;
       values.forEach(function (val) {
-        if (eval(val + ' ' + compareVal)) {
+        if (eval('"' + val + '" ' + compareVal)) {
           count++;
         }
       });
@@ -640,8 +640,6 @@ var Function = exports.Function = function () {
   }, {
     key: 'funcSumProduct',
     value: function funcSumProduct(value1, value2) {
-      console.log(value1);
-      console.log(value2);
       var result = 0;
       if ((0, _util.isNullOrUndefined)(value1) || (0, _util.isNullOrUndefined)(value2)) {
         return result;
