@@ -102,7 +102,9 @@ var Function = exports.Function = function () {
         'DATEDELTA': this.funcDateDelta,
         'REGTEST': this.funcRegTest,
         'LN': this.funcLn,
-        'IFS': this.funcIfs
+        'IFS': this.funcIfs,
+        'BASE64': this.funcBase64,
+        'SQRT': this.funcSqrt
       };
     }
 

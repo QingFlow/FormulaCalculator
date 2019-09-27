@@ -707,4 +707,24 @@ export class Function {
     }
     return null;
   }
+
+  // base64编码
+  funcBase64(value) {
+    checkValueType('string', 'BASE64', 0, value);
+    checkParamCount('BASE64', 1, arguments);
+    if (isNullOrUndefined(value)) {
+      return null;
+    }
+    return btoa(encodeURIComponent(value));
+  }
+
+  // 求平方根
+  funcSqrt(value) {
+    checkValueType('number', 'SQRT', 0, value);
+    checkParamCount('SQRT', 1, arguments);
+    if (isNullOrUndefined(value)) {
+      return null;
+    }
+    return Math.sqrt(value);
+  }
 }
