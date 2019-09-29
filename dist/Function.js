@@ -1067,6 +1067,32 @@ var Function = exports.Function = function () {
       }
       return null;
     }
+
+    // base64编码
+
+  }, {
+    key: 'funcBase64',
+    value: function funcBase64(value) {
+      checkValueType('string', 'BASE64', 0, value);
+      checkParamCount('BASE64', 1, arguments);
+      if ((0, _util.isNullOrUndefined)(value)) {
+        return null;
+      }
+      return btoa(encodeURIComponent(value));
+    }
+
+    // 求平方根
+
+  }, {
+    key: 'funcSqrt',
+    value: function funcSqrt(value) {
+      checkValueType('number', 'SQRT', 0, value);
+      checkParamCount('SQRT', 1, arguments);
+      if ((0, _util.isNullOrUndefined)(value)) {
+        return null;
+      }
+      return Math.sqrt(value);
+    }
   }]);
   return Function;
 }();
