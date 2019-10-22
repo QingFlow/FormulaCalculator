@@ -1,7 +1,10 @@
 const calc = require('../index');
 const chalk = require('chalk');
 
-
+/**
+ * 测试使用方法：命令行运行 npm run calc "公式详情"
+ * 例如： npm run calc "SUM(1,2)"
+ */
 module.exports = function(formula) {
   try {
     // let params = {
