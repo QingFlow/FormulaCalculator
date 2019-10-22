@@ -717,7 +717,7 @@ export class Function {
     if (isNullOrUndefined(value)) {
       return null;
     }
-    return btoa(encodeURIComponent(value));
+    return btoa(value);
   }
 
   // 求平方根
