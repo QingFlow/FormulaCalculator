@@ -584,7 +584,11 @@ export class Function {
   // 计算end和start之间相差的天数
   funcDays(end, start) {
     checkParamCount('DAYS', 2, arguments);
-    return moment.duration(moment(end).unix() - moment(start).unix()).asDays() * 1000;
+    if (isNullOrUndefined(end) || isNullOrUndefined(start)) {
+      return 0;
+    } else {
+      return moment.duration(moment(end).unix() - moment(start).unix()).asDays() * 1000;
+    }
   }
 
   // 计算出date增加或减少days天的日期（days可以为正数/负数）
