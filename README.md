@@ -20,11 +20,14 @@
 
   `npm run calc "sum(1, 2)"`
 
+5. 如果有其他需要，可以提交issue
+
 ### 支持的公式类型
 
 - IF
 - CONCAT
 - LEFT
+- RIGHT
 - REPLACE
 - MID
 - TEXT
@@ -34,9 +37,12 @@
 - SUMIF
 - AVERAGE
 - COUNT
+- COUNTIF
 - MIN
 - MAX
 - ROUND
+- ROUNDUP
+- ROUNDDOWN
 - INT
 - MOD
 - PRODUCT
@@ -52,58 +58,29 @@
 - CURDATE
 - NOW
 - RDID
-- GETUSERNAME
-- GETUSEREMAIL
 - UPPER
 - LOWER
-// 以下是新增的方法
 - AND
 - OR
 - NOT
 - XOR
 - ISEMPTY
 - SEARCH
-- RIGHT
 - LEN
 - DAYS
 - DATEDELTA
-- RECNO
-- ROUNDUP
-- ROUNDDOWN
+- REGTEST
+- LN
+- IFS
+- BASE64
+- SQRT
 
-#### Ja相关的方法
-
-- JAID  (获取ja学工号)
-- JANAME  （获取ja姓名）
-- JATYPE  （获取ja用户类型）
-- JADEPTID  （获取ja部门id）
-- JADEPTNAME  （获取ja部门名称）
-> 调用方法不一样,需要传递用户信息进来：calculate('JAID()', params)
-> params数据结构: 
-```javascript
-{
-  email: "",  // 用户邮箱
-  nickName: "",  // 用户的昵称
-  alias: "",  // 用户在工作区的备注名称
-  jaInfo: {
-    sid: "11134456666", 
-    organize: "03728",
-    organizeId: "organizeId",
-    userType: "student|schoolFellow|faculty|postphd|team",
-    name: "姓名"
-  }
-}
-```
+公式的具体用法，可参考[轻流公式使用说明](https://hc.qingflow.com/help-center/function2/) 
 
 ### 规则
 
 1. 字符串要用双引号包裹
-2. 字符串中如果需要包含双引号，进入公示前需要先把 \ 替换成 \\，再把 " 替换成\"。公式计算出的结果，会自动去掉转义
-
-###
-
-1. 打补丁： npm version patch , npm publish
-
+2. 字符串中如果需要包含双引号，进入公式前需要把 \ 替换成 \\，再把 " 替换成\"。公式计算出的结果，会自动去掉转义
 
 ### 错误码说明
 抛出的错误结构为
