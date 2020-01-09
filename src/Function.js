@@ -1,4 +1,4 @@
-import { isNullOrUndefined, debug } from 'util';
+import { isNullOrUndefined } from 'util';
 
 var checkValueType = require('./Utils').checkValueType;
 var checkParamCount = require('./Utils').checkParamCount;
@@ -455,7 +455,7 @@ export class Function {
   // 时
   funcHour(value) {
     checkParamCount('HOUR', 1, arguments);
-    var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
+    var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss']);
     return t.hour();
   }
   // 分
