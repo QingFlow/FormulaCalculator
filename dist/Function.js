@@ -674,7 +674,7 @@ var Function = exports.Function = function () {
     key: 'funcYear',
     value: function funcYear(value) {
       checkParamCount('YEAR', 1, arguments);
-      var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
+      var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss']);
       return t.year();
     }
     // 拿到月份：注意，用moment拿月份时，是从0~11来计算的
@@ -683,7 +683,7 @@ var Function = exports.Function = function () {
     key: 'funcMonth',
     value: function funcMonth(value) {
       checkParamCount('MONTH', 1, arguments);
-      var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
+      var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss']);
       return t.month() + 1;
     }
     // 拿到月份中的day
@@ -692,7 +692,7 @@ var Function = exports.Function = function () {
     key: 'funcDay',
     value: function funcDay(value) {
       checkParamCount('DAY', 1, arguments);
-      var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
+      var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss']);
       return t.date();
     }
     // 时
@@ -701,7 +701,7 @@ var Function = exports.Function = function () {
     key: 'funcHour',
     value: function funcHour(value) {
       checkParamCount('HOUR', 1, arguments);
-      var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
+      var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss']);
       return t.hour();
     }
     // 分
@@ -710,7 +710,7 @@ var Function = exports.Function = function () {
     key: 'funcMinite',
     value: function funcMinite(value) {
       checkParamCount('MINITE', 1, arguments);
-      var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
+      var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss']);
       return t.minute();
     }
     // 秒
@@ -719,7 +719,7 @@ var Function = exports.Function = function () {
     key: 'funcSecond',
     value: function funcSecond(value) {
       checkParamCount('SECOND', 1, arguments);
-      var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']);
+      var t = moment(value, ['YYYY-MM-DD', 'YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss']);
       return t.second();
     }
     // 组装出日期，时分秒如果没有传递，替换成00
