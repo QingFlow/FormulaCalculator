@@ -365,7 +365,7 @@ export class Function {
   funcRound(value, n) {
     checkParamCount('ROUND', 2, arguments);
     checkValueType('number', 'ROUND', 0, value, n);
-    return Number(value).toFixed(n);
+    return Number(Number(value).toFixed(n));
   }
 
   // 向上取，保留n位小数

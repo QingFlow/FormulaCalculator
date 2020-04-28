@@ -46,6 +46,7 @@ function checkValueType(type, funcName, startIdx) {
   values = (_ref = []).concat.apply(_ref, (0, _toConsumableArray3.default)(values));
   values.forEach(function (value, index) {
     if (!(0, _util.isNullOrUndefined)(value) && (typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value)) !== type) {
+      console.log(222);
       var err = new FormulaError({
         errCode: 1,
         funcName: funcName,
@@ -63,6 +64,7 @@ function checkValueType(type, funcName, startIdx) {
  * @param {*} params 参数列表，即arguments参数
  */
 function checkParamCount(funcName, count, params) {
+  console.log(params);
   if (count !== params.length) {
     var err = new FormulaError({
       errCode: 2,

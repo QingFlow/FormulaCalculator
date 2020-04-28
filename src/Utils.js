@@ -13,6 +13,7 @@ export function checkValueType(type, funcName, startIdx, ...values) {
   values = [].concat(...values);
   values.forEach((value, index) => {
     if(!isNullOrUndefined(value) && (typeof value !== type)) {
+      console.log(222);
       let err = new FormulaError({
           errCode: 1,
           funcName: funcName,
@@ -30,6 +31,7 @@ export function checkValueType(type, funcName, startIdx, ...values) {
  * @param {*} params 参数列表，即arguments参数
  */
 export function checkParamCount(funcName, count, params) {
+  console.log(params);
   if (count !== params.length) {
     let err = new FormulaError({
       errCode: 2,
