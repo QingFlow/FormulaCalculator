@@ -59,6 +59,3 @@ typings/
 
 # idea config folder
 .idea/
-
-# dist
-dist/*
