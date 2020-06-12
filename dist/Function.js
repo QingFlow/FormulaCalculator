@@ -464,8 +464,8 @@ var Function = exports.Function = function () {
         return null;
       }
       // 类型检查
-      checkValueType('number', 'MIN', 0, values);
-      var min = Number.MAX_VALUE;
+      // checkValueType('number', 'MIN', 0, values);
+      var min = values[0];
       var _iteratorNormalCompletion = true;
       var _didIteratorError = false;
       var _iteratorError = undefined;
@@ -512,8 +512,8 @@ var Function = exports.Function = function () {
         return null;
       }
       // 类型检查
-      checkValueType('number', 'MAX', 0, values);
-      var max = Number.MIN_VALUE;
+      // checkValueType('number', 'MAX', 0, values);
+      var max = values[0];
       var _iteratorNormalCompletion2 = true;
       var _didIteratorError2 = false;
       var _iteratorError2 = undefined;
