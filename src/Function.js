@@ -755,10 +755,16 @@ export class Function {
     }
     switch (mode) {
       case 'email': {
+        if (typeof values === 'string') {
+          return values;
+        }
         return values.join(',');
       }
       case 'phone':
       case 'name': {
+        if (typeof values === 'string') {
+          return detailInfo.memberInfos.get(values)[mode];
+        }
         return values
           .map(email => detailInfo.memberInfos.get(email)[mode])
           .filter(v => !isNullOrUndefined(v))
@@ -782,9 +788,15 @@ export class Function {
     }
     switch (mode) {
       case 'id': {
+        if (typeof values === 'string' || typeof values === 'number') {
+          return values;
+        }
         return values.join(',');
       }
       case 'name': {
+        if (typeof values === 'string' || typeof values === 'number') {
+          return detailInfo.deptInfos.get(values)[mode];
+        }
         return values
           .map(deptId => detailInfo.deptInfos.get(deptId)[mode])
           .filter(v => !isNullOrUndefined(v))
