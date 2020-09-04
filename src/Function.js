@@ -755,14 +755,14 @@ export class Function {
     }
     switch (mode) {
       case 'email': {
-        return values;
+        return values.join(',');
       }
       case 'phone':
       case 'name': {
-        return `[${values
+        return values
           .map(email => detailInfo.memberInfos.get(email)[mode])
           .filter(v => !isNullOrUndefined(v))
-          .join(',')}]`;
+          .join(',');
       }
       default: {
         return "";
@@ -782,13 +782,13 @@ export class Function {
     }
     switch (mode) {
       case 'id': {
-        return values;
+        return values.join(',');
       }
       case 'name': {
-        return `[${values
+        return values
           .map(deptId => detailInfo.deptInfos.get(deptId)[mode])
           .filter(v => !isNullOrUndefined(v))
-          .join(',')}]`;
+          .join(',');
       }
       default: {
         return "";
