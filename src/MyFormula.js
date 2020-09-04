@@ -8,13 +8,38 @@ var Function = require('./Function').Function;
 var checkValueType = require('./Utils').checkValueType;
 var replaceNullParam = require('./Utils').replaceNullParam;
 
+
+var QUE_TYEP = {
+  NOT_QUE: 0,
+  MEMBER: 5,
+  DEPT: 22
+};
+
+var FUNC_NAMES_NEED_DETAIL = ['TEXTUSER', 'TEXTDEPT'];
+
 class MyFormulaVisitor extends FormulaVisitor{
 
     constructor() {
         super();
         this.params = arguments[0];  // 公式计算所需的其他参数
+      /**
+       *
+       interface FormulaDetailInfos {
+          memberInfos: Map<string, FormulaMemberInfoDetail>; // key: email
+          deptInfos: Map<number, FormulaDeptInfoDetail>; // key: deptId
+       }
+       interface FormulaMemberInfoDetail {
+          name: string;
+          phone: string;
+       }
+       interface FormulaDeptInfoDetail {
+          name: string;
+       }
+       * */
+        this.detailInfos = arguments[1];  // 成员部门等特殊字段解析时需要的特殊信息
         this.functionMap = new Function().getFuncMap();  // 获取所有一般方法
         this.userInfoFunctionMap = new Function().getFuncMapWithParam();  // 获取所有需要用户信息来计算的方法
+        this.detailInfoFunctionMap = new Function().getFuncMapWithDetailInfos();  // 获取所有需要用户信息来计算的方法
     }
 
     visitNull(ctx) {
@@ -185,6 +210,8 @@ class MyFormulaVisitor extends FormulaVisitor{
         // 如果方法为用户信息相关方法，则把参数信息传递过去
         else if(funcName in this.userInfoFunctionMap) {
             return this.userInfoFunctionMap[funcName](this.params);
+        }else if(funcName in this.detailInfoFunctionMap) {
+            return this.detailInfoFunctionMap[funcName](this.params, ...paramList);
         }
         else {
             // todo: 抛出异常

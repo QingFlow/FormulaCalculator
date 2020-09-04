@@ -13,7 +13,6 @@ export function checkValueType(type, funcName, startIdx, ...values) {
   values = [].concat(...values);
   values.forEach((value, index) => {
     if(!isNullOrUndefined(value) && (typeof value !== type)) {
-      console.log(222);
       let err = new FormulaError({
           errCode: 1,
           funcName: funcName,
@@ -22,6 +21,10 @@ export function checkValueType(type, funcName, startIdx, ...values) {
       throw err;
     }
   })
+}
+
+export function beingNil(value) {
+  return typeof value === 'undefined' || value === null;
 }
 
 /**

@@ -8,11 +8,12 @@ var QfErr = require('./FormulaError').FormulaError;
 function calculate() {
   let formularString = arguments[0];  // 传入的公式字符串
   let params = arguments[1];  // 传入的其他有用信息，如用户信息等
+  let detailInfos = arguments[2];  // 传入的其他有用信息，如用户信息等
   var chars = new antlr4.InputStream(formularString);
   var lexer = new FormulaLexer.FormulaLexer(chars);
   var tokens  = new antlr4.CommonTokenStream(lexer);
   var parser = new FormulaParser.FormulaParser(tokens);
-  var visitor = new MyFormulaVisitor(params);
+  var visitor = new MyFormulaVisitor(params, detailInfos);
   var result = visitor.visit(parser.formula());
   // 计算出答案超过一个，答案为undefined，答案为object都会报错
   // if(result.length !== 1 || result[0]===undefined || typeof result[0] === 'object') {
