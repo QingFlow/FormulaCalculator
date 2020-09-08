@@ -44,6 +44,14 @@ var Function = require('./Function').Function;
 var checkValueType = require('./Utils').checkValueType;
 var replaceNullParam = require('./Utils').replaceNullParam;
 
+var QUE_TYEP = {
+    NOT_QUE: 0,
+    MEMBER: 5,
+    DEPT: 22
+};
+
+var FUNC_NAMES_NEED_DETAIL = ['TEXTUSER', 'TEXTDEPT'];
+
 var MyFormulaVisitor = function (_FormulaVisitor) {
     (0, _inherits3.default)(MyFormulaVisitor, _FormulaVisitor);
 
@@ -53,8 +61,24 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
         var _this = (0, _possibleConstructorReturn3.default)(this, (MyFormulaVisitor.__proto__ || (0, _getPrototypeOf2.default)(MyFormulaVisitor)).call(this));
 
         _this.params = arguments[0]; // 公式计算所需的其他参数
+        /**
+         *
+         interface FormulaDetailInfos {
+            memberInfos: Map<string, FormulaMemberInfoDetail>; // key: email
+            deptInfos: Map<number, FormulaDeptInfoDetail>; // key: deptId
+         }
+         interface FormulaMemberInfoDetail {
+            name: string;
+            phone: string;
+         }
+         interface FormulaDeptInfoDetail {
+            name: string;
+         }
+         * */
+        _this.detailInfos = arguments[1]; // 成员部门等特殊字段解析时需要的特殊信息
         _this.functionMap = new Function().getFuncMap(); // 获取所有一般方法
         _this.userInfoFunctionMap = new Function().getFuncMapWithParam(); // 获取所有需要用户信息来计算的方法
+        _this.detailInfoFunctionMap = new Function().getFuncMapWithDetailInfos(); // 获取所有需要用户信息来计算的方法
         return _this;
     }
 
@@ -305,10 +329,10 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
         key: 'visitFunc',
         value: function visitFunc(ctx) {
             var funcName = ctx.ID().getText();
-            // 检查函数名是否存在于 预定义的函数中
-            if (funcName in this.functionMap) {
-                var _functionMap;
-
+            // 如果方法为用户信息相关方法，则把参数信息传递过去
+            if (funcName in this.userInfoFunctionMap) {
+                return this.userInfoFunctionMap[funcName](this.params);
+            } else {
                 var paramList = [];
                 // 先拿到参数
                 var _iteratorNormalCompletion3 = true;
@@ -321,6 +345,7 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
 
                         paramList.push(this.visit(val));
                     }
+                    // 检查函数名是否存在于 预定义的函数中
                 } catch (err) {
                     _didIteratorError3 = true;
                     _iteratorError3 = err;
@@ -336,14 +361,18 @@ var MyFormulaVisitor = function (_FormulaVisitor) {
                     }
                 }
 
-                return (_functionMap = this.functionMap)[funcName].apply(_functionMap, paramList);
-            }
-            // 如果方法为用户信息相关方法，则把参数信息传递过去
-            else if (funcName in this.userInfoFunctionMap) {
-                    return this.userInfoFunctionMap[funcName](this.params);
+                if (funcName in this.functionMap) {
+                    var _functionMap;
+
+                    return (_functionMap = this.functionMap)[funcName].apply(_functionMap, paramList);
+                } else if (funcName in this.detailInfoFunctionMap) {
+                    var _detailInfoFunctionMa;
+
+                    return (_detailInfoFunctionMa = this.detailInfoFunctionMap)[funcName].apply(_detailInfoFunctionMa, [this.detailInfos].concat(paramList));
                 } else {
                     // todo: 抛出异常
                 }
+            }
         }
         // 解析错误输入
 

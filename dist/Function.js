@@ -124,6 +124,18 @@ var Function = exports.Function = function () {
         'RECNO': this.funcRecno
       };
     }
+
+    // 获取成员部门等特殊信息来计算的方法
+
+  }, {
+    key: 'getFuncMapWithDetailInfos',
+    value: function getFuncMapWithDetailInfos() {
+      return {
+        'TEXTUSER': this.funcTextUser,
+        'TEXTDEPT': this.funcTextDept
+      };
+    }
+
     // if表达式
 
   }, {
@@ -1096,6 +1108,85 @@ var Function = exports.Function = function () {
         return null;
       }
       return Math.sqrt(value);
+    }
+
+    // TEXTUSER（成员字段,"name"/"email"/"phone"）
+    // 获取所选成员在通讯录中的名称、邮箱或手机号。如：
+
+  }, {
+    key: 'funcTextUser',
+    value: function funcTextUser(detailInfo, values, mode) {
+      checkValueType('string', 'TEXTUSER', 0, [mode]);
+      if ((0, _util.isNullOrUndefined)(values) || values.length === 0) {
+        return "";
+      }
+      if ((0, _util.isNullOrUndefined)(detailInfo) || (0, _util.isNullOrUndefined)(detailInfo.memberInfos)) {
+        return "";
+      }
+      switch (mode) {
+        case 'email':
+          {
+            if (typeof values === 'string') {
+              return values;
+            }
+            return values.join(',');
+          }
+        case 'phone':
+        case 'name':
+          {
+            if (typeof values === 'string') {
+              return detailInfo.memberInfos.has(values) ? detailInfo.memberInfos.get(values)[mode] : null;
+            }
+            return values.map(function (email) {
+              return detailInfo.memberInfos.has(email) ? detailInfo.memberInfos.get(email)[mode] : null;
+            }).filter(function (v) {
+              return !(0, _util.isNullOrUndefined)(v);
+            }).join(',');
+          }
+        default:
+          {
+            return "";
+          }
+      }
+    }
+
+    // TEXTDEPT(部门字段,"name"/"id")
+    // 获取所选部门的名称或ID。如：
+
+  }, {
+    key: 'funcTextDept',
+    value: function funcTextDept(detailInfo, values, mode) {
+      checkValueType('string', 'TEXTDEPT', 0, [mode]);
+      if ((0, _util.isNullOrUndefined)(values) || values.length === 0) {
+        return "";
+      }
+      if ((0, _util.isNullOrUndefined)(detailInfo) || (0, _util.isNullOrUndefined)(detailInfo.deptInfos)) {
+        return "";
+      }
+      switch (mode) {
+        case 'id':
+          {
+            if (typeof values === 'string' || typeof values === 'number') {
+              return values;
+            }
+            return values.join(',');
+          }
+        case 'name':
+          {
+            if (typeof values === 'string' || typeof values === 'number') {
+              return detailInfo.deptInfos.has(values) ? detailInfo.deptInfos.get(values)[mode] : null;
+            }
+            return values.map(function (deptId) {
+              return detailInfo.deptInfos.has(deptId) ? detailInfo.deptInfos.get(deptId)[mode] : null;
+            }).filter(function (v) {
+              return !(0, _util.isNullOrUndefined)(v);
+            }).join(',');
+          }
+        default:
+          {
+            return "";
+          }
+      }
     }
   }]);
   return Function;

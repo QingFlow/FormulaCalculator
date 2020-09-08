@@ -80,6 +80,15 @@ export class Function {
       'RECNO': this.funcRecno
     }
   }
+
+  // 获取成员部门等特殊信息来计算的方法
+  getFuncMapWithDetailInfos() {
+    return {
+      'TEXTUSER': this.funcTextUser,
+      'TEXTDEPT': this.funcTextDept
+    }
+  }
+
   // if表达式
   funcIf(test, value1, value2) {
     checkValueType('boolean', 'IF', 0, test);
@@ -732,5 +741,70 @@ export class Function {
       return null;
     }
     return Math.sqrt(value);
+  }
+
+  // TEXTUSER（成员字段,"name"/"email"/"phone"）
+  // 获取所选成员在通讯录中的名称、邮箱或手机号。如：
+  funcTextUser(detailInfo, values, mode) {
+    checkValueType('string', 'TEXTUSER', 0, [mode]);
+    if (isNullOrUndefined(values) || values.length === 0) {
+      return "";
+    }
+    if (isNullOrUndefined(detailInfo) || isNullOrUndefined(detailInfo.memberInfos)) {
+      return "";
+    }
+    switch (mode) {
+      case 'email': {
+        if (typeof values === 'string') {
+          return values;
+        }
+        return values.join(',');
+      }
+      case 'phone':
+      case 'name': {
+        if (typeof values === 'string') {
+          return detailInfo.memberInfos.has(values) ? detailInfo.memberInfos.get(values)[mode] : null;
+        }
+        return values
+          .map(email => detailInfo.memberInfos.has(email) ? detailInfo.memberInfos.get(email)[mode] : null)
+          .filter(v => !isNullOrUndefined(v))
+          .join(',');
+      }
+      default: {
+        return "";
+      }
+    }
+  }
+
+  // TEXTDEPT(部门字段,"name"/"id")
+  // 获取所选部门的名称或ID。如：
+  funcTextDept(detailInfo, values, mode) {
+    checkValueType('string', 'TEXTDEPT', 0, [mode]);
+    if (isNullOrUndefined(values) || values.length === 0) {
+      return "";
+    }
+    if (isNullOrUndefined(detailInfo) || isNullOrUndefined(detailInfo.deptInfos)) {
+      return "";
+    }
+    switch (mode) {
+      case 'id': {
+        if (typeof values === 'string' || typeof values === 'number') {
+          return values;
+        }
+        return values.join(',');
+      }
+      case 'name': {
+        if (typeof values === 'string' || typeof values === 'number') {
+          return detailInfo.deptInfos.has(values) ? detailInfo.deptInfos.get(values)[mode] : null;
+        }
+        return values
+          .map(deptId => detailInfo.deptInfos.has(deptId) ? detailInfo.deptInfos.get(deptId)[mode] : null)
+          .filter(v => !isNullOrUndefined(v))
+          .join(',');
+      }
+      default: {
+        return "";
+      }
+    }
   }
 }

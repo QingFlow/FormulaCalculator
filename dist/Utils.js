@@ -17,6 +17,7 @@ var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
 exports.checkValueType = checkValueType;
+exports.beingNil = beingNil;
 exports.checkParamCount = checkParamCount;
 exports.reverse = reverse;
 exports.removeNullParam = removeNullParam;
@@ -46,7 +47,6 @@ function checkValueType(type, funcName, startIdx) {
   values = (_ref = []).concat.apply(_ref, (0, _toConsumableArray3.default)(values));
   values.forEach(function (value, index) {
     if (!(0, _util.isNullOrUndefined)(value) && (typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value)) !== type) {
-      console.log(222);
       var err = new FormulaError({
         errCode: 1,
         funcName: funcName,
@@ -55,6 +55,10 @@ function checkValueType(type, funcName, startIdx) {
       throw err;
     }
   });
+}
+
+function beingNil(value) {
+  return typeof value === 'undefined' || value === null;
 }
 
 /**
