@@ -198,23 +198,23 @@ class MyFormulaVisitor extends FormulaVisitor{
     // 解析函数
     visitFunc(ctx) {
         var funcName = ctx.ID().getText();
-        // 检查函数名是否存在于 预定义的函数中
-        if (funcName in this.functionMap) {
+        // 如果方法为用户信息相关方法，则把参数信息传递过去
+        if(funcName in this.userInfoFunctionMap) {
+            return this.userInfoFunctionMap[funcName](this.params);
+        } else {
             var paramList = []
             // 先拿到参数
             for (var val of ctx.expr()) {
                 paramList.push(this.visit(val));
             }
-            return this.functionMap[funcName](...paramList);
-        } 
-        // 如果方法为用户信息相关方法，则把参数信息传递过去
-        else if(funcName in this.userInfoFunctionMap) {
-            return this.userInfoFunctionMap[funcName](this.params);
-        }else if(funcName in this.detailInfoFunctionMap) {
-            return this.detailInfoFunctionMap[funcName](this.params, ...paramList);
-        }
-        else {
-            // todo: 抛出异常
+            // 检查函数名是否存在于 预定义的函数中
+            if (funcName in this.functionMap) {
+                return this.functionMap[funcName](...paramList);
+            }else if(funcName in this.detailInfoFunctionMap) {
+                return this.detailInfoFunctionMap[funcName](this.detailInfos, ...paramList);
+            } else {
+                // todo: 抛出异常
+            }
         }
     }
     // 解析错误输入

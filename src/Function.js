@@ -763,10 +763,10 @@ export class Function {
       case 'phone':
       case 'name': {
         if (typeof values === 'string') {
-          return detailInfo.memberInfos.get(values)[mode];
+          return detailInfo.memberInfos.has(values) ? detailInfo.memberInfos.get(values)[mode] : null;
         }
         return values
-          .map(email => detailInfo.memberInfos.get(email)[mode])
+          .map(email => detailInfo.memberInfos.has(email) ? detailInfo.memberInfos.get(email)[mode] : null)
           .filter(v => !isNullOrUndefined(v))
           .join(',');
       }
@@ -795,10 +795,10 @@ export class Function {
       }
       case 'name': {
         if (typeof values === 'string' || typeof values === 'number') {
-          return detailInfo.deptInfos.get(values)[mode];
+          return detailInfo.deptInfos.has(values) ? detailInfo.deptInfos.get(values)[mode] : null;
         }
         return values
-          .map(deptId => detailInfo.deptInfos.get(deptId)[mode])
+          .map(deptId => detailInfo.deptInfos.has(deptId) ? detailInfo.deptInfos.get(deptId)[mode] : null)
           .filter(v => !isNullOrUndefined(v))
           .join(',');
       }
